@@ -42,8 +42,12 @@ public class Sleep : MonoBehaviour
 
             // Comienza a llamar repetidamente al método que incrementa la barra de sueño con un intervalo
             InvokeRepeating(nameof(IncreaseSleep), 0f, restInterval);
-            // Aquí activamos la animación "Sleeping" en el Animator
-            animator.SetBool("SleepTime", true);
+
+            if (animator != null)
+            {
+                // Aquí activamos la animación "Sleeping" en el Animator
+                animator.SetBool("SleepTime", true);
+            }
         }
         else
         {
@@ -55,9 +59,11 @@ public class Sleep : MonoBehaviour
 
             // Reinicia la repetición del método que decrementa la barra de sueño
             InvokeRepeating(nameof(DecreaseSleep), 1f, 1f);
-
+            if (animator != null)
+            {
             // Aquí activamos la animación "Sleeping" en el Animator
             animator.SetBool("SleepTime", false);
+            }
         }
     }
 

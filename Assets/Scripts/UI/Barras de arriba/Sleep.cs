@@ -54,7 +54,7 @@ public class Sleep : MonoBehaviour
     }
 
     // Método llamado repetidamente cuando se está descansando
-    private void IncreaseSleep()
+    public void IncreaseSleep()
     {
         // Define la velocidad de incremento deseada
         float incrementSpeed = 0.025f;
@@ -72,6 +72,7 @@ public class Sleep : MonoBehaviour
         // Detiene la repetición del método que incrementa la barra de sueño si el jugador muere
         CancelInvoke(nameof(IncreaseSleep));
     }
+
     public void SetPanelNoche(GameObject panel)
     {
         _panelNoche = panel;

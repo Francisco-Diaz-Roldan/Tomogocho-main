@@ -10,6 +10,7 @@ public class Hapiness : MonoBehaviour
     #region Variables
     [SerializeField]
     private Image _hapinessBar;
+    public float HapinessBarPercent => _hapinessBar.fillAmount;
     #endregion
 
     private void Start()

@@ -1,57 +1,3 @@
-/*using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEngine;
-using UnityEngine.UI;
-
-public class PlayerPoop : MonoBehaviour
-{
-    [SerializeField]
-    Image _hungerPercent;
-    [SerializeField]
-    GameObject _poo;
-    [SerializeField]
-    float _poopHungerTime;
-    [SerializeField]
-    float _poopNohungerTime;
-
-    private float _poopTime = 0;
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        CheckPoop();
-    }
-
-    private void CheckPoop()
-    {
-        _poopTime += Time.deltaTime;
-        if (_hungerPercent.fillAmount >= 0.5f)
-        {
-            if (_poopTime >= _poopNohungerTime)
-            {
-                InstantiatePoop();
-            } 
-        }
-        else
-        {
-            if(_poopTime >= _poopHungerTime)
-            {
-                InstantiatePoop();
-            }
-        }
-
-    }
-
-   private void InstantiatePoop()
-    {
-        _poopTime = 0f;
-        Instantiate(_poo, transform.position, Quaternion.identity);
-    }
-
-}*/
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -70,12 +16,16 @@ public class PlayerPoop : MonoBehaviour
 
     private float _poopTime = 0;
 
+    private PlayerSleep _playerSleep;
+
     private List<GameObject> pooledObjects = new List<GameObject>();
     private int poolSize = 5; // Tamaño del pool (cantidad máxima de objetos Poo que pueden existir a la vez)
 
     // Start is called before the first frame update
     void Start()
     {
+        _playerSleep = GetComponent<PlayerSleep>();
+
         // Inicializar el pool al comienzo del juego
         for (int i = 0; i < poolSize; i++)
         {
@@ -88,6 +38,8 @@ public class PlayerPoop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_playerSleep.IsSleeping) return;
+
         CheckPoop();
     }
 

@@ -9,8 +9,6 @@ public class Sleep : MonoBehaviour
     private bool isResting = false;
     private float restInterval = 1f;
     
-
-
     private void Start()
     {
         // Llama repetidamente al método que decrementa la barra de sueño con un intervalo de tiempo

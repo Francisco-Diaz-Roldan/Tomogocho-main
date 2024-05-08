@@ -5,11 +5,11 @@ public class Sleep : MonoBehaviour
 {
     [SerializeField] private Image _sleepBar;
     [SerializeField] private GameObject _panelNoche;
+    [SerializeField] private PlayerSleep _playerSleep;
     private bool isResting = false;
     private float restInterval = 1f;
+    
 
-    // Referencia al Animator del personaje para controlar la animación
-    public Animator animator;
 
     private void Start()
     {
@@ -43,11 +43,8 @@ public class Sleep : MonoBehaviour
             // Comienza a llamar repetidamente al método que incrementa la barra de sueño con un intervalo
             InvokeRepeating(nameof(IncreaseSleep), 0f, restInterval);
 
-            if (animator != null)
-            {
-                // Aquí activamos la animación "Sleeping" en el Animator
-                animator.SetBool("SleepTime", true);
-            }
+            // Aquí activamos la animación "Sleeping" en el Animator
+            _playerSleep.ChangeSleepState(true);
         }
         else
         {
@@ -59,11 +56,9 @@ public class Sleep : MonoBehaviour
 
             // Reinicia la repetición del método que decrementa la barra de sueño
             InvokeRepeating(nameof(DecreaseSleep), 1f, 1f);
-            if (animator != null)
-            {
-            // Aquí activamos la animación "Sleeping" en el Animator
-            animator.SetBool("SleepTime", false);
-            }
+
+            // Aquí desactivamos la animación "Sleeping" en el Animator
+            _playerSleep.ChangeSleepState(false);
         }
     }
 

@@ -20,8 +20,11 @@ public class PlayerMovement : MonoBehaviour
     private float _maxTurnAngle = 192f; // Ángulo máximo de giro
     private bool _isHappy = false;
 
+    private PlayerSleep _sleep;
+
     private void Awake()
     {
+        _sleep = GetComponent<PlayerSleep>();
         _centerPlayerPosition = transform.position;
         _rb = GetComponent<Rigidbody2D>();
         _direction = Vector2.zero;
@@ -30,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (_isHappy) { return; }
+        if (_isHappy || _sleep.IsSleeping) { return; }
 
         if ( !_inZone) { 
             OnReturnPosition();
@@ -54,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if ( _isHappy ) { return; }
+        if ( _isHappy || _sleep.IsSleeping) { return; }
         Move();        
     }
 

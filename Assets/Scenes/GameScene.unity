@@ -2248,6 +2248,7 @@ GameObject:
   - component: {fileID: 1214898770}
   - component: {fileID: 1214898772}
   - component: {fileID: 1214898773}
+  - component: {fileID: 1214898774}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -2463,6 +2464,18 @@ MonoBehaviour:
   carita: {fileID: 929618439}
   contenedorCorazones: {fileID: 1618274769}
   porcentajeFelicidad: {fileID: 862111842}
+--- !u!114 &1214898774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214898765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61e681dca748a534bad4ded4fce19c09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1268717568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4153,7 +4166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sleepBar: {fileID: 2098435505}
   _panelNoche: {fileID: 1740794066}
-  animator: {fileID: 1214898768}
+  _playerSleep: {fileID: 1214898774}
 --- !u!1 &2112859978
 GameObject:
   m_ObjectHideFlags: 0

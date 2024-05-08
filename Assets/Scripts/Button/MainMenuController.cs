@@ -3,10 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    public void QuitGame()
+
+    [SerializeField] private GameObject _panelMenu;
+
+    public void GoToMenu()
     {
-        // Para salir de la app
-        Application.Quit();
+        _panelMenu.SetActive(true);
     }
 
     public void GoToGameScene()
@@ -14,4 +16,10 @@ public class MainMenuController : MonoBehaviour
         // Para ir a la escena de Juego
         SceneManager.LoadScene("GameScene");
     }
+
+    /* public void QuitGame()
+     {
+         // Para salir de la app
+         Application.Quit();
+     }*/
 }

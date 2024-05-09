@@ -7,6 +7,7 @@ public class PlayerSleep : MonoBehaviour
     // Referencia al Animator del personaje para controlar la animación
     private Animator animator;
     private bool _isSleeping = false;
+    private PlayerDead _playerDead;
 
     //Hago un Get de la propiedad privada y no puede editarse porque voy a poder acceder desde cualquier script
     //y que por seguridad solo se pueda activar desde aquí
@@ -15,12 +16,21 @@ public class PlayerSleep : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();    
+        _playerDead = GetComponent<PlayerDead>();
+        animator = GetComponent<Animator>();
+       
     }
 
     public void ChangeSleepState(bool isSleeping)
     {
-        _isSleeping = isSleeping;
+        if (!_playerDead.IsDead)
+        {
+            _isSleeping = isSleeping;
+        }
+        else
+        {
+            isSleeping = false; // Fuerzo el estado de sueño a falso si el jugador está muerto
+        }
         animator.SetBool("SleepTime", isSleeping);
     }
 }

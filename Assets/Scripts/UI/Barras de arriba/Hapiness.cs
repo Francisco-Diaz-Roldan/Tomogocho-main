@@ -8,17 +8,17 @@ using UnityEngine.UI;
 public class Hapiness : MonoBehaviour
 {
     #region Variables
-    [SerializeField]
-    private Image _hapinessBar;
+    [SerializeField] private Image _hapinessBar;
     public float HapinessBarPercent => _hapinessBar.fillAmount;
+    private PlayerDead _playerDead;
+    private PlayerSleep _playerSleep;
     #endregion
 
     private void Start()
     {
-        // Para pausar el juego -> Time.timeScale = 0f; poner a 1 para reanudar
-
-        // Llama repetidamente a UpdateBar con un intervalo de 1 segundo
-        InvokeRepeating(nameof(UpdateBar), 1f, 1f);
+        _playerDead = FindObjectOfType<PlayerDead>();
+        _playerSleep = FindObjectOfType<PlayerSleep>();
+        InvokeRepeating(nameof(UpdateBar), 1f, 1f); // Llama repetidamente a UpdateBar con un intervalo de 1 segundo
     }
 
     // Aumenta el porcentaje de felicidad
@@ -30,12 +30,13 @@ public class Hapiness : MonoBehaviour
     // Actualiza la barra de felicidad
     private void UpdateBar()
     {
-        _hapinessBar.fillAmount -= .01f;
-        _hapinessBar.fillAmount = Mathf.Max(_hapinessBar.fillAmount, 0f);
-    }
-
-    private void PlayerDead()
-    {
-
+        if (_playerDead != null && !_playerDead.IsDead)
+        {
+            if (_playerSleep != null && !_playerSleep.IsSleeping)
+            {
+                _hapinessBar.fillAmount -= 0.01f;
+                _hapinessBar.fillAmount = Mathf.Max(_hapinessBar.fillAmount, 0f);
+            }
+        }
     }
 }

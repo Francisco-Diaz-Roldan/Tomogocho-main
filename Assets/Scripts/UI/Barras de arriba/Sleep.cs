@@ -6,9 +6,17 @@ public class Sleep : MonoBehaviour
     [SerializeField] private Image _sleepBar;
     [SerializeField] private GameObject _panelNoche;
     [SerializeField] private PlayerSleep _playerSleep;
+    [SerializeField] private PlayerHappy _playerHappy;
+
     private bool isResting = false;
     private float restInterval = 1f;
-    
+
+    private void Awake()
+    {
+        // Obtengo la referencia al componente PlayerHappy
+        _playerHappy = FindObjectOfType<PlayerHappy>();
+    }
+
     private void Start()
     {
         // Llama repetidamente al método que decrementa la barra de sueño con un intervalo de tiempo
@@ -41,8 +49,11 @@ public class Sleep : MonoBehaviour
             // Comienza a llamar repetidamente al método que incrementa la barra de sueño con un intervalo
             InvokeRepeating(nameof(IncreaseSleep), 0f, restInterval);
 
-            // Aquí activamos la animación "Sleeping" en el Animator
+            // Desactivo la animación "Sleeping" en el Animator
             _playerSleep.ChangeSleepState(true);
+
+            // Desactivo la cara feliz del jugador
+            _playerHappy.ActivateHappyFace(false);
         }
         else
         {

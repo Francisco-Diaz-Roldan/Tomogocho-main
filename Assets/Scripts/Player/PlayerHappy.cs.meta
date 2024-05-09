@@ -3,7 +3,10 @@ guid: fe6e5742b5cd64e408eb21355910fa21
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - carita: {fileID: 5481489962635887878, guid: ac709ef187be1144b87a7c8b26e0c400, type: 3}
+  - contenedorCorazones: {fileID: 352674453937113479, guid: 230818637b3aa8546aa07de3b3ab7437, type: 3}
+  - porcentajeFelicidad: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

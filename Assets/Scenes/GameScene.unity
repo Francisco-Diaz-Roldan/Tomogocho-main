@@ -1000,7 +1000,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 66.4
+  m_fontSize: 66.3
   m_fontSizeBase: 47.35
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1067,7 +1067,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &663273136
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1165,10 +1165,10 @@ RectTransform:
   - {fileID: 971379049}
   m_Father: {fileID: 663273136}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.24010415, y: 0.27022228}
+  m_AnchorMax: {x: 0.7612709, y: 0.7301852}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1000, y: 500}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &787257165
 MonoBehaviour:
@@ -1647,10 +1647,10 @@ RectTransform:
   - {fileID: 1450644370}
   m_Father: {fileID: 787257164}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -94}
-  m_SizeDelta: {x: 800, y: 100}
+  m_AnchorMin: {x: 0.1, y: 0.425}
+  m_AnchorMax: {x: 0.90000004, y: 0.47700003}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &971379050
 MonoBehaviour:
@@ -2123,10 +2123,10 @@ RectTransform:
   - {fileID: 592565581}
   m_Father: {fileID: 787257164}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 117}
-  m_SizeDelta: {x: 800, y: 100}
+  m_AnchorMin: {x: 0.1, y: 0.535}
+  m_AnchorMax: {x: 0.89900005, y: 0.5872011}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1080688462
 MonoBehaviour:
@@ -2786,7 +2786,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 66.4
+  m_fontSize: 66.05
   m_fontSizeBase: 42.75
   m_fontWeight: 400
   m_enableAutoSizing: 1

@@ -5,29 +5,23 @@ using UnityEngine.UI;
 
 public class PlayerPoop : MonoBehaviour
 {
-    [SerializeField]
-    Image _hungerPercent;
-    [SerializeField]
-    GameObject _pooPrefab; // Prefab del objeto que quieres instanciar (Poo)
-    [SerializeField]
-    float _poopHungerTime;
-    [SerializeField]
-    float _poopNohungerTime;
+    [SerializeField] Image _hungerPercent;
+    [SerializeField] GameObject _pooPrefab; // Prefab del objeto que quieres instanciar (Poo)
+    [SerializeField] float _poopHungerTime;
+    [SerializeField] float _poopNohungerTime;
 
     private float _poopTime = 0;
-
     private PlayerSleep _playerSleep;
     private PlayerDead _playerDead;
-
 
     private List<GameObject> pooledObjects = new List<GameObject>();
     private int poolSize = 5; // Tamaño del pool (cantidad máxima de objetos Poo que pueden existir a la vez)
 
-    // Start is called before the first frame update
     void Start()
     {
         _playerSleep = GetComponent<PlayerSleep>();
         _playerDead = GetComponent<PlayerDead>();
+
         if (_playerDead == null)
         {
             Debug.LogError("El componente PlayerDead no está asignado correctamente en el script PlayerPoop.");
@@ -51,42 +45,29 @@ public class PlayerPoop : MonoBehaviour
     }*/
     void Update()
     {
-        if (_playerSleep.IsSleeping)
         {
-            Debug.Log("El jugador está dormido. No se generarán caquitas");
-            return;
-        }
-
-        if (_playerDead != null)
-            if (_playerDead.IsDead)
+            if (_playerSleep.IsSleeping || (_playerDead != null && _playerDead.IsDead))
             {
-                Debug.Log("El jugador está muerto. No se generarán caquitas");
                 return;
             }
-        else
-        {
-            Debug.Log("El jugador está vivo. Se generarán caquitas");
-        }
 
-        CheckPoop();
+            CheckPoop();
+        }
     }
 
     private void CheckPoop()
     {
         _poopTime += Time.deltaTime;
-        if (_hungerPercent.fillAmount >= 0.5f)
+
+        float currentHungerPercent = _hungerPercent.fillAmount;
+
+        if (currentHungerPercent >= 0.5f && _poopTime >= _poopNohungerTime)
         {
-            if (_poopTime >= _poopNohungerTime)
-            {
-                InstantiatePoop();
-            }
+            InstantiatePoop();
         }
-        else
+        else if (currentHungerPercent < 0.5f && _poopTime >= _poopHungerTime)
         {
-            if (_poopTime >= _poopHungerTime)
-            {
-                InstantiatePoop();
-            }
+            InstantiatePoop();
         }
     }
 

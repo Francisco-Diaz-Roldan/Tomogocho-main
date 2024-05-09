@@ -16,8 +16,11 @@ public class RayCamera : MonoBehaviour
             {
                 GameObject player = hit.collider.gameObject;
                 PlayerSleep playerSleep = player.GetComponent<PlayerSleep>();
-                if (playerSleep.IsSleeping) { return; }
                 PlayerHappy playerHappy = player.GetComponent<PlayerHappy>();
+                PlayerDead playerDead = player.GetComponent<PlayerDead>();
+                if (playerSleep.IsSleeping) { return; }
+                if (playerDead.IsDead) { return; }
+    
                 playerHappy.ActivateHappyFace(true);
 
                 // Obtengo el componente Hapiness del objeto que tiene el script Hapiness

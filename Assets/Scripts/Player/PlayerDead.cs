@@ -14,23 +14,29 @@ public class PlayerDead : MonoBehaviour
     void Start()
     {
        _animator = GetComponent<Animator>();
+        //coger también _hapiness
     }
 
-    void Update()
+    private void Update()
     {
-        if (_hapiness.HapinessBarPercent <= 0f)
-        {
-            _animator.SetBool("IsAlive", false);
-        } else
-        {
-            _animator.SetBool("IsAlive", true);
-        }
+        CheckHappiness(); // Verifica el estado de la felicidad para determinar si el jugador está muerto
     }
-    public void ChangeDeadState(bool isDead)
+
+    private void CheckHappiness()
+    {
+        if (_hapiness != null && _hapiness.HapinessBarPercent <= 0f)
+        {
+            SetDead(true); // Marca al jugador como muerto si la felicidad llega a cero
+        }/*
+        else
+        {
+            SetDead(false); // Marca al jugador como vivo si la felicidad es mayor que cero
+        }*/
+    }
+
+    public void SetDead(bool isDead)
     {
         _isDead = isDead;
-        _animator.SetBool("IsAlive", !isDead);
+        _animator.SetBool("IsAlive", !isDead); // Cambia el estado de la animación en base al estado de vida
     }
-
-
 }

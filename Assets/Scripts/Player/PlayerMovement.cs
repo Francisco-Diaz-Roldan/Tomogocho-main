@@ -21,10 +21,12 @@ public class PlayerMovement : MonoBehaviour
     private bool _isHappy = false;
 
     private PlayerSleep _sleep;
+    private PlayerDead _playerDead;
 
     private void Awake()
     {
         _sleep = GetComponent<PlayerSleep>();
+        _playerDead = GetComponent<PlayerDead>();
         _centerPlayerPosition = transform.position;
         _rb = GetComponent<Rigidbody2D>();
         _direction = Vector2.zero;
@@ -33,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (_isHappy || _sleep.IsSleeping) { return; }
+        if (_isHappy || _sleep.IsSleeping || _playerDead.IsDead) { return; }
 
         if ( !_inZone) { 
             OnReturnPosition();
@@ -57,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if ( _isHappy || _sleep.IsSleeping) { return; }
+        if ( _isHappy || _sleep.IsSleeping || _playerDead.IsDead) { return; }
         Move();        
     }
 

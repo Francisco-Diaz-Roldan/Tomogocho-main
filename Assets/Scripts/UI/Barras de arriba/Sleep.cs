@@ -6,7 +6,8 @@ public class Sleep : MonoBehaviour
     [SerializeField] private Image _sleepBar;
     [SerializeField] private GameObject _panelNoche;
     [SerializeField] private PlayerSleep _playerSleep;
-    [SerializeField] private PlayerHappy _playerHappy;
+    private PlayerHappy _playerHappy;
+    private PlayerDead _playerDead;
 
     private bool isResting = false;
     private float restInterval = 1f;
@@ -19,14 +20,16 @@ public class Sleep : MonoBehaviour
 
     private void Start()
     {
+        _playerDead = FindObjectOfType<PlayerDead>();
+        if (_playerDead == null) { return; }
         // Llama repetidamente al método que decrementa la barra de sueño con un intervalo de tiempo
-        InvokeRepeating(nameof(DecreaseSleep), 1f, 1f);
+        if (!_playerDead.IsDead) { InvokeRepeating(nameof(DecreaseSleep), 1f, 1f); }
     }
 
     // Método para decrementar la barra de sueño solo si no se está descansando
     private void DecreaseSleep()
     {
-        if (!isResting) // Solo baja si no se está descansando
+        if (!isResting && !_playerDead.IsDead) // Solo baja si no se está descansando
         {
             _sleepBar.fillAmount -= 0.01f; // Decrementa el porcentaje de sueño
             _sleepBar.fillAmount = Mathf.Max(_sleepBar.fillAmount, 0f); // Asegura que el valor no sea menor que 0
@@ -74,14 +77,17 @@ public class Sleep : MonoBehaviour
     // Método llamado repetidamente cuando se está descansando
     public void IncreaseSleep()
     {
-        // Define la velocidad de incremento deseada
-        float incrementSpeed = 0.025f;
+        if (!_playerDead.IsDead)
+        {
+            // Define la velocidad de incremento deseada
+            float incrementSpeed = 0.025f;
 
         // Calcula el nuevo valor de fillAmount de manera más suave usando Lerp
         _sleepBar.fillAmount = Mathf.Lerp(_sleepBar.fillAmount, 1f, incrementSpeed);
 
         // Asegura que el valor no supere 1
         _sleepBar.fillAmount = Mathf.Min(_sleepBar.fillAmount, 1f);
+        }
     }
 
     // Método para detener el descanso cuando el jugador muere (opcional)

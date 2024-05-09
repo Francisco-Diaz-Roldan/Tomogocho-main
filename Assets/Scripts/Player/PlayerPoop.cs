@@ -17,6 +17,8 @@ public class PlayerPoop : MonoBehaviour
     private float _poopTime = 0;
 
     private PlayerSleep _playerSleep;
+    private PlayerDead _playerDead;
+
 
     private List<GameObject> pooledObjects = new List<GameObject>();
     private int poolSize = 5; // Tamaño del pool (cantidad máxima de objetos Poo que pueden existir a la vez)
@@ -25,6 +27,11 @@ public class PlayerPoop : MonoBehaviour
     void Start()
     {
         _playerSleep = GetComponent<PlayerSleep>();
+        _playerDead = GetComponent<PlayerDead>();
+        if (_playerDead == null)
+        {
+            Debug.LogError("El componente PlayerDead no está asignado correctamente en el script PlayerPoop.");
+        }
 
         // Inicializar el pool al comienzo del juego
         for (int i = 0; i < poolSize; i++)
@@ -36,9 +43,30 @@ public class PlayerPoop : MonoBehaviour
     }
 
     // Update is called once per frame
+    /*void Update()
+    {
+        if (_playerSleep.IsSleeping || (_playerDead != null && !_playerDead.IsDead)) return;
+
+        CheckPoop();
+    }*/
     void Update()
     {
-        if (_playerSleep.IsSleeping) return;
+        if (_playerSleep.IsSleeping)
+        {
+            Debug.Log("El jugador está dormido. No se generarán caquitas");
+            return;
+        }
+
+        if (_playerDead != null)
+            if (_playerDead.IsDead)
+            {
+                Debug.Log("El jugador está muerto. No se generarán caquitas");
+                return;
+            }
+        else
+        {
+            Debug.Log("El jugador está vivo. Se generarán caquitas");
+        }
 
         CheckPoop();
     }

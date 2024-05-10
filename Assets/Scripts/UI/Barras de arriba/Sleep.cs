@@ -39,38 +39,31 @@ public class Sleep : MonoBehaviour
     // Método para iniciar o detener el descanso al pulsar un botón
     public void RestCreature()
     {
-        isResting = !isResting; // Cambia el estado de descanso al presionar el botón
+        isResting = !isResting; // Cambio el estado de descanso al presionar el botón
 
         if (isResting)
         {
-            // Activar el GameObject Panel Noche al comenzar a descansar
-            _panelNoche.SetActive(true);
+            _panelNoche.SetActive(true); // Activo el GameObject Panel Noche al comenzar a descansar
 
-            // Detiene la repetición del método que decrementa la barra de sueño
-            CancelInvoke(nameof(DecreaseSleep));
+            CancelInvoke(nameof(DecreaseSleep)); // Detengo la repetición del método que decrementa la barra de sueño
 
-            // Comienza a llamar repetidamente al método que incrementa la barra de sueño con un intervalo
-            InvokeRepeating(nameof(IncreaseSleep), 0f, restInterval);
+            InvokeRepeating(nameof(IncreaseSleep), 0f, restInterval); // Comienza a llamar repetidamente al método que incrementa la barra de sueño con un intervalo
 
-            // Desactivo la animación "Sleeping" en el Animator
-            _playerSleep.ChangeSleepState(true);
+            _playerSleep.ChangeSleepState(true); // Desactivo la animación "Sleeping" en el Animator
 
-            // Desactivo la cara feliz del jugador
-            _playerHappy.ActivateHappyFace(false);
+            _playerHappy.ActivateHappyFace(false); // Desactivo la cara feliz del jugador
         }
         else
         {
-            // Desactivar el GameObject Panel Noche al dejar de descansar
-            _panelNoche.SetActive(false);
 
-            // Detiene la repetición del método que incrementa la barra de sueño
-            CancelInvoke(nameof(IncreaseSleep));
+            _panelNoche.SetActive(false); // Desactivo el GameObject Panel Noche al dejar de descansar
 
-            // Reinicia la repetición del método que decrementa la barra de sueño
-            InvokeRepeating(nameof(DecreaseSleep), 1f, 1f);
+            CancelInvoke(nameof(IncreaseSleep)); // Detengo la repetición del método que incrementa la barra de sueño
 
-            // Aquí desactivamos la animación "Sleeping" en el Animator
-            _playerSleep.ChangeSleepState(false);
+            InvokeRepeating(nameof(DecreaseSleep), 1f, 1f); // Reinicio la repetición del método que decrementa la barra de sueño
+
+            _playerSleep.ChangeSleepState(false); // Desactivo la animación "Sleeping" en el Animator
+
         }
     }
 
@@ -79,22 +72,13 @@ public class Sleep : MonoBehaviour
     {
         if (!_playerDead.IsDead)
         {
-            // Define la velocidad de incremento deseada
-            float incrementSpeed = 0.025f;
+            
+            float incrementSpeed = 0.025f; 
 
-        // Calcula el nuevo valor de fillAmount de manera más suave usando Lerp
-        _sleepBar.fillAmount = Mathf.Lerp(_sleepBar.fillAmount, 1f, incrementSpeed);
+            _sleepBar.fillAmount = Mathf.Lerp(_sleepBar.fillAmount, 1f, incrementSpeed); // Calculo el nuevo valor de fillAmount de manera más suave usando Lerp
 
-        // Asegura que el valor no supere 1
-        _sleepBar.fillAmount = Mathf.Min(_sleepBar.fillAmount, 1f);
+            _sleepBar.fillAmount = Mathf.Min(_sleepBar.fillAmount, 1f); // Asegura que el valor no supere 1
         }
-    }
-
-    // Método para detener el descanso cuando el jugador muere (opcional)
-    private void HandlePlayerDeath()
-    {
-        // Detiene la repetición del método que incrementa la barra de sueño si el jugador muere
-        CancelInvoke(nameof(IncreaseSleep));
     }
 
     public void SetPanelNoche(GameObject panel)

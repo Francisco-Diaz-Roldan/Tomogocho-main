@@ -7,11 +7,20 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] private GameObject _botonHome;
     [SerializeField] private GameObject _panelHome;
+    private PlayerDead _playerDead;
 
+    private void Start()
+    {
+        _playerDead = FindObjectOfType<PlayerDead>();
+        if (_playerDead == null) { return; }
+    }
     public void Pausa()
     {
-        Time.timeScale = 0f;
-        _panelHome.SetActive(true);//_panelHome es el menú de pausa
+        if (!_playerDead.IsDead)
+        {
+            Time.timeScale = 0f;
+            _panelHome.SetActive(true);//_panelHome es el menú de pausa
+        }
     }
 
     public void Reanudar()

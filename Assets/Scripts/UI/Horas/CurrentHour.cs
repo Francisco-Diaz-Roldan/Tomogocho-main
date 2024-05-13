@@ -16,28 +16,34 @@ public class CurrentHour : MonoBehaviour
         InvokeRepeating("ActualizarHora", 0f, 1f);
     }
 
+    private void Update()
+    {
+        if (Time.timeScale <= 0) 
+        {
+            ActualizarHora();
+        }
+    }
+
     void ActualizarHora()
     {
-        // Obtener la hora actual del sistema
+        // Consigo la hora actual del sistema
         DateTime _currentHour = DateTime.Now;
 
-        // Obtener la hora en formato de 24 horas
+        // Paso la hora a un formato de 24 horas
         int currentHour = _currentHour.Hour;
         int currentMinit = _currentHour.Minute;
 
-        //Debug.Log($"{currentHour}: {currentMinit}");
-
-        // Determinar qué sprite asignar según la hora actual
+        // Dependiendo de la hora le asigno un Sprite u otro
         if (currentHour >= 9 && (currentHour < 20 || (currentHour == 20 && currentMinit < 30)))  // Entre las 6:00h y las 20:30h
         {
-            _imageDay.sprite = _dayIcon[0];  // Asignar el sprite de la mañana
+            _imageDay.sprite = _dayIcon[0];  // Asigno el sprite de la mañana
         }
         else
         {
-            _imageDay.sprite = _dayIcon[1];  // Asignar el sprite de la tarde/noche
+            _imageDay.sprite = _dayIcon[1];  // Asigno el sprite de la tarde/noche
         }
 
-        // Actualizar el texto de la hora en el componente TMP_Text
+        // Actualizo el texto de la hora en el componente TMP_Text
         string _formattedHour = _currentHour.ToString("HH:mm:ss");
         _hourText.text = _formattedHour;
     }

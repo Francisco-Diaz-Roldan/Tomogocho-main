@@ -15,4 +15,4 @@ MonoBehaviour:
   HungerPercent: 0
   HapinessPercent: 0
   SleepPercent: 0
-  Seconds: 0
+  LifeTimeInSeconds: 1.4689817

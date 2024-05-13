@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class RayCamera : MonoBehaviour
 {
+    [SerializeField] private GameObject _panelGameOver;
+
     void Update()
     {
-        // Si se hace clic izquierdo
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) // Si se hace clic izquierdo
         {
-            // Lanzar un rayo desde la posición del ratón en la pantalla
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);  // Se lanza un rayo desde la posición del ratón en la pantalla
 
             if (hit.collider != null && hit.collider.gameObject.CompareTag("Player"))
             {
@@ -19,22 +19,20 @@ public class RayCamera : MonoBehaviour
                 PlayerHappy playerHappy = player.GetComponent<PlayerHappy>();
                 PlayerDead playerDead = player.GetComponent<PlayerDead>();
                 if (playerSleep.IsSleeping) { return; }
-                if (playerDead.IsDead) { return; }
+                if (playerDead.IsDead) {
+                    _panelGameOver.SetActive(true);
+                    //    SceneManager.LoadScene("MainScene");
+                    return;
+                }
     
                 playerHappy.ActivateHappyFace(true);
 
-                // Obtengo el componente Hapiness del objeto que tiene el script Hapiness
-                Hapiness hapiness = FindObjectOfType<Hapiness>(); // Esto busca el primer objeto con el script Hapiness en la escena
+                Hapiness hapiness = FindObjectOfType<Hapiness>(); // // Obtengo el componente Hapiness del objeto que tiene el script Hapiness ya que busca el primer objeto con el script Hapiness en la escena
 
                 if (hapiness != null)
                 {
-                    // Aumentar la barra de felicidad
-                    hapiness.MakeFeelHappyCreature();
+                    hapiness.MakeFeelHappyCreature();  // Aumenta la barra de felicidad
                 }
-
-                //Debug.Log("He tocado al moñeco");
-                //TODO hacer que la barra de felicidad suba y se le ponga cara de uwu mirando a cámara (para esto ultimo hacer animación nueva), para lo de 
-                //las particulas corazones hacer unas partículas o un sprite
             }
             else if (hit.collider != null && hit.collider.gameObject.CompareTag("Poo"))
             {

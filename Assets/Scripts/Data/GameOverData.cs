@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class GameOverData : MonoBehaviour
 {
@@ -43,6 +45,7 @@ public class GameOverData : MonoBehaviour
     public void Salir()
     {
         _playerData.ResetValues(false); //Creo un PLater Data vacio
-        this.gameObject.SetActive(false);
+        SceneManager.LoadScene("MainScene");
+        // this.gameObject.SetActive(false);
     }
 }

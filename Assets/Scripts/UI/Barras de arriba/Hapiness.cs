@@ -12,6 +12,7 @@ public class Hapiness : MonoBehaviour
     public float HapinessBarPercent => _hapinessBar.fillAmount;
     private PlayerDead _playerDead;
     private PlayerSleep _playerSleep;
+    public PlayerData playerData;
     #endregion
 
     private void Start()
@@ -36,6 +37,11 @@ public class Hapiness : MonoBehaviour
             {
                 _hapinessBar.fillAmount -= 0.01f;
                 _hapinessBar.fillAmount = Mathf.Max(_hapinessBar.fillAmount, 0f);
+
+                if(playerData != null)
+                {
+                    playerData.HapinessPercent = _hapinessBar.fillAmount;
+                }
             }
         }
     }

@@ -13,7 +13,6 @@ public class GameOverData : MonoBehaviour
     private void OnEnable()
     {
         ConvertirSegundos(_playerData.Seconds);
-        //Necesito desactivar el panel que hay detrás de Juego nuevo ya que cuando pulso lo que hay detrás también se ve afectado
     }
 
     private void ConvertirSegundos(float segundos)

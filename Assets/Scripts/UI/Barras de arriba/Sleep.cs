@@ -3,14 +3,18 @@ using UnityEngine.UI;
 
 public class Sleep : MonoBehaviour
 {
+    #region Variables
     [SerializeField] private Image _sleepBar;
     [SerializeField] private GameObject _panelNoche;
     [SerializeField] private PlayerSleep _playerSleep;
     private PlayerHappy _playerHappy;
     private PlayerDead _playerDead;
+    public PlayerData playerData; // Referencia al PlayerData
+    #endregion
 
     private bool isResting = false;
     private float restInterval = 1f;
+
 
     private void Awake()
     {
@@ -72,12 +76,16 @@ public class Sleep : MonoBehaviour
     {
         if (!_playerDead.IsDead)
         {
-            
             float incrementSpeed = 0.025f; 
 
             _sleepBar.fillAmount = Mathf.Lerp(_sleepBar.fillAmount, 1f, incrementSpeed); // Calculo el nuevo valor de fillAmount de manera más suave usando Lerp
-
             _sleepBar.fillAmount = Mathf.Min(_sleepBar.fillAmount, 1f); // Asegura que el valor no supere 1
+
+            // Guardo el valor actual de _sleepBar.fillAmount en SleepPercent de PlayerData
+            if (playerData != null)
+            {
+                playerData.SleepPercent = _sleepBar.fillAmount;
+            }
         }
     }
 

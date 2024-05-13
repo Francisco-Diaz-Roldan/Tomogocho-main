@@ -9,6 +9,7 @@ public class Hunger : MonoBehaviour
     [SerializeField] private Image _hungryBar;
     private PlayerDead _playerDead; // Referencia al script PlayerDead
     private PlayerSleep _playerSleep;
+    public PlayerData playerData;
     #endregion
 
     private void Start()
@@ -35,6 +36,12 @@ public class Hunger : MonoBehaviour
         {
             _hungryBar.fillAmount -= .01f;
             _hungryBar.fillAmount = Mathf.Max(_hungryBar.fillAmount, 0f);
+
+            // Guardo el valor actual de _hungryBar.fillAmount en HungerPercent de PlayerData
+            if (playerData != null)
+            {
+                playerData.HungerPercent = _hungryBar.fillAmount;
+            }
         }
     }
 }

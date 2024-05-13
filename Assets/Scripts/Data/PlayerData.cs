@@ -12,7 +12,7 @@ public class PlayerData : ScriptableObject
     public float HapinessPercent;
     public float SleepPercent;
     public DateTime? StartLifeTime; //TODO para futura mejora que incluya la fecha en la que empecé la partida
-    public float Seconds;   //Para medir la cantidad de tiempo jugado
+    public float LifeTimeInSeconds;   //Para medir la cantidad de tiempo jugado
 
 
     public void ResetValues(bool newGame = true)
@@ -31,7 +31,7 @@ public class PlayerData : ScriptableObject
             SleepPercent = 0f;
             StartLifeTime = null;
         }
-        Seconds = 0f;
+        LifeTimeInSeconds = 0f;
     }
 
 

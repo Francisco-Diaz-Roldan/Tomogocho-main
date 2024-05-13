@@ -12,7 +12,7 @@ public class GameOverData : MonoBehaviour
 
     private void OnEnable()
     {
-        ConvertirSegundos(_playerData.Seconds);
+        ConvertirSegundos(_playerData.LifeTimeInSeconds);
     }
 
     private void ConvertirSegundos(float segundos)

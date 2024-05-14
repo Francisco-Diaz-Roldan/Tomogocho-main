@@ -34,6 +34,11 @@ public class PlayerData : ScriptableObject
         LifeTimeInSeconds = 0f;
     }
 
+    public bool HasDied()
+    {
+        return HapinessPercent == 0;
+    }
+
 
     //Cuando le de a nueva partida hacer un PLayerData.ResetValues() porque necesita una referencia previa (Hacer otro script)
     //Cuando le dé a jugar y Seconds = 0f; -> Hacer un ResetValues() para

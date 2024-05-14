@@ -10,13 +10,14 @@ public class Hapiness : MonoBehaviour
     #region Variables
     [SerializeField] private Image _hapinessBar;
     public float HapinessBarPercent => _hapinessBar.fillAmount;
-    private PlayerDead _playerDead;
-    private PlayerSleep _playerSleep;
+    [SerializeField] private PlayerDead _playerDead;
+    [SerializeField] private PlayerSleep _playerSleep;
     public PlayerData playerData;
     #endregion
 
     private void Start()
     {
+        _hapinessBar.fillAmount = playerData.HapinessPercent;
         _playerDead = FindObjectOfType<PlayerDead>();
         _playerSleep = FindObjectOfType<PlayerSleep>();
         InvokeRepeating(nameof(UpdateBar), 1f, 1f); // Llama repetidamente a UpdateBar con un intervalo de 1 segundo

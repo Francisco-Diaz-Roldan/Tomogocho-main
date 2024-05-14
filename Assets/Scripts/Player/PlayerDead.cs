@@ -27,11 +27,7 @@ public class PlayerDead : MonoBehaviour
         if (_hapiness != null && _hapiness.HapinessBarPercent <= 0f)
         {
             SetDead(true); // Marca al jugador como muerto si la felicidad llega a cero
-        }/*
-        else
-        {
-            SetDead(false); // Marca al jugador como vivo si la felicidad es mayor que cero
-        }*/
+        }
     }
 
     public void SetDead(bool isDead)

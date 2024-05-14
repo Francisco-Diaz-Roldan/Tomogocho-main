@@ -7,15 +7,18 @@ public class Hunger : MonoBehaviour
 {
     #region Variables
     [SerializeField] private Image _hungryBar;
-    private PlayerDead _playerDead; // Referencia al script PlayerDead
-    private PlayerSleep _playerSleep;
-    public PlayerData playerData;
+    [SerializeField] private PlayerDead _playerDead; // Referencia al script PlayerDead
+    [SerializeField] private PlayerSleep _playerSleep;
+    public PlayerData _playerData;
     #endregion
 
     private void Start()
     {
-        _playerDead = FindObjectOfType<PlayerDead>(); // Encuentra el componente PlayerDead en la escena
-        _playerSleep = FindObjectOfType<PlayerSleep>();
+        Debug.Log(_playerData == null);
+        _hungryBar.fillAmount = _playerData.HungerPercent;
+        
+       // _playerDead = FindObjectOfType<PlayerDead>(); // Encuentra el componente PlayerDead en la escena
+      //  _playerSleep = FindObjectOfType<PlayerSleep>();
         if (_playerDead == null || _playerSleep == null) { return; }
 
         // Llama repetidamente a UpdateBar con un intervalo de 1 segundo si el jugador no está muerto
@@ -38,9 +41,9 @@ public class Hunger : MonoBehaviour
             _hungryBar.fillAmount = Mathf.Max(_hungryBar.fillAmount, 0f);
 
             // Guardo el valor actual de _hungryBar.fillAmount en HungerPercent de PlayerData
-            if (playerData != null)
+            if (_playerData != null)
             {
-                playerData.HungerPercent = _hungryBar.fillAmount;
+                _playerData.HungerPercent = _hungryBar.fillAmount;
             }
         }
     }

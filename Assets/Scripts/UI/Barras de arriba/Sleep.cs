@@ -7,8 +7,8 @@ public class Sleep : MonoBehaviour
     [SerializeField] private Image _sleepBar;
     [SerializeField] private GameObject _panelNoche;
     [SerializeField] private PlayerSleep _playerSleep;
-    private PlayerHappy _playerHappy;
-    private PlayerDead _playerDead;
+    [SerializeField] private PlayerHappy _playerHappy;
+    [SerializeField] private PlayerDead _playerDead;
     public PlayerData playerData; // Referencia al PlayerData
     #endregion
 
@@ -19,12 +19,13 @@ public class Sleep : MonoBehaviour
     private void Awake()
     {
         // Obtengo la referencia al componente PlayerHappy
-        _playerHappy = FindObjectOfType<PlayerHappy>();
+       // _playerHappy = FindObjectOfType<PlayerHappy>();
     }
 
     private void Start()
     {
-        _playerDead = FindObjectOfType<PlayerDead>();
+        _sleepBar.fillAmount = playerData.SleepPercent;
+       // _playerDead = FindObjectOfType<PlayerDead>();
         if (_playerDead == null) { return; }
         // Llama repetidamente al método que decrementa la barra de sueño con un intervalo de tiempo
         if (!_playerDead.IsDead) { InvokeRepeating(nameof(DecreaseSleep), 1f, 1f); }
@@ -37,6 +38,7 @@ public class Sleep : MonoBehaviour
         {
             _sleepBar.fillAmount -= 0.01f; // Decrementa el porcentaje de sueño
             _sleepBar.fillAmount = Mathf.Max(_sleepBar.fillAmount, 0f); // Asegura que el valor no sea menor que 0
+            playerData.SleepPercent = _sleepBar.fillAmount;
         }
     }
 
@@ -82,10 +84,7 @@ public class Sleep : MonoBehaviour
             _sleepBar.fillAmount = Mathf.Min(_sleepBar.fillAmount, 1f); // Asegura que el valor no supere 1
 
             // Guardo el valor actual de _sleepBar.fillAmount en SleepPercent de PlayerData
-            if (playerData != null)
-            {
                 playerData.SleepPercent = _sleepBar.fillAmount;
-            }
         }
     }
 

@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameMenuController : MonoBehaviour
 {
     [SerializeField] private GameObject _panelMenu;
+    [SerializeField] private PlayerData _playerData;
+
 
     /*public void QuitGame()
     {
@@ -27,9 +29,18 @@ public class GameMenuController : MonoBehaviour
 
     public void StartNewGame()
     {
+        ControlGame();
         // Para ir a la escena de juego
         //TODO hacer que se carguen los datos (controlar también que estén vacíos)
         Time.timeScale = 1f;
         SceneManager.LoadScene("GameScene");
+    }
+
+    private void ControlGame()
+    {
+        if (_playerData.HasDied())
+        {
+            _playerData.ResetValues();
+        }
     }
 }

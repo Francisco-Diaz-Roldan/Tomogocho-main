@@ -5,21 +5,21 @@ public class MainMenuController : MonoBehaviour
 {
 
     [SerializeField] private GameObject _panelMenu;
+    [SerializeField] private PlayerData _playerData;
 
     public void GoToMenu()
     {
         _panelMenu.SetActive(true);
     }
 
-    public void GoToGameScene()
+    public void ResetGame()
     {
-        // Para ir a la escena de Juego
-        SceneManager.LoadScene("GameScene");
+        _playerData.ResetValues(true); // Resetear valores sin iniciar un nuevo juego
+        GoToGameScene();
     }
 
-    /* public void QuitGame()
-     {
-         // Para salir de la app
-         Application.Quit();
-     }*/
+    public void GoToGameScene()
+    {
+        SceneManager.LoadScene("GameScene");// Para ir a la escena de Juego
+    }   
 }

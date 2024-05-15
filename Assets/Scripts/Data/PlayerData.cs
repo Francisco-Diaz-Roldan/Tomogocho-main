@@ -14,7 +14,6 @@ public class PlayerData : ScriptableObject
     public DateTime? StartLifeTime; //TODO para futura mejora que incluya la fecha en la que empecé la partida
     public float LifeTimeInSeconds;   //Para medir la cantidad de tiempo jugado
 
-
     public void ResetValues(bool newGame = true)
     {
         if (newGame)
@@ -33,8 +32,6 @@ public class PlayerData : ScriptableObject
         }
         LifeTimeInSeconds = 0f;
     }
-
-
 
     public bool HasDied()
     {

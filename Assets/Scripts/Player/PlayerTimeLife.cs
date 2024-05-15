@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerTimeLife : MonoBehaviour
 {
-    private PlayerDead _playerDead;
-    [SerializeField] private PlayerData _playerData; 
+    [SerializeField] private PlayerDead _playerDead;
+    [SerializeField] private PlayerData _playerData;
 
     void Update()
     {

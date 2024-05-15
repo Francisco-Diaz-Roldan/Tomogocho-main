@@ -2499,9 +2499,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2010191394}
-        m_TargetAssemblyTypeName: GameMenuController, Assembly-CSharp
-        m_MethodName: StartNewGame
+      - m_Target: {fileID: 2010191393}
+        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
+        m_MethodName: ResetGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

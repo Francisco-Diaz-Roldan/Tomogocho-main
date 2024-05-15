@@ -20,6 +20,10 @@ public class MainMenuController : MonoBehaviour
 
     public void GoToGameScene()
     {
+        if (_playerData.HasDied()) // En caso de que la criatura tenga 0 de vida al darle a jugar se resetean sus valores
+        {
+            _playerData.ResetValues(true);
+        }
         SceneManager.LoadScene("GameScene");// Para ir a la escena de Juego
     }   
 }

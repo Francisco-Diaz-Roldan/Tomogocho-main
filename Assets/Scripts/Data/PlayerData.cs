@@ -34,16 +34,10 @@ public class PlayerData : ScriptableObject
         LifeTimeInSeconds = 0f;
     }
 
+
+
     public bool HasDied()
     {
         return HapinessPercent == 0;
     }
-
-
-    //Cuando le de a nueva partida hacer un PLayerData.ResetValues() porque necesita una referencia previa (Hacer otro script)
-    //Cuando le dé a jugar y Seconds = 0f; -> Hacer un ResetValues() para
-    //Los datos siempre están cargados -> CUando inicie la escena tengo que coger los percents y tengo que ver cómo guardar los segundos -> Hacer un script que sea un contador de tiempo que debe 
-    //Necesito los porcentajes cuando inicio partida para que cada barra se cargue, cuando guarde partida que vuelque los datos al playerData
-    //Necesito un script de un invokerepeating de cada segundo en el cual se incremente un segundo por cada segundo en el temporizador que lo coja del PLayerDataSeconds +=seconds;
-
 }

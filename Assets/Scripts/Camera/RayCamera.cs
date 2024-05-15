@@ -5,6 +5,7 @@ using UnityEngine;
 public class RayCamera : MonoBehaviour
 {
     [SerializeField] private GameObject _panelGameOver;
+    [SerializeField] private GameObject _panelHome;
 
     void Update()
     {
@@ -21,15 +22,17 @@ public class RayCamera : MonoBehaviour
                 if (playerSleep.IsSleeping) { return; }
                 if (playerDead.IsDead) {
                     _panelGameOver.SetActive(true);
-                    //    SceneManager.LoadScene("MainScene");
                     return;
                 }
-    
-                playerHappy.ActivateHappyFace(true);
 
-                Hapiness hapiness = FindObjectOfType<Hapiness>(); // // Obtengo el componente Hapiness del objeto que tiene el script Hapiness ya que busca el primer objeto con el script Hapiness en la escena
+                if (!_panelHome.activeSelf)
+                {
+                    playerHappy.ActivateHappyFace(true);
+                }
 
-                if (hapiness != null)
+                Hapiness hapiness = FindObjectOfType<Hapiness>(); // Obtengo el componente Hapiness del objeto que tiene el script Hapiness ya que busca el primer objeto con el script Hapiness en la escena
+
+                if (hapiness != null && !_panelHome.activeSelf)
                 {
                     hapiness.MakeFeelHappyCreature();  // Aumenta la barra de felicidad
                 }

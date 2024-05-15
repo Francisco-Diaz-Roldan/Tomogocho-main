@@ -12,19 +12,18 @@ public class Hapiness : MonoBehaviour
     public float HapinessBarPercent => _hapinessBar.fillAmount;
     [SerializeField] private PlayerDead _playerDead;
     [SerializeField] private PlayerSleep _playerSleep;
-    public PlayerData playerData;
+    public PlayerData _playerData;
     #endregion
 
     private void Start()
     {
-        _hapinessBar.fillAmount = playerData.HapinessPercent;
+        _hapinessBar.fillAmount = _playerData.HapinessPercent;
         _playerDead = FindObjectOfType<PlayerDead>();
         _playerSleep = FindObjectOfType<PlayerSleep>();
         InvokeRepeating(nameof(UpdateBar), 1f, 1f); // Llama repetidamente a UpdateBar con un intervalo de 1 segundo
     }
 
-    // Aumenta el porcentaje de felicidad
-    public void MakeFeelHappyCreature()
+    public void MakeFeelHappyCreature() // Aumenta el porcentaje de felicidad
     {
         _hapinessBar.fillAmount = Mathf.Min(1f, _hapinessBar.fillAmount + .1f);
     }
@@ -39,9 +38,9 @@ public class Hapiness : MonoBehaviour
                 _hapinessBar.fillAmount -= 0.01f;
                 _hapinessBar.fillAmount = Mathf.Max(_hapinessBar.fillAmount, 0f);
 
-                if(playerData != null)
+                if(_playerData != null)
                 {
-                    playerData.HapinessPercent = _hapinessBar.fillAmount;
+                    _playerData.HapinessPercent = _hapinessBar.fillAmount;
                 }
             }
         }

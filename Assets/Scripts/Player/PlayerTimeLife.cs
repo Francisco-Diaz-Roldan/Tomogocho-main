@@ -6,13 +6,6 @@ public class PlayerTimeLife : MonoBehaviour
 {
     private PlayerDead _playerDead;
     public PlayerData playerData; 
-   // private float lifeTime; 
-
-    /*void Start()
-    {
-        _playerDead = FindObjectOfType<PlayerDead>();
-       // lifeTime = 0f;
-    }*/
 
     void Update()
     {

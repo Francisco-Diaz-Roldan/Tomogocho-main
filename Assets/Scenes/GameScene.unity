@@ -1810,6 +1810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _panelGameOver: {fileID: 565995711}
+  _panelHome: {fileID: 663273135}
 --- !u!1 &544034646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2803,6 +2804,7 @@ GameObject:
   - component: {fileID: 787257164}
   - component: {fileID: 787257166}
   - component: {fileID: 787257165}
+  - component: {fileID: 787257167}
   m_Layer: 5
   m_Name: "Contenedor Man\xFA"
   m_TagString: Untagged
@@ -2873,6 +2875,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 787257163}
   m_CullTransparentMesh: 1
+--- !u!114 &787257167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787257163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f7974ebdfe7e85428bea1f14af836dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _days: {fileID: 196941512}
+  _hours: {fileID: 321930922}
+  _minutes: {fileID: 685364011}
+  _playerData: {fileID: 11400000, guid: d85bd1a6960046445a21db94936db762, type: 2}
 --- !u!1 &797573793
 GameObject:
   m_ObjectHideFlags: 0
@@ -3296,7 +3314,7 @@ MonoBehaviour:
   _hapinessBar: {fileID: 862111842}
   _playerDead: {fileID: 1214898775}
   _playerSleep: {fileID: 1214898774}
-  playerData: {fileID: 11400000, guid: d85bd1a6960046445a21db94936db762, type: 2}
+  _playerData: {fileID: 11400000, guid: d85bd1a6960046445a21db94936db762, type: 2}
 --- !u!1 &877334741
 GameObject:
   m_ObjectHideFlags: 0
@@ -7312,7 +7330,7 @@ MonoBehaviour:
   _hapinessBar: {fileID: 1961037542}
   _playerDead: {fileID: 0}
   _playerSleep: {fileID: 0}
-  playerData: {fileID: 0}
+  _playerData: {fileID: 0}
 --- !u!114 &1961037542
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,27 +9,39 @@ public class Hunger : MonoBehaviour
     [SerializeField] private Image _hungryBar;
     [SerializeField] private PlayerDead _playerDead; // Referencia al script PlayerDead
     [SerializeField] private PlayerSleep _playerSleep;
+    [SerializeField] private PlayerEating _playerEating;
     public PlayerData _playerData;
     #endregion
 
     private void Start()
     {
-        Debug.Log(_playerData == null);
         _hungryBar.fillAmount = _playerData.HungerPercent;
-        
-       // _playerDead = FindObjectOfType<PlayerDead>(); // Encuentra el componente PlayerDead en la escena
-      //  _playerSleep = FindObjectOfType<PlayerSleep>();
         if (_playerDead == null || _playerSleep == null) { return; }
 
         // Llama repetidamente a UpdateBar con un intervalo de 1 segundo si el jugador no está muerto
-        if (!_playerDead.IsDead && !_playerSleep.IsSleeping) { InvokeRepeating(nameof(UpdateBar), 1f, 1f); }
+        if (!_playerDead.IsDead && !_playerSleep.IsSleeping) {
+            InvokeRepeating(nameof(UpdateBar), 1f, 1f);
+        }
     }
 
     // Alimenta a la criatura aumentando el porcentaje de hambre
     public void FeedCreature()
     {
-        if (!_playerDead.IsDead && !_playerSleep.IsSleeping) { _hungryBar.fillAmount = Mathf.Min(1f, _hungryBar.fillAmount + .1f); }
+        if (!_playerDead.IsDead && !_playerSleep.IsSleeping) 
+        {
+            _playerEating.ActivateEatingFace(true);
+            _hungryBar.fillAmount = Mathf.Min(1f, _hungryBar.fillAmount + .1f);
+            StartCoroutine(DisactivateEatingCoroutine());
+        }
     }
+
+    // Corrutina para desactivar la cara de comer después de un tiempo
+    private IEnumerator DisactivateEatingCoroutine()
+    {
+        yield return new WaitForSeconds(1.5f);
+        _playerEating.ActivateEatingFace(false);
+    }
+
 
     // Actualiza la barra de hambre
     private void UpdateBar()

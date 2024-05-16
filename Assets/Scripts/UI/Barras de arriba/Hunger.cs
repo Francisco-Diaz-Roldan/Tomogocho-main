@@ -7,7 +7,7 @@ public class Hunger : MonoBehaviour
 {
     #region Variables
     [SerializeField] private Image _hungryBar;
-    [SerializeField] private PlayerDead _playerDead; // Referencia al script PlayerDead
+    [SerializeField] private PlayerDead _playerDead;
     [SerializeField] private PlayerSleep _playerSleep;
     [SerializeField] private PlayerEating _playerEating;
     public PlayerData _playerData;
@@ -24,7 +24,7 @@ public class Hunger : MonoBehaviour
         }
     }
 
-    // Alimenta a la criatura aumentando el porcentaje de hambre
+    // Se da de comer a la criatura aumentando el porcentaje de la barra de hambre
     public void FeedCreature()
     {
         if (!_playerDead.IsDead && !_playerSleep.IsSleeping) 

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerHappy : MonoBehaviour
 {
     [SerializeField] GameObject carita;
+    [SerializeField] GameObject carita_carita_comida;
     [SerializeField] GameObject contenedorCorazones;
     [SerializeField] Image porcentajeFelicidad;
     private PlayerMovement _playerMovement;
@@ -16,6 +17,7 @@ public class PlayerHappy : MonoBehaviour
         contenedorCorazones.SetActive(isHappy);
         _playerMovement.SetHappyFace(isHappy);
         if (isHappy){
+            carita_carita_comida.SetActive(false);
             StartCoroutine(SetToUnhappy());
             porcentajeFelicidad.fillAmount = Mathf.Min(1, porcentajeFelicidad.fillAmount + 0.05f); //La barra de porcentaje no pasa de 1
         }
@@ -28,7 +30,7 @@ public class PlayerHappy : MonoBehaviour
 
     private IEnumerator SetToUnhappy()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         ActivateHappyFace(false);
     }
 }

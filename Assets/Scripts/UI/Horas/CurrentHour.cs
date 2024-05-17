@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 public class CurrentHour : MonoBehaviour
 {
-    public TMP_Text _hourText;
-    public Image _imageDay;
-    public List<Sprite> _dayIcon;
+    [SerializeField] private TMP_Text _hourText;
+    [SerializeField] private Image _imageDay;
+    [SerializeField] private List<Sprite> _dayIcon;
 
     void Start()
     {

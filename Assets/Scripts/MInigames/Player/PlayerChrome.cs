@@ -23,13 +23,13 @@ public class PlayerChrome : MonoBehaviour
     void Update()
     {
         bool isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _radius, _ground);
-       // _animator.SetBool("IsGrounded", isGrounded);
+        // _animator.SetBool("IsGrounded", isGrounded);
 
         if (Input.GetMouseButtonDown(0))
         {
             if (isGrounded)
             {
-            _rigidbody2D.AddForce(Vector2.up * _upForce);
+                _rigidbody2D.AddForce(Vector2.up * _upForce);
             }
         }
     }

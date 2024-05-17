@@ -20,6 +20,6 @@ public class Score : MonoBehaviour
         _timer += Time.deltaTime;
         _score = (int)(_timer  * scorePerSeconds);
         _score = Mathf.RoundToInt(_score / 10) * 10;
-        _scoreText.text = string.Format("{0:000000}", _score);
+        _scoreText.text = string.Format("{0:00000}", _score);
     }
 }

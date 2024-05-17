@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a19fe76bbe392f148a0266c3930aca54, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  HungerPercent: 0
-  HapinessPercent: 0
-  SleepPercent: 0
-  LifeTimeInSeconds: 0
+  HungerPercent: 1
+  HapinessPercent: 1
+  SleepPercent: 1
+  LifeTimeInSeconds: 17.500547

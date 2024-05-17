@@ -13,17 +13,17 @@ public class PlayerChrome : MonoBehaviour
 
 
     private Rigidbody2D _rigidbody2D;
-    // private Animator _animator;
+     private Animator _animator;
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         bool isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _radius, _ground);
-        // _animator.SetBool("IsGrounded", isGrounded);
+        if(isGrounded) _animator.SetFloat("X", 1f);
 
         if (Input.GetMouseButtonDown(0))
         {

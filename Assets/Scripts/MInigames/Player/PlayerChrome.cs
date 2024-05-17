@@ -41,7 +41,7 @@ public class PlayerChrome : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Poo"))
+        if (other.CompareTag("Poo") || other.CompareTag("Lapida"))
         {
             Time.timeScale = 0f;
             _gameOverPanel.SetActive(true);

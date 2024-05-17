@@ -979,6 +979,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c74f2a0b9926794c8afb901bee7cf9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _initialScrollSpeed: 1
+  _scrollSpeed: 4
 --- !u!50 &1272313498
 Rigidbody2D:
   serializedVersion: 4
@@ -1052,6 +1054,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c74f2a0b9926794c8afb901bee7cf9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _initialScrollSpeed: 1
+  _scrollSpeed: 4
 --- !u!50 &1316520636
 Rigidbody2D:
   serializedVersion: 4
@@ -1557,6 +1561,7 @@ GameObject:
   - component: {fileID: 1879394823}
   - component: {fileID: 1879394825}
   - component: {fileID: 1879394824}
+  - component: {fileID: 1879394826}
   m_Layer: 5
   m_Name: Puntuacion
   m_TagString: Untagged
@@ -1680,6 +1685,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879394822}
   m_CullTransparentMesh: 1
+--- !u!114 &1879394826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879394822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d723005b2a13f1e4693008808c926267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreText: {fileID: 1879394824}
 --- !u!1 &1912281801
 GameObject:
   m_ObjectHideFlags: 0

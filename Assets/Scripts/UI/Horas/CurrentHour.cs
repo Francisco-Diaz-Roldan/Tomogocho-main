@@ -9,6 +9,9 @@ public class CurrentHour : MonoBehaviour
     [SerializeField] private TMP_Text _hourText;
     [SerializeField] private Image _imageDay;
     [SerializeField] private List<Sprite> _dayIcon;
+    [SerializeField] private GameObject _panelNoche;
+    [SerializeField] private Sleep _sleepScript;
+
 
     void Start()
     {
@@ -34,13 +37,19 @@ public class CurrentHour : MonoBehaviour
         int currentMinit = _currentHour.Minute;
 
         // Dependiendo de la hora le asigno un Sprite u otro
-        if (currentHour >= 9 && (currentHour < 20 || (currentHour == 20 && currentMinit < 30)))  // Entre las 6:00h y las 20:30h
+       if (currentHour >= 9 && (currentHour < 21 || (currentHour == 21 && currentMinit < 30)))  // Entre las 6:00h y las 21:30h
         {
             _imageDay.sprite = _dayIcon[0];  // Asigno el sprite de la mañana
+            if (!_sleepScript.IsResting())
+            {
+                _panelNoche.SetActive(false);
+            }
         }
         else
         {
+            _panelNoche.SetActive(true);
             _imageDay.sprite = _dayIcon[1];  // Asigno el sprite de la tarde/noche
+            _sleepScript.ForceSleep();
         }
 
         // Actualizo el texto de la hora en el componente TMP_Text

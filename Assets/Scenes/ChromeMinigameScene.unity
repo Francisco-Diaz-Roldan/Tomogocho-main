@@ -658,6 +658,7 @@ MonoBehaviour:
   _dayIcon:
   - {fileID: 21300000, guid: af79198c72a22114b9987bba1f9a61c1, type: 3}
   - {fileID: 21300000, guid: aa9254ddf4557c84fb417f7325a2b615, type: 3}
+  _panelNoche: {fileID: 1887942136}
 --- !u!114 &548836598
 MonoBehaviour:
   m_ObjectHideFlags: 0

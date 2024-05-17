@@ -8,9 +8,12 @@ public class PlayerChrome : MonoBehaviour
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private LayerMask _ground;
     [SerializeField] private float _radius;
+    [SerializeField] private GameObject _gameOverPanel;
+
+
 
     private Rigidbody2D _rigidbody2D;
-   // private Animator _animator;
+    // private Animator _animator;
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -34,5 +37,14 @@ public class PlayerChrome : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(_groundCheck.position, _radius);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Poo"))
+        {
+            Time.timeScale = 0f;
+            _gameOverPanel.SetActive(true);
+        }
     }
 }

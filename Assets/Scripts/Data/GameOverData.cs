@@ -46,6 +46,5 @@ public class GameOverData : MonoBehaviour
     {
         _playerData.ResetValues(false); //Creo un PLater Data vacio
         SceneManager.LoadScene("MainScene");
-        // this.gameObject.SetActive(false);
     }
 }

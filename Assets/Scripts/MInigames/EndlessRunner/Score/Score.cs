@@ -42,7 +42,9 @@ public class Score : MonoBehaviour
     public void ResetHighScore()
     {
         PlayerPrefs.DeleteKey("HighScore");
+        _score = 0;
         _highScore = 0;
         _highScoreText.text = string.Format("{0:00000}", _highScore);
+        _scoreText.text = string.Format("{0:00000}", _score);
     }
 }

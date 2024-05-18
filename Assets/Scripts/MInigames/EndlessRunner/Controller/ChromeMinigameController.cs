@@ -6,6 +6,7 @@ public class ChromeMinigameController : MonoBehaviour
 
     [SerializeField] GameObject _panelJugar;
     [SerializeField] GameObject _panelHome;
+    [SerializeField] GameObject _panelGameOver;
 
     public void Restart()
     {
@@ -41,6 +42,9 @@ public class ChromeMinigameController : MonoBehaviour
     public void GoBack()
     {
         _panelHome.SetActive(false);
-        Time.timeScale = 1f;
+        if (!_panelGameOver.activeSelf) 
+        {
+            Time.timeScale = 1f;
+        }
     }
 }

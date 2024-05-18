@@ -1712,7 +1712,7 @@ GameObject:
   m_Component:
   - component: {fileID: 762180345}
   m_Layer: 0
-  m_Name: Game Over Panel
+  m_Name: Panel Game Over
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3255,7 +3255,6 @@ GameObject:
   - component: {fileID: 1757921796}
   - component: {fileID: 1757921795}
   - component: {fileID: 1757921794}
-  - component: {fileID: 1757921797}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3337,18 +3336,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1757921797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757921793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca51723a604103f488eb474e51293c79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1771302454 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8895934117620372860, guid: 15a94d3d81c088b489d712baeb8f6c27, type: 3}

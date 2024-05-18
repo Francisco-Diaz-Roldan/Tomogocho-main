@@ -13,7 +13,6 @@ public class Score : MonoBehaviour
 
     private void Start()
     {
-        // Recupera la puntuación más alta guardada
         _highScore = PlayerPrefs.GetInt("HighScore", 0);
         _highScoreText.text = string.Format("{0:00000}", _highScore);
     }

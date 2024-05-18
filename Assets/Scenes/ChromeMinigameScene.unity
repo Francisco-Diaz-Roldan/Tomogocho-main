@@ -2616,6 +2616,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812019942}
   m_CullTransparentMesh: 1
+--- !u!1 &1863023321
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1863023322}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1863023322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863023321}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1053.6431, y: 1369.5154, z: 3.4614208}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1879394822
 GameObject:
   m_ObjectHideFlags: 0
@@ -2629,7 +2660,7 @@ GameObject:
   - component: {fileID: 1879394824}
   - component: {fileID: 1879394826}
   m_Layer: 5
-  m_Name: Puntuacion
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3051,7 +3082,7 @@ GameObject:
   - component: {fileID: 2018847585}
   - component: {fileID: 2018847584}
   m_Layer: 5
-  m_Name: "Score Text que no la puntuaci\xF3n"
+  m_Name: Texto Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3520,3 +3551,4 @@ SceneRoots:
   - {fileID: 703263561000235313}
   - {fileID: 1958053409}
   - {fileID: 2103730157}
+  - {fileID: 1863023322}

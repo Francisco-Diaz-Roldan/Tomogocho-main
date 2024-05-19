@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,14 +15,19 @@ public class Hapiness : MonoBehaviour
     [SerializeField] private PlayerDead _playerDead;
     [SerializeField] private PlayerSleep _playerSleep;
     public PlayerData _playerData;
+    private bool _eggIsOpened;
+
     #endregion
 
     private void Start()
     {
         _hapinessBar.fillAmount = _playerData.HapinessPercent;
-        _playerDead = FindObjectOfType<PlayerDead>();
-        _playerSleep = FindObjectOfType<PlayerSleep>();
         InvokeRepeating(nameof(UpdateBar), 1f, 1f); // Llama repetidamente a UpdateBar con un intervalo de 1 segundo
+    }
+
+    public void StartBar()
+    {
+        _eggIsOpened = true;
     }
 
     public void MakeFeelHappyCreature() // Aumenta el porcentaje de felicidad
@@ -31,6 +38,11 @@ public class Hapiness : MonoBehaviour
     // Actualiza la barra de felicidad
     private void UpdateBar()
     {
+        if (!_eggIsOpened)
+        {
+            return;
+        }
+
         if (_playerDead != null && !_playerDead.IsDead)
         {
             if (_playerSleep != null && !_playerSleep.IsSleeping)

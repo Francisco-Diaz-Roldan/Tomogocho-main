@@ -9,7 +9,9 @@ public class Sleep : MonoBehaviour
     [SerializeField] private PlayerSleep _playerSleep;
     [SerializeField] private PlayerHappy _playerHappy;
     [SerializeField] private PlayerDead _playerDead;
-    public PlayerData playerData; // Referencia al PlayerData
+    public PlayerData playerData;
+    private bool _eggIsOpened;
+
     #endregion
 
     private bool isResting = false;
@@ -32,9 +34,19 @@ public class Sleep : MonoBehaviour
         if (!_playerDead.IsDead) { InvokeRepeating(nameof(DecreaseSleep), 1f, 1f); }
     }
 
+    public void StartBar()
+    {
+        _eggIsOpened = true;
+    }
+
     // Método para decrementar la barra de sueño solo si no se está descansando
     private void DecreaseSleep()
     {
+        if (!_eggIsOpened)
+        {
+            return;
+        }
+
         if (!isResting && !_playerDead.IsDead) // Solo baja si no se está descansando
         {
             _sleepBar.fillAmount -= 0.01f; // Decrementa el porcentaje de sueño

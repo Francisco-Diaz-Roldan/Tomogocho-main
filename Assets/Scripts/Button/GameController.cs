@@ -37,8 +37,11 @@ public class GameController : MonoBehaviour
 
     public void GoToChromeMiniGameScene()
     {
-        Time.timeScale = 0f;
+        if (!_playerDead.IsDead)
+        {
+            Time.timeScale = 0f;
         StartCoroutine(LoadSceneAndPause("ChromeMiniGameScene"));
+        }
     }
 
     // Método para cargar la escena y pausarla

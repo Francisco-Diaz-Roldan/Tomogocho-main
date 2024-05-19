@@ -10,10 +10,9 @@ public class PlayerChrome : MonoBehaviour
     [SerializeField] private float _radius;
     [SerializeField] private GameObject _gameOverPanel;
 
-
-
     private Rigidbody2D _rigidbody2D;
-     private Animator _animator;
+    private Animator _animator;
+
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -23,7 +22,7 @@ public class PlayerChrome : MonoBehaviour
     void Update()
     {
         bool isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _radius, _ground);
-        if(isGrounded) _animator.SetFloat("X", 1f);
+        if (isGrounded) _animator.SetFloat("X", 1f);
 
         if (Input.GetMouseButtonDown(0))
         {

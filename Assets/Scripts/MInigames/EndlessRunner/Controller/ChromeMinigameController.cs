@@ -7,6 +7,7 @@ public class ChromeMinigameController : MonoBehaviour
     [SerializeField] GameObject _panelJugar;
     [SerializeField] GameObject _panelHome;
     [SerializeField] GameObject _panelGameOver;
+    [SerializeField] GameObject _panelResetMenu;
 
     public void Restart()
     {
@@ -32,12 +33,21 @@ public class ChromeMinigameController : MonoBehaviour
         _panelHome.SetActive(true);
     }
 
+    public void OpenResetMenu()
+    {
+        _panelResetMenu.SetActive(true);
+    }
+
+    public void CloseResetMenu()
+    {
+        _panelResetMenu.SetActive(false);
+    }
+
     public void GoToMainScene()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainScene");
     }
-
 
     public void GoBack()
     {

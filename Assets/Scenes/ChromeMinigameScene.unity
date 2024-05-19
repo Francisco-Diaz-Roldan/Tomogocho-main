@@ -769,6 +769,7 @@ GameObject:
   - component: {fileID: 384416974}
   - component: {fileID: 384416973}
   - component: {fileID: 384416975}
+  - component: {fileID: 384416976}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -955,6 +956,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &384416976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384416968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8968f777a821fa47a3544e808705f63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerData: {fileID: 11400000, guid: d85bd1a6960046445a21db94936db762, type: 2}
 --- !u!1 &411773027
 GameObject:
   m_ObjectHideFlags: 0
@@ -3079,7 +3093,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1283841423
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4351,7 +4365,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 283474442}
         m_TargetAssemblyTypeName: ChromeMinigameController, Assembly-CSharp
-        m_MethodName: GoToGameScene
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

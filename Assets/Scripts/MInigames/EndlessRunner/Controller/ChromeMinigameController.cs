@@ -11,7 +11,7 @@ public class ChromeMinigameController : MonoBehaviour
 
     public void Restart()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = 0f;
         SceneManager.LoadScene("ChromeMinigameScene");
     }
 

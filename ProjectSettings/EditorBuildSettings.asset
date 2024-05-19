@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ChromeMinigameScene.unity
     guid: c70f2888fae226c4386c815d9dd7fead
+  - enabled: 1
+    path: Assets/Scenes/TresEnRayaMinigameScene.unity
+    guid: c94717eb8ad074a449a2fe358c71efdc
   m_configObjects: {}

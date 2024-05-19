@@ -37,6 +37,7 @@ public class GameController : MonoBehaviour
 
     public void GoToChromeMiniGameScene()
     {
+        Time.timeScale = 0f;
         StartCoroutine(LoadSceneAndPause("ChromeMiniGameScene"));
     }
 

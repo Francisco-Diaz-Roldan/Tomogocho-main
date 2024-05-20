@@ -55,33 +55,23 @@ public class TresEnRaya : MonoBehaviour
         }
     }
 
-
     void OnButtonClick(int index)
     {
         if (!gameOver && buttonImages[index].sprite == null)
         {
             buttonImages[index].sprite = currentSprite;
+
             if (CheckWin())
             {
-                if (playerTurn == "Jugador")
-                {
-                    IncrementarPartidasGanadasJugador();
-                    _turnText.text = "¡Enhorabuena, has ganado!";
-                }
-                else
-                {
-                    IncrementarPartidasGanadasTomogocho();
-                    _turnText.text = "Lo siento, has perdido.";
-                }
-                SaveResultadosTotales();
-                ShowResultPanel();
+                HandleWin();
+            }
+            else if (CheckLose())
+            {
+                HandleLose();
             }
             else if (CheckDraw())
             {
-                IncrementarEmpates();
-                _turnText.text = "Vaya sorpresa, ha habido un empate.";
-                SaveResultadosTotales();
-                ShowResultPanel();
+                HandleDraw();
             }
             else
             {
@@ -95,8 +85,38 @@ public class TresEnRaya : MonoBehaviour
         }
     }
 
-    
+    void HandleWin()
+    {
+        if (playerTurn == "Jugador")
+        {
+            IncrementarPartidasGanadasJugador();
+            _turnText.text = "¡Enhorabuena, has ganado!";
+        }
+        else
+        {
+            IncrementarPartidasGanadasTomogocho();
+            _turnText.text = "Lo siento, has perdido.";
+        }
+        SaveResultadosTotales();
+        ShowResultPanel();
+    }
 
+    void HandleLose()
+    {
+        IncrementarPartidasGanadasTomogocho();
+        print("Has perdido, pringao");
+        _turnText.text = "Lo siento, has perdido contra el todopoderoso Tomogocho.";
+        SaveResultadosTotales();
+        ShowResultPanel();
+    }
+
+    void HandleDraw()
+    {
+        IncrementarEmpates();
+        _turnText.text = "Vaya sorpresa, ha habido un empate.";
+        SaveResultadosTotales();
+        ShowResultPanel();
+    }
     IEnumerator AIMove()
     {
         yield return new WaitForSeconds(0.75f); // Espera 0.75 segundos antes de hacer el movimiento
@@ -106,6 +126,8 @@ public class TresEnRaya : MonoBehaviour
             buttonImages[index].sprite = currentSprite;
             if (CheckWin())
             {
+                IncrementarPartidasGanadasTomogocho(); //Aquí es donde se añaden las partidas ganadas por el Tomogocho
+                _turnText.text = "Lo siento, has perdido contra el todopoderoso Tomogocho.";
                 ResetBoard();
                 SaveResultadosTotales();
                 ShowResultPanel();
@@ -213,6 +235,35 @@ public class TresEnRaya : MonoBehaviour
         return false;
     }
 
+    bool CheckLose()
+    {
+        int[,] winCombinations = new int[,]
+        {
+        {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, // Horizontales
+        {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, // Verticales
+        {0, 4, 8}, {2, 4, 6}             // Diagonales
+        };
+
+        // Verificamos si la máquina ha ganado en alguna combinación
+        for (int i = 0; i < winCombinations.GetLength(0); i++)
+        {
+            int a = winCombinations[i, 0];
+            int b = winCombinations[i, 1];
+            int c = winCombinations[i, 2];
+
+            if (buttonImages[a].sprite != null &&
+                buttonImages[a].sprite == buttonImages[b].sprite &&
+                buttonImages[a].sprite == buttonImages[c].sprite &&
+                buttonImages[a].sprite == oSprite) // Verifica si el sprite es el de la máquina
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
     void ResetBoard()
     {
         for (int i = 0; i < buttonImages.Length; i++)
@@ -248,18 +299,23 @@ public class TresEnRaya : MonoBehaviour
 
     bool CheckDraw()
     {
-        // Verificar si todas las casillas están ocupadas
-        for (int i = 0; i < buttonImages.Length; i++)
+        // Verificar si todas las casillas están ocupadas y no hay un ganador ni un perdedor
+        if (!CheckWin() && !CheckLose())
         {
-            if (buttonImages[i].sprite == null)
+            for (int i = 0; i < buttonImages.Length; i++)
             {
-                // Aún hay casillas vacías, no hay empate
-                return false;
+                if (buttonImages[i].sprite == null)
+                {
+                    // Aún hay casillas vacías, no hay empate
+                    return false;
+                }
             }
+
+            // Si se recorre todo el tablero y no hay casillas vacías, es un empate
+            return true;
         }
 
-        // Si se recorre todo el tablero y no hay casillas vacías, es un empate
-        return true;
+        return false; // No es un empate si hay un ganador o un perdedor
     }
 
     void IncrementarPartidasGanadasJugador()
@@ -275,5 +331,23 @@ public class TresEnRaya : MonoBehaviour
     void IncrementarEmpates()
     {
         _empates++;
+    }
+
+    public void ResetData()
+    {
+        _partidasGanadasJugador = 0;
+        _partidasGanadasTomogocho = 0;
+        _empates = 0;
+        SaveResultadosTotales();
+        UpdateResultadosTotales();
+        ResetBoard();
+        _panelResultado.SetActive(false);
+    }
+
+    void UpdateResultadosTotales()
+    {
+        _resultadosTotalesText.text = "Partidas ganadas: " + _partidasGanadasJugador +
+                                      "\nPartidas perdidas: " + _partidasGanadasTomogocho +
+                                      "\nEmpates: " + _empates;
     }
 }

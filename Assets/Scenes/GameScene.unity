@@ -5246,6 +5246,8 @@ MonoBehaviour:
   _pooPrefab: {fileID: 8266594066506780638, guid: dbdbbe9237d1f2044bdb5caa08ea0821, type: 3}
   _poopHungerTime: 5
   _poopNohungerTime: 1
+  _playerSleep: {fileID: 1214898774}
+  _playerDead: {fileID: 1214898775}
 --- !u!114 &1214898773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5262,6 +5264,7 @@ MonoBehaviour:
   carita_carita_comida: {fileID: 955170023}
   contenedorCorazones: {fileID: 1618274769}
   porcentajeFelicidad: {fileID: 862111842}
+  _playerMovement: {fileID: 1214898770}
 --- !u!114 &1214898774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5274,8 +5277,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61e681dca748a534bad4ded4fce19c09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 1214898768}
+  _playerDead: {fileID: 1214898775}
   carita_happy: {fileID: 929618439}
   carita_comida: {fileID: 955170023}
+  _egg: {fileID: 1962560430}
 --- !u!114 &1214898775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7778,7 +7784,7 @@ GameObject:
   - component: {fileID: 1962560430}
   m_Layer: 0
   m_Name: Huevo
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7996,7 +8002,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2072185676
 RectTransform:
   m_ObjectHideFlags: 0

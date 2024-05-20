@@ -91,14 +91,23 @@ public class Egg : MonoBehaviour
         float timeRemaining = _playerData.TimeToOpenEgg - _playerData.LifeTimeInSeconds;
         timeRemaining = Mathf.Max(timeRemaining, 0);  // Me aseguro de que no sea negativo
 
-        if (timeRemaining <= 0)
+        if (isEgg)
         {
-            _timeRemainingText.gameObject.SetActive(false);
+            if (timeRemaining <= 0)
+            {
+                _timeRemainingText.gameObject.SetActive(false);
+            }
+            else
+            {
+                // Convierto el tiempo restante a segundos enteros
+                _timeRemainingText.gameObject.SetActive(true);
+                _timeRemainingText.text = $"Incubando huevo\r\nFaltan: {timeRemaining:N0} segundos para abrirse";
+            }
         }
         else
         {
-            // Convierto el tiempo restante a segundos enteros
-            _timeRemainingText.text = $"Incubando huevo\r\nFaltan: {timeRemaining:N0} segundos para abrirse";
+            _timeRemainingText.gameObject.SetActive(false); 
         }
     }
 }
+

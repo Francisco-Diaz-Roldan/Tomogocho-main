@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PlayerSleep : MonoBehaviour
 {
-    
-    private Animator animator;
-    private bool _isSleeping = false;
-    private PlayerDead _playerDead;
+
+    [SerializeField] private Animator animator;
+    [SerializeField] private PlayerDead _playerDead;
     [SerializeField] GameObject carita_happy;
     [SerializeField] GameObject carita_comida;
-    private Egg _egg;
-
+    [SerializeField] private Egg _egg;
+    private bool _isSleeping = false;
+    
     //Hago un Get de la propiedad privada y no puede editarse porque voy a poder acceder desde cualquier script
     //y que por seguridad solo se pueda activar desde aquí
     public bool IsSleeping => _isSleeping;
@@ -19,9 +19,9 @@ public class PlayerSleep : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _playerDead = GetComponent<PlayerDead>();
-        animator = GetComponent<Animator>();
-        _egg = GetComponent<Egg>();
+       //  _playerDead = GetComponent<PlayerDead>();
+       // animator = GetComponent<Animator>();
+       // _egg = GetComponent<Egg>();
     }
 
     public void ChangeSleepState(bool isSleeping)

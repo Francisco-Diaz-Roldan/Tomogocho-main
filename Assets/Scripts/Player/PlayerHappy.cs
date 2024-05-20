@@ -9,7 +9,7 @@ public class PlayerHappy : MonoBehaviour
     [SerializeField] GameObject carita_carita_comida;
     [SerializeField] GameObject contenedorCorazones;
     [SerializeField] Image porcentajeFelicidad;
-    private PlayerMovement _playerMovement;
+    [SerializeField] private PlayerMovement _playerMovement;
 
     public void ActivateHappyFace(bool isHappy)
     {

@@ -11,16 +11,16 @@ public class PlayerPoop : MonoBehaviour
     [SerializeField] float _poopNohungerTime;
 
     private float _poopTime = 0;
-    private PlayerSleep _playerSleep;
-    private PlayerDead _playerDead;
+    [SerializeField] private PlayerSleep _playerSleep;
+    [SerializeField] private PlayerDead _playerDead;
 
     private List<GameObject> pooledObjects = new List<GameObject>();
     private int poolSize = 5; // Tamaño del pool (cantidad máxima de objetos Poo que pueden existir a la vez)
 
     void Start()
     {
-        _playerSleep = GetComponent<PlayerSleep>();
-        _playerDead = GetComponent<PlayerDead>();
+        //_playerSleep = GetComponent<PlayerSleep>();
+        //_playerDead = GetComponent<PlayerDead>();
 
         if (_playerDead == null)
         {

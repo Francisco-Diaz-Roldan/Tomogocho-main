@@ -66,7 +66,6 @@ public class Egg : MonoBehaviour
         DOTween.KillAll();
         gameObject.SetActive(false);
         isEgg = false;
-
     }
 
     private void ActivateBars()

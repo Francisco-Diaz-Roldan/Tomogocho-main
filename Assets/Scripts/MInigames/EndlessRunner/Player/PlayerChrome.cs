@@ -12,25 +12,41 @@ public class PlayerChrome : MonoBehaviour
 
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
+    private bool _isPlaying;
+
+
 
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _isPlaying = false;
     }
 
     void Update()
     {
         bool isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _radius, _ground);
         if (isGrounded) _animator.SetFloat("X", 1f);
-
-        if (Input.GetMouseButtonDown(0))
+        if (_isPlaying)
         {
-            if (isGrounded)
+            if (Input.GetMouseButtonDown(0))
             {
-                _rigidbody2D.AddForce(Vector2.up * _upForce);
+                if (isGrounded)
+                {
+                    _rigidbody2D.AddForce(Vector2.up * _upForce);
+                }
             }
         }
+    }
+
+    public void StartGame()
+    {
+        _isPlaying = true;
+    }
+
+    public void StopGame()
+    {
+        _isPlaying = false;
     }
 
     private void OnDrawGizmos()
@@ -44,6 +60,7 @@ public class PlayerChrome : MonoBehaviour
         {
             Time.timeScale = 0f;
             _gameOverPanel.SetActive(true);
+            StopGame();
         }
     }
 }

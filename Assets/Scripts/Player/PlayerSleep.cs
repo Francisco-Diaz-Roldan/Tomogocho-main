@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerSleep : MonoBehaviour
 {
-    // Referencia al Animator del personaje para controlar la animación
+    
     private Animator animator;
     private bool _isSleeping = false;
     private PlayerDead _playerDead;

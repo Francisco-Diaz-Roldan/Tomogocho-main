@@ -14,19 +14,22 @@ public class GameController : MonoBehaviour
         _playerDead = FindObjectOfType<PlayerDead>();
         if (_playerDead == null) { return; }
     }
-
     public void Pausa()
     {
-        if (_playerDead == null) { return; }
-
-        Time.timeScale = 0f;
+       // if (_playerDead != null && !_playerDead.IsDead && _panelHome != null)
+        //{
+            Time.timeScale = 0f;
             _panelHome.SetActive(true);
+        //}
     }
 
     public void Reanudar()
     {
         Time.timeScale = 1f;
-        _panelHome.SetActive(false);
+        if (_panelHome != null)
+        {
+            _panelHome.SetActive(false);
+        }
     }
 
     public void GoToMainScene()
@@ -37,11 +40,7 @@ public class GameController : MonoBehaviour
 
     public void GoToChromeMiniGameScene()
     {
-        if (_playerDead == null)
-        { return;
-        }
-
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         StartCoroutine(LoadSceneAndPause("ChromeMiniGameScene"));
     }
 

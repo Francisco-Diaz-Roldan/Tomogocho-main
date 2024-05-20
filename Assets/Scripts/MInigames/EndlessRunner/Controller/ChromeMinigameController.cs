@@ -8,6 +8,8 @@ public class ChromeMinigameController : MonoBehaviour
     [SerializeField] GameObject _panelHome;
     [SerializeField] GameObject _panelGameOver;
     [SerializeField] GameObject _panelResetMenu;
+    [SerializeField] ObstacleSpawner _obstacleSpawner;
+    [SerializeField] Score _scoreManager;
 
     public void Restart()
     {
@@ -25,12 +27,17 @@ public class ChromeMinigameController : MonoBehaviour
     {
         _panelJugar.SetActive(false);
         Time.timeScale = 1f;
+        _obstacleSpawner.StartSpawning();
+        _scoreManager.StartGame();
     }
 
     public void Pause()
     {
         Time.timeScale = 0f;
         _panelHome.SetActive(true);
+         _panelJugar.SetActive(false) ;
+        _obstacleSpawner.StopSpawning();
+        _scoreManager.StopGame();
     }
 
     public void OpenResetMenu()
@@ -55,6 +62,8 @@ public class ChromeMinigameController : MonoBehaviour
         if (!_panelGameOver.activeSelf) 
         {
             Time.timeScale = 1f;
+            _obstacleSpawner.StartSpawning();
+            _scoreManager.StartGame();
         }
     }
 }

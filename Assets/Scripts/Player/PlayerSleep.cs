@@ -10,7 +10,7 @@ public class PlayerSleep : MonoBehaviour
     private PlayerDead _playerDead;
     [SerializeField] GameObject carita_happy;
     [SerializeField] GameObject carita_comida;
-
+    private Egg _egg;
 
     //Hago un Get de la propiedad privada y no puede editarse porque voy a poder acceder desde cualquier script
     //y que por seguridad solo se pueda activar desde aquí
@@ -21,13 +21,17 @@ public class PlayerSleep : MonoBehaviour
     {
         _playerDead = GetComponent<PlayerDead>();
         animator = GetComponent<Animator>();
+        _egg = GetComponent<Egg>();
     }
 
     public void ChangeSleepState(bool isSleeping)
     {
-        if (!_playerDead.IsDead)
+        if (_playerDead != null && !_playerDead.IsDead)
         {
-            _isSleeping = isSleeping;
+            if (_egg == null || !_egg.IsEgg())
+            {
+                _isSleeping = isSleeping;
+            }
         }
         else
         {

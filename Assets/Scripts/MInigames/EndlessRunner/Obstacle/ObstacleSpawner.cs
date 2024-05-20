@@ -5,13 +5,13 @@ using UnityEngine;
 public class ObstacleSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] _obstacles;
-    [SerializeField] private int poolSize = 10; // Tamaño del pool
+    [SerializeField] private int poolSize = 10;
     private List<GameObject> obstaclePool = new List<GameObject>();
+    private Coroutine spawnCoroutine;
 
     void Start()
     {
         InitializePool();
-        StartCoroutine(SpawnObstacle());
     }
 
     private void InitializePool()
@@ -27,6 +27,23 @@ public class ObstacleSpawner : MonoBehaviour
         }
     }
 
+    public void StartSpawning()
+    {
+        if (spawnCoroutine == null)
+        {
+            spawnCoroutine = StartCoroutine(SpawnObstacle());
+        }
+    }
+
+    public void StopSpawning()
+    {
+        if (spawnCoroutine != null)
+        {
+            StopCoroutine(spawnCoroutine);
+            spawnCoroutine = null;
+        }
+    }
+
     private IEnumerator SpawnObstacle()
     {
         while (true)
@@ -35,7 +52,6 @@ public class ObstacleSpawner : MonoBehaviour
             float maxTime = 1.8f;
             float randomTime = Random.Range(minTime, maxTime);
 
-            // Obtener un obstáculo del pool
             GameObject obstacle = GetPooledObstacle();
             if (obstacle != null)
             {
@@ -56,6 +72,6 @@ public class ObstacleSpawner : MonoBehaviour
                 return obstacle;
             }
         }
-        return null; // Retorna null si no hay objetos disponibles en el pool
+        return null;
     }
 }

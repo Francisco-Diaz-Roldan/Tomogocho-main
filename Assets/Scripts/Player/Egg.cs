@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class Egg : MonoBehaviour
 {
@@ -18,6 +19,12 @@ public class Egg : MonoBehaviour
     [SerializeField] private Button _sleepButton;
     [SerializeField] private Button _hungerButton;
     [SerializeField] private Button _minigamesButton;
+    private bool isEgg = true;
+
+    public bool IsEgg()
+    {
+        return isEgg;
+    }
 
     private void Start()
     {
@@ -42,7 +49,7 @@ public class Egg : MonoBehaviour
 
     private void EggMovement()
     {
-        Sequence sequence = DOTween.Sequence();
+        DG.Tweening.Sequence sequence = DOTween.Sequence();
 
         sequence.Append(transform.DORotate(new Vector3(0, 0, -25), _rotationDuration)); 
         sequence.Append(transform.DORotate(new Vector3(0, 0, 25), _rotationDuration)); 
@@ -58,6 +65,8 @@ public class Egg : MonoBehaviour
         _player.SetActive(true);
         DOTween.KillAll();
         gameObject.SetActive(false);
+        isEgg = false;
+
     }
 
     private void ActivateBars()

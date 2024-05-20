@@ -11,6 +11,8 @@ public class Score : MonoBehaviour
     private int _score;
     private float _timer;
     private int _highScore;
+    private bool _isPlaying;
+
 
     private void Start()
     {
@@ -20,7 +22,10 @@ public class Score : MonoBehaviour
 
     private void Update()
     {
-        UpdateScore();
+        if (_isPlaying)
+        {
+            UpdateScore();
+        }
     }
 
     private void UpdateScore()
@@ -62,5 +67,15 @@ public class Score : MonoBehaviour
 
         _scoreText.text = string.Format("{0:00000}", _score);
         _highScoreText.text = string.Format("{0:00000}", _highScore);
+    }
+
+    public void StartGame()
+    {
+        _isPlaying = true;
+    }
+
+    public void StopGame()
+    {
+        _isPlaying = false;
     }
 }

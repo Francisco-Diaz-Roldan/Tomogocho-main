@@ -40,9 +40,9 @@ public class Egg : MonoBehaviour
 
     void Update()
     {
-        if (_playerData != null )
+        if (_playerData != null)
         {
-            if ( _playerData.EggHasBeenOpened())
+            if (_playerData.EggHasBeenOpened())
             {
                 OpenEgg();
             }
@@ -55,14 +55,14 @@ public class Egg : MonoBehaviour
     {
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
-        sequence.Append(transform.DORotate(new Vector3(0, 0, -25), _rotationDuration)); 
-        sequence.Append(transform.DORotate(new Vector3(0, 0, 25), _rotationDuration)); 
-        sequence.SetLoops(-1, LoopType.Yoyo); 
+        sequence.Append(transform.DORotate(new Vector3(0, 0, -25), _rotationDuration));
+        sequence.Append(transform.DORotate(new Vector3(0, 0, 25), _rotationDuration));
+        sequence.SetLoops(-1, LoopType.Yoyo);
         sequence.Play();
     }
 
 
-    private void OpenEgg() 
+    private void OpenEgg()
     {
         ActivateBars();
         ActivateButtons();
@@ -93,7 +93,7 @@ public class Egg : MonoBehaviour
 
         if (timeRemaining <= 0)
         {
-             _timeRemainingText.gameObject.SetActive(false);
+            _timeRemainingText.gameObject.SetActive(false);
         }
         else
         {

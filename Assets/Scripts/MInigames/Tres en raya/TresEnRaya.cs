@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TresEnRaya : MonoBehaviour
 {
@@ -10,7 +12,9 @@ public class TresEnRaya : MonoBehaviour
     public Sprite xSprite;
     public Sprite oSprite;
     private Sprite currentSprite;
-    private string playerTurn = "X";
+    [SerializeField] private TMP_Text _tunrText;
+    private string playerTurn = "Jugador";
+
 
     void Start()
     {
@@ -20,7 +24,21 @@ public class TresEnRaya : MonoBehaviour
             int index = i;
             buttons[i].onClick.AddListener(() => OnButtonClick(index));
         }
+        UpdateTurnText();
     }
+
+    void UpdateTurnText()
+    {
+        if (playerTurn == "Jugador")
+        {
+            _tunrText.text = "Tu turno";
+        }
+        else
+        {
+            _tunrText.text = "Turno del Tomogocho";
+        }
+    }
+
 
     void OnButtonClick(int index)
     {
@@ -29,13 +47,13 @@ public class TresEnRaya : MonoBehaviour
             buttonImages[index].sprite = currentSprite;
             if (CheckWin())
             {
-                Debug.Log(playerTurn + " wins!");
+                Debug.Log(playerTurn + " ha ganado!");
                 ResetBoard();
             }
             else
             {
                 SwitchTurn();
-                if (playerTurn == "O")
+                if (playerTurn == "Tomogocho")
                 {
                     StartCoroutine(AIMove());
                 }
@@ -45,19 +63,20 @@ public class TresEnRaya : MonoBehaviour
 
     IEnumerator AIMove()
     {
-        yield return new WaitForSeconds(0.5f); // Espera medio segundo antes de hacer el movimiento
+        yield return new WaitForSeconds(0.8f); // Espera 0.8 segundos antes de hacer el movimiento
         int index = GetAIMove();
         if (index != -1)
         {
             buttonImages[index].sprite = currentSprite;
             if (CheckWin())
             {
-                Debug.Log(playerTurn + " wins!");
+                Debug.Log(playerTurn + " ha ganado!");
                 ResetBoard();
             }
             else
             {
                 SwitchTurn();
+                UpdateTurnText();
             }
         }
     }
@@ -118,16 +137,17 @@ public class TresEnRaya : MonoBehaviour
 
     void SwitchTurn()
     {
-        if (playerTurn == "X")
+        if (playerTurn == "Jugador")
         {
-            playerTurn = "O";
+            playerTurn = "Tomogocho";
             currentSprite = oSprite;
         }
         else
         {
-            playerTurn = "X";
+            playerTurn = "Jugador";
             currentSprite = xSprite;
         }
+        UpdateTurnText();
     }
 
     bool CheckWin()
@@ -162,7 +182,7 @@ public class TresEnRaya : MonoBehaviour
         {
             buttonImages[i].sprite = null;
         }
-        playerTurn = "X";
+        playerTurn = "Jugador";
         currentSprite = xSprite;
     }
 }

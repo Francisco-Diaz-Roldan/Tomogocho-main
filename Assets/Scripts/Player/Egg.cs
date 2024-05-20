@@ -5,6 +5,7 @@ using DG.Tweening;
 using System;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using TMPro;
 
 public class Egg : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class Egg : MonoBehaviour
     [SerializeField] private Button _sleepButton;
     [SerializeField] private Button _hungerButton;
     [SerializeField] private Button _minigamesButton;
+    [SerializeField] private TMP_Text _timeRemainingText;
+
     private bool isEgg = true;
 
     public bool IsEgg()
@@ -44,6 +47,7 @@ public class Egg : MonoBehaviour
                 OpenEgg();
             }
             _playerData.LifeTimeInSeconds += Time.deltaTime;
+            UpdateTimeRemainingText();
         }
     }
 
@@ -74,10 +78,27 @@ public class Egg : MonoBehaviour
         _hungerBar.StartBar();
         _hapinessBar.StartBar();
     }
+
     private void ActivateButtons()
     {
         _sleepButton.interactable = true;
         _hungerButton.interactable = true;
         _minigamesButton.interactable = true;
+    }
+
+    private void UpdateTimeRemainingText()
+    {
+        float timeRemaining = _playerData.TimeToOpenEgg - _playerData.LifeTimeInSeconds;
+        timeRemaining = Mathf.Max(timeRemaining, 0);  // Me aseguro de que no sea negativo
+
+        if (timeRemaining <= 0)
+        {
+             _timeRemainingText.gameObject.SetActive(false);
+        }
+        else
+        {
+            // Convierto el tiempo restante a segundos enteros
+            _timeRemainingText.text = $"Incubando huevo\r\nFaltan: {timeRemaining:N0} segundos para abrirse";
+        }
     }
 }

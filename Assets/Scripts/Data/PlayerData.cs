@@ -14,7 +14,13 @@ public class PlayerData : ScriptableObject
     public float SleepPercent;
     public DateTime? StartLifeTime; //TODO para futura mejora que incluya la fecha en la que empecé la partida
     public float LifeTimeInSeconds;   //Para medir la cantidad de tiempo jugado
-    [SerializeField] private float TimeToOpenEgg = 60f;
+    [SerializeField] private float _timeToOpenEgg = 60f;
+
+    public float TimeToOpenEgg // Propiedad pública para acceder a timeToOpenEgg
+    {
+        get { return _timeToOpenEgg; }
+    }
+
 
     public void ResetValues(bool newGame = true)
     {

@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class TresEnRaya : MonoBehaviour
 {
@@ -12,8 +13,8 @@ public class TresEnRaya : MonoBehaviour
     [SerializeField] private TMP_Text _resultadosTotalesText;
     public Button[] buttons;
     public Image[] buttonImages;
-    public Sprite xSprite;
-    public Sprite oSprite;
+    public Sprite _playerSprite;
+    public Sprite _tomogochoSprite;
     private Sprite currentSprite;
 
     private string playerTurn = "Jugador";
@@ -28,7 +29,7 @@ public class TresEnRaya : MonoBehaviour
 
     void Start()
     {
-        currentSprite = xSprite;
+        currentSprite = _playerSprite;
         LoadResultadosTotales();
 
 
@@ -61,13 +62,11 @@ public class TresEnRaya : MonoBehaviour
         {
             buttonImages[index].sprite = currentSprite;
 
+            SetSpritesVisibles(index);
+
             if (CheckWin())
             {
                 HandleWin();
-            }
-            else if (CheckLose())
-            {
-                HandleLose();
             }
             else if (CheckDraw())
             {
@@ -85,6 +84,8 @@ public class TresEnRaya : MonoBehaviour
         }
     }
 
+
+
     void HandleWin()
     {
         if (playerTurn == "Jugador")
@@ -92,20 +93,6 @@ public class TresEnRaya : MonoBehaviour
             IncrementarPartidasGanadasJugador();
             _turnText.text = "¡Enhorabuena, has ganado!";
         }
-        else
-        {
-            IncrementarPartidasGanadasTomogocho();
-            _turnText.text = "Lo siento, has perdido.";
-        }
-        SaveResultadosTotales();
-        ShowResultPanel();
-    }
-
-    void HandleLose()
-    {
-        IncrementarPartidasGanadasTomogocho();
-        print("Has perdido, pringao");
-        _turnText.text = "Lo siento, has perdido contra el todopoderoso Tomogocho.";
         SaveResultadosTotales();
         ShowResultPanel();
     }
@@ -124,6 +111,7 @@ public class TresEnRaya : MonoBehaviour
         if (index != -1)
         {
             buttonImages[index].sprite = currentSprite;
+            SetSpritesVisibles(index);
             if (CheckWin())
             {
                 IncrementarPartidasGanadasTomogocho(); //Aquí es donde se añaden las partidas ganadas por el Tomogocho
@@ -147,7 +135,7 @@ public class TresEnRaya : MonoBehaviour
         if (winMove != -1) return winMove;
 
         // Prioridad 2: Bloquear al jugador si está a punto de ganar
-        Sprite opponentSprite = (currentSprite == xSprite) ? oSprite : xSprite;
+        Sprite opponentSprite = (currentSprite == _playerSprite) ? _tomogochoSprite : _playerSprite;
         int blockMove = FindWinningMove(opponentSprite);
         if (blockMove != -1) return blockMove;
 
@@ -199,12 +187,12 @@ public class TresEnRaya : MonoBehaviour
         if (playerTurn == "Jugador")
         {
             playerTurn = "Tomogocho";
-            currentSprite = oSprite;
+            currentSprite = _tomogochoSprite;
         }
         else
         {
             playerTurn = "Jugador";
-            currentSprite = xSprite;
+            currentSprite = _playerSprite;
         }
         UpdateTurnText();
     }
@@ -235,35 +223,6 @@ public class TresEnRaya : MonoBehaviour
         return false;
     }
 
-    bool CheckLose()
-    {
-        int[,] winCombinations = new int[,]
-        {
-        {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, // Horizontales
-        {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, // Verticales
-        {0, 4, 8}, {2, 4, 6}             // Diagonales
-        };
-
-        // Verificamos si la máquina ha ganado en alguna combinación
-        for (int i = 0; i < winCombinations.GetLength(0); i++)
-        {
-            int a = winCombinations[i, 0];
-            int b = winCombinations[i, 1];
-            int c = winCombinations[i, 2];
-
-            if (buttonImages[a].sprite != null &&
-                buttonImages[a].sprite == buttonImages[b].sprite &&
-                buttonImages[a].sprite == buttonImages[c].sprite &&
-                buttonImages[a].sprite == oSprite) // Verifica si el sprite es el de la máquina
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-
     void ResetBoard()
     {
         for (int i = 0; i < buttonImages.Length; i++)
@@ -271,7 +230,7 @@ public class TresEnRaya : MonoBehaviour
             buttonImages[i].sprite = null;
         }
         playerTurn = "Jugador";
-        currentSprite = xSprite;
+        currentSprite = _playerSprite;
     }
 
     void ShowResultPanel()
@@ -299,8 +258,8 @@ public class TresEnRaya : MonoBehaviour
 
     bool CheckDraw()
     {
-        // Verificar si todas las casillas están ocupadas y no hay un ganador ni un perdedor
-        if (!CheckWin() && !CheckLose())
+        // Comprueba que todas las casillas estén ocupadas y no haya un ganador ni un perdedor
+        if (!CheckWin())
         {
             for (int i = 0; i < buttonImages.Length; i++)
             {
@@ -349,5 +308,20 @@ public class TresEnRaya : MonoBehaviour
         _resultadosTotalesText.text = "Partidas ganadas: " + _partidasGanadasJugador +
                                       "\nPartidas perdidas: " + _partidasGanadasTomogocho +
                                       "\nEmpates: " + _empates;
+    }
+
+    void SetSpritesVisibles(int index)
+    {
+        if (index >= 0 && index < buttonImages.Length && buttonImages[index] != null)
+        {
+            // Obtén el color actual del botón
+            Color buttonColor = buttonImages[index].color;
+
+            // Establece el canal alfa (A) del color
+            buttonColor.a = 1f; // Hacer el botón completamente opaco
+
+            // Asigna el nuevo color al botón
+            buttonImages[index].color = buttonColor;
+        }
     }
 }

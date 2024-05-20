@@ -35,6 +35,11 @@ public class TresEnRayaController : MonoBehaviour
         _panelHome.SetActive(false);
     }
 
+    public void OpenPanelResultado() 
+    { 
+        _panelResultado.SetActive(true);
+    }
+
     public void OpenPanelResultadoAbdClosePanelHome()
     {
         _panelResultado.SetActive(true);

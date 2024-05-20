@@ -22,9 +22,16 @@ public class TresEnRaya : MonoBehaviour
     private int _empates = 0;
     private bool gameOver = false;
 
+    private const string PartidasGanadasJugadorKey = "PartidasGanadasJugador";
+    private const string PartidasGanadasTomogochoKey = "PartidasGanadasTomogocho";
+    private const string EmpatesKey = "Empates";
+
     void Start()
     {
         currentSprite = xSprite;
+        LoadResultadosTotales();
+
+
         for (int i = 0; i < buttons.Length; i++)
         {
             int index = i;
@@ -58,20 +65,22 @@ public class TresEnRaya : MonoBehaviour
             {
                 if (playerTurn == "Jugador")
                 {
-                    _partidasGanadasJugador++;
+                    IncrementarPartidasGanadasJugador();
                     _turnText.text = "¡Enhorabuena, has ganado!";
                 }
                 else
                 {
-                    _partidasGanadasTomogocho++;
+                    IncrementarPartidasGanadasTomogocho();
                     _turnText.text = "Lo siento, has perdido.";
                 }
+                SaveResultadosTotales();
                 ShowResultPanel();
             }
             else if (CheckDraw())
             {
-                _empates++;
+                IncrementarEmpates();
                 _turnText.text = "Vaya sorpresa, ha habido un empate.";
+                SaveResultadosTotales();
                 ShowResultPanel();
             }
             else
@@ -86,6 +95,8 @@ public class TresEnRaya : MonoBehaviour
         }
     }
 
+    
+
     IEnumerator AIMove()
     {
         yield return new WaitForSeconds(0.75f); // Espera 0.75 segundos antes de hacer el movimiento
@@ -95,8 +106,9 @@ public class TresEnRaya : MonoBehaviour
             buttonImages[index].sprite = currentSprite;
             if (CheckWin())
             {
-                Debug.Log(playerTurn + " ha ganado!");
                 ResetBoard();
+                SaveResultadosTotales();
+                ShowResultPanel();
             }
             else
             {
@@ -219,6 +231,21 @@ public class TresEnRaya : MonoBehaviour
                              "\nEmpates: " + _empates;
     }
 
+    void SaveResultadosTotales()
+    {
+        PlayerPrefs.SetInt(PartidasGanadasJugadorKey, _partidasGanadasJugador);
+        PlayerPrefs.SetInt(PartidasGanadasTomogochoKey, _partidasGanadasTomogocho);
+        PlayerPrefs.SetInt(EmpatesKey, _empates);
+        PlayerPrefs.Save();
+    }
+
+    void LoadResultadosTotales()
+    {
+        _partidasGanadasJugador = PlayerPrefs.GetInt(PartidasGanadasJugadorKey, 0);
+        _partidasGanadasTomogocho = PlayerPrefs.GetInt(PartidasGanadasTomogochoKey, 0);
+        _empates = PlayerPrefs.GetInt(EmpatesKey, 0);
+    }
+
     bool CheckDraw()
     {
         // Verificar si todas las casillas están ocupadas
@@ -233,5 +260,20 @@ public class TresEnRaya : MonoBehaviour
 
         // Si se recorre todo el tablero y no hay casillas vacías, es un empate
         return true;
+    }
+
+    void IncrementarPartidasGanadasJugador()
+    {
+        _partidasGanadasJugador++;
+    }
+
+    void IncrementarPartidasGanadasTomogocho()
+    {
+        _partidasGanadasTomogocho++;
+    }
+
+    void IncrementarEmpates()
+    {
+        _empates++;
     }
 }

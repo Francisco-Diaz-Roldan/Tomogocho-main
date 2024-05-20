@@ -7,14 +7,20 @@ using TMPro;
 
 public class TresEnRaya : MonoBehaviour
 {
+    [SerializeField] private TMP_Text _turnText;
+    [SerializeField] private GameObject _panelResultado;
+    [SerializeField] private TMP_Text _resultadosTotalesText;
     public Button[] buttons;
     public Image[] buttonImages;
     public Sprite xSprite;
     public Sprite oSprite;
     private Sprite currentSprite;
-    [SerializeField] private TMP_Text _tunrText;
-    private string playerTurn = "Jugador";
 
+    private string playerTurn = "Jugador";
+    private int _partidasGanadasJugador = 0;
+    private int _partidasGanadasTomogocho = 0;
+    private int _empates = 0;
+    private bool gameOver = false;
 
     void Start()
     {
@@ -29,26 +35,44 @@ public class TresEnRaya : MonoBehaviour
 
     void UpdateTurnText()
     {
+        if (gameOver)
+            return;
+
         if (playerTurn == "Jugador")
         {
-            _tunrText.text = "Tu turno";
+            _turnText.text = "Tu turno";
         }
         else
         {
-            _tunrText.text = "Turno del Tomogocho";
+            _turnText.text = "Turno del Tomogocho";
         }
     }
 
 
     void OnButtonClick(int index)
     {
-        if (buttonImages[index].sprite == null)
+        if (!gameOver && buttonImages[index].sprite == null)
         {
             buttonImages[index].sprite = currentSprite;
             if (CheckWin())
             {
-                Debug.Log(playerTurn + " ha ganado!");
-                ResetBoard();
+                if (playerTurn == "Jugador")
+                {
+                    _partidasGanadasJugador++;
+                    _turnText.text = "¡Enhorabuena, has ganado!";
+                }
+                else
+                {
+                    _partidasGanadasTomogocho++;
+                    _turnText.text = "Lo siento, has perdido.";
+                }
+                ShowResultPanel();
+            }
+            else if (CheckDraw())
+            {
+                _empates++;
+                _turnText.text = "Vaya sorpresa, ha habido un empate.";
+                ShowResultPanel();
             }
             else
             {
@@ -57,13 +81,14 @@ public class TresEnRaya : MonoBehaviour
                 {
                     StartCoroutine(AIMove());
                 }
+                UpdateTurnText();
             }
         }
     }
 
     IEnumerator AIMove()
     {
-        yield return new WaitForSeconds(0.8f); // Espera 0.8 segundos antes de hacer el movimiento
+        yield return new WaitForSeconds(0.75f); // Espera 0.75 segundos antes de hacer el movimiento
         int index = GetAIMove();
         if (index != -1)
         {
@@ -100,7 +125,7 @@ public class TresEnRaya : MonoBehaviour
                 return i;
             }
         }
-        return -1; // No hay movimientos disponibles
+        return -1; // No quedan movimientos disponibles
     }
 
     int FindWinningMove(Sprite sprite)
@@ -184,5 +209,29 @@ public class TresEnRaya : MonoBehaviour
         }
         playerTurn = "Jugador";
         currentSprite = xSprite;
+    }
+
+    void ShowResultPanel()
+    {
+        _panelResultado.SetActive(true);
+        _resultadosTotalesText.text = "Partidas ganadas: " + _partidasGanadasJugador +
+                             "\nPartidas perdidas: " + _partidasGanadasTomogocho +
+                             "\nEmpates: " + _empates;
+    }
+
+    bool CheckDraw()
+    {
+        // Verificar si todas las casillas están ocupadas
+        for (int i = 0; i < buttonImages.Length; i++)
+        {
+            if (buttonImages[i].sprite == null)
+            {
+                // Aún hay casillas vacías, no hay empate
+                return false;
+            }
+        }
+
+        // Si se recorre todo el tablero y no hay casillas vacías, es un empate
+        return true;
     }
 }

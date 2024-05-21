@@ -8,6 +8,7 @@ public class TresEnRayaController : MonoBehaviour
 {
     [SerializeField] private GameObject _panelResultado;
     [SerializeField] private GameObject _panelHome;
+    [SerializeField] private GameObject _panelResetearPuntuacion;
     public void Restart()
     {
         SceneManager.LoadScene("TresEnRayaMinigameScene");
@@ -40,9 +41,19 @@ public class TresEnRayaController : MonoBehaviour
         _panelResultado.SetActive(true);
     }
 
-    public void OpenPanelResultadoAbdClosePanelHome()
+    public void OpenPanelResultadoAndClosePanelHome()
     {
         _panelResultado.SetActive(true);
-        _panelHome.SetActive(false);
+        _panelResetearPuntuacion.SetActive(false);
+    }
+
+    public void OpenPanelMenuResetearPuntuacion()
+    {
+        _panelResetearPuntuacion.SetActive(true);
+    }
+
+    public void ClosePanelMenuResetearPuntuacion()
+    {
+        _panelResetearPuntuacion.SetActive(false);
     }
 }

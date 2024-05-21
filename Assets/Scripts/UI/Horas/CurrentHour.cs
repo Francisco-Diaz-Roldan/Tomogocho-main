@@ -16,7 +16,7 @@ public class CurrentHour : MonoBehaviour
     void Start()
     {
         // Llamo a la función ActualizarHora cada segundo
-        InvokeRepeating("ActualizarHora", 0f, 1f);
+        InvokeRepeating("ActualizarHora", 0.1f, 1f);
     }
 
     private void Update()
@@ -37,7 +37,7 @@ public class CurrentHour : MonoBehaviour
         int currentMinit = _currentHour.Minute;
 
         // Dependiendo de la hora le asigno un Sprite u otro
-       if (currentHour >= 8 && (currentHour < 20 || (currentHour == 20 && currentMinit < 30)))  // Entre las 6:00h y las 21:30h
+       if (currentHour >= 8 && (currentHour < 22 || (currentHour == 22 && currentMinit < 30)))  // Entre las 6:00h y las 21:30h
         {
             _imageDay.sprite = _dayIcon[0];  // Asigno el sprite de la mañana
             if (!_sleepScript.IsResting())

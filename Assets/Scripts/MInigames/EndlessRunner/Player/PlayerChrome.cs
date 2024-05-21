@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerChrome : MonoBehaviour
 {
@@ -9,34 +10,47 @@ public class PlayerChrome : MonoBehaviour
     [SerializeField] private LayerMask _ground;
     [SerializeField] private float _radius;
     [SerializeField] private GameObject _gameOverPanel;
+    [SerializeField] private Button _jumpButton;
+    [SerializeField] private float _fallMultiplier = 2.5f; // Multiplicador de la gravedad al caer
+    [SerializeField] private float _lowJumpMultiplier = 2f; // Multiplicador de la gravedad al hacer un salto corto
+
 
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
     private bool _isPlaying;
-
-
 
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _isPlaying = false;
+        _jumpButton.onClick.AddListener(Jump);
     }
 
     void Update()
     {
+       
         bool isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _radius, _ground);
         if (isGrounded) _animator.SetFloat("X", 1f);
-        if (_isPlaying)
+
+        if (_rigidbody2D.velocity.y < 0)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (isGrounded)
-                {
-                    _rigidbody2D.AddForce(Vector2.up * _upForce);
-                }
-            }
+            _rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (_fallMultiplier - 1) * Time.deltaTime;
         }
+        else if (_rigidbody2D.velocity.y > 0 && !Input.GetMouseButton(0))
+        {
+            _rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (_lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+        /* if (_isPlaying)
+         {
+             if (Input.GetMouseButtonDown(0))
+             {
+                 if (isGrounded)
+                 {
+                     _rigidbody2D.AddForce(Vector2.up * _upForce);
+                 }
+             }
+         }*/
     }
 
     public void StartGame()
@@ -61,6 +75,14 @@ public class PlayerChrome : MonoBehaviour
             Time.timeScale = 0f;
             _gameOverPanel.SetActive(true);
             StopGame();
+        }
+    }
+     public void Jump()
+    {
+        bool isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _radius, _ground);
+        if (_isPlaying && isGrounded)
+        {
+            _rigidbody2D.AddForce(Vector2.up * _upForce);
         }
     }
 }

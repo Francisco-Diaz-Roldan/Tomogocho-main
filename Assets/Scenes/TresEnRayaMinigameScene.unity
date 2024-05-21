@@ -660,6 +660,7 @@ GameObject:
   - component: {fileID: 84681344}
   - component: {fileID: 84681343}
   - component: {fileID: 84681345}
+  - component: {fileID: 84681346}
   m_Layer: 5
   m_Name: Panel Tablero
   m_TagString: Untagged
@@ -769,7 +770,20 @@ MonoBehaviour:
   - {fileID: 35415022}
   - {fileID: 65812944}
   _playerSprite: {fileID: 21300000, guid: 470abf39c2891054787280da091d6a53, type: 3}
-  _tomogochoSprite: {fileID: 21300000, guid: b341084562fb1684287b47a5e73c3f2a, type: 3}
+  _tomogochoSprite: {fileID: 21300000, guid: 048d758b4d3df194d93c831f6af65a04, type: 3}
+--- !u!114 &84681346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84681341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8968f777a821fa47a3544e808705f63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerData: {fileID: 11400000, guid: d85bd1a6960046445a21db94936db762, type: 2}
 --- !u!1 &96081941
 GameObject:
   m_ObjectHideFlags: 0

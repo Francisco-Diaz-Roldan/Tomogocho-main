@@ -353,7 +353,6 @@ RectTransform:
   - {fileID: 84681342}
   - {fileID: 961843828}
   - {fileID: 1979695710}
-  - {fileID: 1395391671}
   - {fileID: 1920278427}
   - {fileID: 1689204877}
   - {fileID: 263443606}
@@ -1433,7 +1432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &292112589
 Transform:
   m_ObjectHideFlags: 0
@@ -3367,12 +3366,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1944771823}
-  m_Father: {fileID: 29046274}
+  m_Father: {fileID: 1979695710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.25, y: 0.201}
   m_AnchorMax: {x: 0.75000006, y: 0.26665825}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -128.46265}
+  m_SizeDelta: {x: 0, y: 63.30255}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1395391672
 MonoBehaviour:
@@ -4259,7 +4258,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ver resultados
+  m_text: "Estad\xEDsticas"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a5804bbdb2d0a984b8358a3d49a87aed, type: 2}
   m_sharedMaterial: {fileID: 1903148793529524034, guid: a5804bbdb2d0a984b8358a3d49a87aed, type: 2}
@@ -4775,6 +4774,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1395391671}
   - {fileID: 2045722329}
   m_Father: {fileID: 29046274}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -32,7 +32,6 @@ public class TresEnRaya : MonoBehaviour
         currentSprite = _playerSprite;
         LoadResultadosTotales();
 
-
         for (int i = 0; i < buttons.Length; i++)
         {
             int index = i;
@@ -254,6 +253,7 @@ public class TresEnRaya : MonoBehaviour
         _partidasGanadasJugador = PlayerPrefs.GetInt(PartidasGanadasJugadorKey, 0);
         _partidasGanadasTomogocho = PlayerPrefs.GetInt(PartidasGanadasTomogochoKey, 0);
         _empates = PlayerPrefs.GetInt(EmpatesKey, 0);
+        UpdateResultadosTotales();
     }
 
     bool CheckDraw()
@@ -324,4 +324,6 @@ public class TresEnRaya : MonoBehaviour
             buttonImages[index].color = buttonColor;
         }
     }
+
+
 }

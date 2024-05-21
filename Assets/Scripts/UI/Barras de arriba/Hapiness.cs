@@ -5,19 +5,16 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-
 public class Hapiness : MonoBehaviour
 {
-    #region Variables
     [SerializeField] private Image _hapinessBar;
-    public float HapinessBarPercent => _hapinessBar.fillAmount;
     [SerializeField] private PlayerDead _playerDead;
     [SerializeField] private PlayerSleep _playerSleep;
-    public PlayerData _playerData;
+    [SerializeField] private PlayerPoop _playerPoop;
     private bool _eggIsOpened;
+    public PlayerData _playerData;
+    public float HapinessBarPercent => _hapinessBar.fillAmount;
 
-    #endregion
 
     private void Start()
     {
@@ -47,6 +44,9 @@ public class Hapiness : MonoBehaviour
         {
             if (_playerSleep != null && !_playerSleep.IsSleeping)
             {
+                int activePoopCount = _playerPoop.GetActivePoopCount();
+                float decreaseAmount = 0.01f + (activePoopCount * 0.05f);
+
                 _hapinessBar.fillAmount -= 0.01f;
                 _hapinessBar.fillAmount = Mathf.Max(_hapinessBar.fillAmount, 0f);
 

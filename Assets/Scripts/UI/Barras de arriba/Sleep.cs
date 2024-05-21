@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class Sleep : MonoBehaviour
 {
-    #region Variables
     [SerializeField] private Image _sleepBar;
     [SerializeField] private GameObject _panelNoche;
     [SerializeField] private PlayerSleep _playerSleep;
@@ -11,27 +10,15 @@ public class Sleep : MonoBehaviour
     [SerializeField] private PlayerDead _playerDead;
     public PlayerData playerData;
     private bool _eggIsOpened;
-
-    #endregion
-
     private bool isResting = false;
     private float restInterval = 1f;
     private bool isNightTime = false;
 
-
-    private void Awake()
-    {
-        // Obtengo la referencia al componente PlayerHappy
-       // _playerHappy = FindObjectOfType<PlayerHappy>();
-    }
-
     private void Start()
     {
         _sleepBar.fillAmount = playerData.SleepPercent;
-       // _playerDead = FindObjectOfType<PlayerDead>();
         if (_playerDead == null) { return; }
-        // Llama repetidamente al método que decrementa la barra de sueño con un intervalo de tiempo
-        if (!_playerDead.IsDead) { InvokeRepeating(nameof(DecreaseSleep), 1f, 1f); }
+        if (!_playerDead.IsDead) InvokeRepeating(nameof(DecreaseSleep), 1f, 1f);  // Llama repetidamente al método que decrementa la barra de sueño con un intervalo de tiempo de 1 segundo
     }
 
     public void StartBar()
@@ -39,7 +26,6 @@ public class Sleep : MonoBehaviour
         _eggIsOpened = true;
     }
 
-    // Método para decrementar la barra de sueño solo si no se está descansando
     private void DecreaseSleep()
     {
         if (!_eggIsOpened)

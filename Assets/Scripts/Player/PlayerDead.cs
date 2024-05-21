@@ -1,25 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerDead : MonoBehaviour
 {
     //Referencia al Script de Hapiness
     [SerializeField]private Hapiness _hapiness;
+    [SerializeField] private Button _botonComida;
+    [SerializeField] private Button _botonSueno;
+    [SerializeField] private Button _botonMinijuegos;
     private Animator _animator;
     private bool _isDead = false;
-
     public bool IsDead => _isDead;
 
     void Start()
     {
        _animator = GetComponent<Animator>();
-        //coger también _hapiness
     }
 
     private void Update()
     {
-        CheckHappiness(); // Verifica el estado de la felicidad para determinar si el jugador está muerto
+        CheckHappiness(); // Comprueba el estado de la felicidad para determinar si el jugador está muerto
     }
 
     private void CheckHappiness()
@@ -27,6 +29,9 @@ public class PlayerDead : MonoBehaviour
         if (_hapiness != null && _hapiness.HapinessBarPercent <= 0f)
         {
             SetDead(true); // Marca al jugador como muerto si la felicidad llega a cero
+            _botonMinijuegos.interactable = false;
+            _botonSueno.interactable = false;
+            _botonComida.interactable = false;
         }
     }
 

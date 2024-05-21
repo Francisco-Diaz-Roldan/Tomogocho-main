@@ -4127,6 +4127,7 @@ MonoBehaviour:
   _hapinessBar: {fileID: 862111842}
   _playerDead: {fileID: 1214898775}
   _playerSleep: {fileID: 1214898774}
+  _playerPoop: {fileID: 1214898772}
   _playerData: {fileID: 11400000, guid: d85bd1a6960046445a21db94936db762, type: 2}
 --- !u!1 &877334741
 GameObject:
@@ -5907,8 +5908,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hungerPercent: {fileID: 1549408804}
   _pooPrefab: {fileID: 8266594066506780638, guid: dbdbbe9237d1f2044bdb5caa08ea0821, type: 3}
-  _poopHungerTime: 5
-  _poopNohungerTime: 1
+  _poopHungerTime: 20
+  _poopNohungerTime: 10
   _playerSleep: {fileID: 1214898774}
   _playerDead: {fileID: 1214898775}
 --- !u!114 &1214898773
@@ -5958,6 +5959,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hapiness: {fileID: 862111844}
+  _botonComida: {fileID: 1877286452}
+  _botonSueno: {fileID: 1631837199}
+  _botonMinijuegos: {fileID: 140856892}
 --- !u!114 &1214898776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8528,6 +8532,7 @@ MonoBehaviour:
   _hapinessBar: {fileID: 1961037542}
   _playerDead: {fileID: 0}
   _playerSleep: {fileID: 0}
+  _playerPoop: {fileID: 0}
   _playerData: {fileID: 0}
 --- !u!114 &1961037542
 MonoBehaviour:

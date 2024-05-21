@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Hunger : MonoBehaviour
 {
-    #region Variables
     [SerializeField] private Image _hungryBar;
     [SerializeField] private PlayerDead _playerDead;
     [SerializeField] private PlayerSleep _playerSleep;
@@ -13,17 +12,11 @@ public class Hunger : MonoBehaviour
     public PlayerData _playerData;
     private bool _eggIsOpened;
 
-    #endregion
-
     private void Start()
     {
         _hungryBar.fillAmount = _playerData.HungerPercent;
         if (_playerDead == null || _playerSleep == null) { return; }
-
-        // Llama repetidamente a UpdateBar con un intervalo de 1 segundo si el jugador no está muerto
-        if (!_playerDead.IsDead && !_playerSleep.IsSleeping) {
-            InvokeRepeating(nameof(UpdateBar), 1f, 1f);
-        }
+        if (!_playerDead.IsDead && !_playerSleep.IsSleeping) InvokeRepeating(nameof(UpdateBar), 1f, 1f); // Llama repetidamente a UpdateBar con un intervalo de 1 segundo si el jugador no está muerto
     }
 
     public void StartBar()
@@ -31,7 +24,6 @@ public class Hunger : MonoBehaviour
         _eggIsOpened = true;
     }
 
-    // Se da de comer a la criatura aumentando el porcentaje de la barra de hambre
     public void FeedCreature()
     {
         if (!_playerDead.IsDead && !_playerSleep.IsSleeping) 
@@ -42,16 +34,13 @@ public class Hunger : MonoBehaviour
         }
     }
 
-    // Corrutina para desactivar la cara de comer después de un tiempo
-    private IEnumerator DisactivateEatingCoroutine()
+    private IEnumerator DisactivateEatingCoroutine() // Corrutina para desactivar la cara de comer después de un tiempo
     {
         yield return new WaitForSeconds(1.5f);
         _playerEating.ActivateEatingFace(false);
     }
 
-
-    // Actualiza la barra de hambre
-    private void UpdateBar()
+    private void UpdateBar() // Actualiza la barra de hambre
     {
         if (!_eggIsOpened) 
         {

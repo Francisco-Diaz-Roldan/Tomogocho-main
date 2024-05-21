@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerPoop : MonoBehaviour
 {
     [SerializeField] Image _hungerPercent;
-    [SerializeField] GameObject _pooPrefab; // Prefab del objeto que quieres instanciar (Poo)
+    [SerializeField] GameObject _pooPrefab;
     [SerializeField] float _poopHungerTime;
     [SerializeField] float _poopNohungerTime;
 
@@ -15,19 +15,10 @@ public class PlayerPoop : MonoBehaviour
     [SerializeField] private PlayerDead _playerDead;
 
     private List<GameObject> pooledObjects = new List<GameObject>();
-    private int poolSize = 5; // Tamaño del pool (cantidad máxima de objetos Poo que pueden existir a la vez)
+    private int poolSize = 10; // Tamaño del pool (cantidad máxima de objetos Poo que pueden existir a la vez)
 
     void Start()
     {
-        //_playerSleep = GetComponent<PlayerSleep>();
-        //_playerDead = GetComponent<PlayerDead>();
-
-        if (_playerDead == null)
-        {
-            Debug.LogError("El componente PlayerDead no está asignado correctamente en el script PlayerPoop.");
-        }
-
-        // Inicializar el pool al comienzo del juego
         for (int i = 0; i < poolSize; i++)
         {
             GameObject obj = Instantiate(_pooPrefab, Vector3.zero, Quaternion.identity);
@@ -75,8 +66,7 @@ public class PlayerPoop : MonoBehaviour
     {
         _poopTime = 0f;
 
-        // Buscar un objeto inactivo en el pool para reutilizar
-        foreach (GameObject obj in pooledObjects)
+        foreach (GameObject obj in pooledObjects) // Buscar un objeto inactivo en el pool para reutilizarlo
         {
             if (!obj.activeInHierarchy)
             {
@@ -85,8 +75,18 @@ public class PlayerPoop : MonoBehaviour
                 return;
             }
         }
+    }
 
-        // Si todos los objetos en el pool están activos, no crear más poos
-        Debug.LogWarning("Ya está el máximo de cacas. No se pueden crear más en este momento.");
+    public int GetActivePoopCount()
+    {
+        int activeCount = 0;
+        foreach (GameObject obj in pooledObjects)
+        {
+            if (obj.activeInHierarchy)
+            {
+                activeCount++;
+            }
+        }
+        return activeCount;
     }
 }

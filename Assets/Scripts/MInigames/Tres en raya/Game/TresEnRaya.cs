@@ -21,7 +21,7 @@ public class TresEnRaya : MonoBehaviour
     private int _partidasGanadasJugador = 0;
     private int _partidasGanadasTomogocho = 0;
     private int _empates = 0;
-    private bool gameOver = false;
+    private bool _gameOver = false;
 
     private const string PartidasGanadasJugadorKey = "PartidasGanadasJugador";
     private const string PartidasGanadasTomogochoKey = "PartidasGanadasTomogocho";
@@ -42,7 +42,7 @@ public class TresEnRaya : MonoBehaviour
 
     void UpdateTurnText()
     {
-        if (gameOver)
+        if (_gameOver)
             return;
 
         if (playerTurn == "Jugador")
@@ -57,10 +57,9 @@ public class TresEnRaya : MonoBehaviour
 
     void OnButtonClick(int index)
     {
-        if (!gameOver && buttonImages[index].sprite == null)
+        if (!_gameOver && buttonImages[index].sprite == null)
         {
             buttonImages[index].sprite = currentSprite;
-
             SetSpritesVisibles(index);
 
             if (CheckWin())
@@ -76,14 +75,13 @@ public class TresEnRaya : MonoBehaviour
                 SwitchTurn();
                 if (playerTurn == "Tomogocho")
                 {
+                    DisableButtons();
                     StartCoroutine(AIMove());
                 }
                 UpdateTurnText();
             }
         }
     }
-
-
 
     void HandleWin()
     {
@@ -123,6 +121,27 @@ public class TresEnRaya : MonoBehaviour
             {
                 SwitchTurn();
                 UpdateTurnText();
+            }
+        }
+        EnableButtons();
+    }
+
+    void DisableButtons()
+    {
+        foreach (Button button in buttons)
+        {
+            button.interactable = false;
+        }
+    }
+
+    void EnableButtons()
+    {
+        foreach (Button button in buttons)
+        {
+            Image buttonImage = button.GetComponent<Image>();
+            if (buttonImage.sprite != _playerSprite && buttonImage.sprite != _tomogochoSprite)
+            {
+                button.interactable = true;
             }
         }
     }
@@ -230,6 +249,7 @@ public class TresEnRaya : MonoBehaviour
         }
         playerTurn = "Jugador";
         currentSprite = _playerSprite;
+        EnableButtons();  
     }
 
     void ShowResultPanel()

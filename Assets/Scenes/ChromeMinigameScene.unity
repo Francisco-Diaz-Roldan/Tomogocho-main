@@ -1156,7 +1156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc5cca99e1f292f4c835337601937ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _upForce: 625
+  _upForce: 600
   _groundCheck: {fileID: 810835766}
   _ground:
     serializedVersion: 2
@@ -2242,7 +2242,7 @@ GameObject:
   - component: {fileID: 699805284}
   - component: {fileID: 699805283}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: "Borde bot\xF3n \xA1Salta!"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

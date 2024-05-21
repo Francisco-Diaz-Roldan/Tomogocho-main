@@ -28,7 +28,7 @@ public class TresEnRayaController : MonoBehaviour
     public void GoToGameScene()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("GameScene");
     }
 
     public void GoBack()

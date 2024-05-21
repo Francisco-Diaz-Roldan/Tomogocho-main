@@ -6,12 +6,17 @@ public class RayCamera : MonoBehaviour
 {
     [SerializeField] private GameObject _panelGameOver;
     [SerializeField] private GameObject _panelHome;
+    [SerializeField] private PlayerData _playrData;
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0)) // Si se hace clic izquierdo
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);  // Se lanza un rayo desde la posición del ratón en la pantalla
+            if(hit.collider != null)
+            {
+                Debug.Log(hit.collider.gameObject.name);
+            }
 
             if (hit.collider != null && hit.collider.gameObject.CompareTag("Player"))
             {
@@ -40,6 +45,10 @@ public class RayCamera : MonoBehaviour
             else if (hit.collider != null && hit.collider.gameObject.CompareTag("Poo"))
             {
                 hit.collider.gameObject.SetActive(false);
+            }
+            else if (hit.collider != null && hit.collider.gameObject.CompareTag("Egg"))
+            {
+                _playrData.TimeToOpenEgg -= 1f;
             }
         }
     }

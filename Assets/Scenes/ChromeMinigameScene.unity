@@ -399,6 +399,8 @@ MonoBehaviour:
   _panelGameOver: {fileID: 762180344}
   _panelResetMenu: {fileID: 491057115}
   _obstacleSpawner: {fileID: 195211203}
+  _cloudSpawner1: {fileID: 723326100}
+  _cloudSpawner2: {fileID: 681088765}
   _scoreManager: {fileID: 822888156}
   _player: {fileID: 384416973}
 --- !u!1 &308983554

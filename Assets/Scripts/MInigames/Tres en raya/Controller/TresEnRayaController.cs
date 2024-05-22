@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class TresEnRayaController : MonoBehaviour
 {
-    [SerializeField] private GameObject _panelResultado;
-    [SerializeField] private GameObject _panelHome;
     [SerializeField] private GameObject _panelResetearPuntuacion;
+    [SerializeField] private GameObject _panelResultado;
+    [SerializeField] private GameObject _panelMiniGame;
+    [SerializeField] private GameObject _panelHome;
     private bool _isHomeMenuActive = false;
+    private bool _isMiniGameActive = false;
+
 
     public void Restart()
     {
@@ -28,10 +30,28 @@ public class TresEnRayaController : MonoBehaviour
         SceneManager.LoadScene("MainScene");
     }
 
-    public void GoToGameScene()
+    public void GoToGameScene() 
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("GameScene");
+    }
+
+    public void ToggleMiniGameButton()
+    {
+        _isMiniGameActive = !_isMiniGameActive;
+        _panelMiniGame.SetActive(_isMiniGameActive);
+    }
+
+    public void OpenPanelMiniGame()
+    {
+        _panelMiniGame.SetActive(true);
+        _isMiniGameActive = true;
+    }
+
+    public void ClosePanelMiniGame()
+    {
+        _panelMiniGame.SetActive(false);
+        _isMiniGameActive = false;
     }
 
     public void GoBack()

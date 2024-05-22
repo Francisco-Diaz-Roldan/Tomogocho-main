@@ -31,15 +31,8 @@ public class PiedraPapelTijeras : MonoBehaviour
         EstablecerAnimaciónJugador();
     }
 
-    private void AsignarJugadaJugador(string jugadaJugador)
+    public void SeleccionarJugadaJugador(string jugadaJugador)
     {
-        Debug.Log("El jugador seleccionó: " + jugadaJugador);
-    }
-
-    public void SeleccionarJugada(string jugadaJugador)
-    {
-        AsignarJugadaJugador(jugadaJugador);
-
         // Mostrar el bocadillo de la jugada de Tomogocho
         _bocadilloJugadaTomogocho.SetActive(true);
 
@@ -48,7 +41,6 @@ public class PiedraPapelTijeras : MonoBehaviour
 
         // Mostrar la jugada de Tomogocho
         MostrarJugadaTomogocho(jugadaTomogocho);
-        Debug.Log("Tomogocho seleccionó: " + jugadaTomogocho);
 
         // Determinar el resultado del juego
         string resultado = DeterminarResultado(jugadaJugador, jugadaTomogocho);
@@ -60,11 +52,11 @@ public class PiedraPapelTijeras : MonoBehaviour
         numeroRonda++;
 
         // Determinar si alguien ha ganado al mejor de 3
-        if (resultado == "¡Ganaste!")
+        if (resultado == "Ganaste")
         {
             rondasGanadasJugador++;
         }
-        else if (resultado == "¡Perdiste!")
+        else if (resultado == "Perdiste")
         {
             rondasGanadasTomogocho++;
         }
@@ -163,27 +155,27 @@ public class PiedraPapelTijeras : MonoBehaviour
                  (jugadaJugador == "Papel" && jugadaTomogocho == "Piedra") ||
                  (jugadaJugador == "Tijeras" && jugadaTomogocho == "Papel"))
         {
-            return "¡Ganaste!";
+            return "Ganaste";
         }
         else
         {
-            return "¡Perdiste!";
+            return "Perdiste";
         }
     }
 
     public void AsignarPiedra()
     {
-        if (!_panelResultado.activeSelf) SeleccionarJugada("Piedra");
+        if (!_panelResultado.activeSelf) SeleccionarJugadaJugador("Piedra");
     }
 
     public void AsignarPapel()
     {
-        if (!_panelResultado.activeSelf) SeleccionarJugada("Papel");
+        if (!_panelResultado.activeSelf) SeleccionarJugadaJugador("Papel");
     }
 
     public void AsignarTijeras()
     {
-        if (!_panelResultado.activeSelf) SeleccionarJugada("Tijeras");
+        if (!_panelResultado.activeSelf) SeleccionarJugadaJugador("Tijeras");
     }
 
     void MostrarJugadaTomogocho(string jugadaTomogocho)
@@ -217,6 +209,32 @@ public class PiedraPapelTijeras : MonoBehaviour
         rondasGanadasTomogocho = 0;
         _resultadoText.text = "Elige: Piedra, Papel o Tijeras";
     }
+
+    public void ResetData()
+    {
+        // Reiniciar todas las variables
+        rondasGanadasJugador = 0;
+        rondasGanadasTomogocho = 0;
+        partidasGanadas = 0;
+        partidasPerdidas = 0;
+        numeroRonda = 1;
+
+        // Reiniciar el texto de resultado
+        _resultadoText.text = "Elige: Piedra, Papel o Tijeras";
+
+        // Actualizar los contadores en la UI
+        ActualizarContadoresUI();
+
+        // Ocultar el panel de resultados si está activo
+        if (_panelResultado.activeSelf)
+        {
+            _panelResultado.SetActive(false);
+        }
+
+        // Ocultar la jugada de Tomogocho
+        OcultarJugadaTomogocho();
+    }
+
     private void EstablecerAnimaciónJugador()
     {
         _animator.SetFloat("Y", -1f);

@@ -12,6 +12,7 @@ public class PiedraPapelTijeras : MonoBehaviour
     [SerializeField] private GameObject _bocadilloJugadaTomogocho;
     [SerializeField] private Image _imagenJugadaTomogocho;
     [SerializeField] private List<Sprite> _spriteJugadaTomogocho;
+    [SerializeField] private Animator _animator;
 
     private int rondasGanadasJugador = 0;
     private int rondasGanadasTomogocho = 0;
@@ -25,6 +26,7 @@ public class PiedraPapelTijeras : MonoBehaviour
         partidasPerdidas = PlayerPrefs.GetInt("PartidasPerdidas", 0);
         ActualizarContadoresUI();
         OcultarJugadaTomogocho();
+        EstablecerAnimaciónJugador();
     }
 
     private void AsignarJugadaJugador(string jugadaJugador)
@@ -78,6 +80,9 @@ public class PiedraPapelTijeras : MonoBehaviour
 
             // Actualizar los contadores de partidas en la UI
             ActualizarContadoresUI();
+
+            // Ocultar la jugada de Tomogocho
+            OcultarJugadaTomogocho();
 
             // Mostrar el panel de resultados
             _panelResultado.SetActive(true);
@@ -157,7 +162,7 @@ public class PiedraPapelTijeras : MonoBehaviour
 
     public void AsignarPiedra()
     {
-        if(!_panelResultado.activeSelf) SeleccionarJugada("Piedra");
+        if (!_panelResultado.activeSelf) SeleccionarJugada("Piedra");
     }
 
     public void AsignarPapel()
@@ -200,5 +205,11 @@ public class PiedraPapelTijeras : MonoBehaviour
         rondasGanadasJugador = 0;
         rondasGanadasTomogocho = 0;
         _resultadoText.text = "Elige: Piedra, Papel o Tijeras";
+    }
+    private void EstablecerAnimaciónJugador()
+    {
+        _animator.SetFloat("Y", -1f);
+        _animator.SetFloat("X", 0f);
+        _animator.SetFloat("Speed", 0f);
     }
 }

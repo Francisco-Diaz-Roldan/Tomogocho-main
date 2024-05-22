@@ -9,6 +9,8 @@ public class Hunger : MonoBehaviour
     [SerializeField] private PlayerDead _playerDead;
     [SerializeField] private PlayerSleep _playerSleep;
     [SerializeField] private PlayerEating _playerEating;
+    [SerializeField] private Hapiness _hapiness;
+
     public PlayerData _playerData;
     private bool _eggIsOpened;
 
@@ -22,6 +24,12 @@ public class Hunger : MonoBehaviour
     public void StartBar()
     {
         _eggIsOpened = true;
+    }
+
+    private void Update()
+    {
+        if (_hungryBar.fillAmount < 0.5f && _hungryBar.fillAmount > 0) { _hapiness.NotifyBitHungry(); }
+        if (_hungryBar.fillAmount > 0f) { _hapiness.NotifyReallyHungry(); }
     }
 
     public void FeedCreature()
@@ -42,10 +50,7 @@ public class Hunger : MonoBehaviour
 
     private void UpdateBar() // Actualiza la barra de hambre
     {
-        if (!_eggIsOpened) 
-        {
-            return;
-        }
+        if (!_eggIsOpened) { return; }
 
         // Disminuye el porcentaje de hambre solo si el jugador no está muerto
         if (!_playerDead.IsDead && !_playerSleep.IsSleeping)

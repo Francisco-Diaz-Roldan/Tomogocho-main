@@ -15,6 +15,10 @@ public class Hapiness : MonoBehaviour
     public PlayerData _playerData;
     public float HapinessBarPercent => _hapinessBar.fillAmount;
 
+    private bool _lowSleepNotified = false;
+    private bool _noSleepNotified = false;
+    private bool _bitHungry = false;
+    private bool _reallytHungry = false;
 
     private void Start()
     {
@@ -33,7 +37,7 @@ public class Hapiness : MonoBehaviour
     }
 
     // Actualiza la barra de felicidad
-    private void UpdateBar()
+    /*private void UpdateBar()
     {
         if (!_eggIsOpened)
         {
@@ -45,7 +49,7 @@ public class Hapiness : MonoBehaviour
             if (_playerSleep != null && !_playerSleep.IsSleeping)
             {
                 int activePoopCount = _playerPoop.GetActivePoopCount();
-                float decreaseAmount = 0.01f + (activePoopCount * 0.05f);
+                float decreaseAmount = 0.01f + (activePoopCount * 0.07f);
 
                 _hapinessBar.fillAmount -= 0.01f;
                 _hapinessBar.fillAmount = Mathf.Max(_hapinessBar.fillAmount, 0f);
@@ -56,5 +60,138 @@ public class Hapiness : MonoBehaviour
                 }
             }
         }
+    }*/
+
+    /* private void UpdateBar()
+     {
+         if (!_eggIsOpened)
+         {
+             return;
+         }
+
+         if (_playerDead != null && !_playerDead.IsDead)
+         {
+             if (_playerSleep != null && !_playerSleep.IsSleeping)
+             {
+                 int activePoopCount = _playerPoop.GetActivePoopCount();
+                 float decreaseAmount = 0.0075f + (activePoopCount * 0.005f);
+
+                 _hapinessBar.fillAmount -= decreaseAmount;
+                 _hapinessBar.fillAmount = Mathf.Max(_hapinessBar.fillAmount, 0f);
+
+                 if (_playerData != null)
+                 {
+                     _playerData.HapinessPercent = _hapinessBar.fillAmount;
+                 }
+             }
+         }
+
+         // Reducción de la felicidad más rápido si se notifica bajo sueño o falta de sueño
+         if (_lowSleepNotified && _playerSleep != null && !_playerSleep.IsSleeping)
+         {
+             // Reduce el valor de la barra de felicidad un 2.5% más rápido (además del valor de las cacas)
+             float decreaseAmount = 0.01f * 1.0025f; // Incremento del 2.5% adicional
+             _hapinessBar.fillAmount -= decreaseAmount;
+             _hapinessBar.fillAmount = Mathf.Max(_hapinessBar.fillAmount, 0f);
+
+             _lowSleepNotified = false;
+         }
+
+         if (_noSleepNotified && _playerSleep != null && !_playerSleep.IsSleeping)
+         {
+             // Reduce el valor de la barra de felicidad un 5% más rápido (además del valor de las cacas)
+             float decreaseAmount = 0.01f * 1.005f; // Incremento del 5% adicional
+             _hapinessBar.fillAmount -= decreaseAmount;
+             _hapinessBar.fillAmount = Mathf.Max(_hapinessBar.fillAmount, 0f);
+
+             _noSleepNotified = false;
+         }
+
+         // Manejo de notificaciones de hambre
+         if (_bitHungry && _playerSleep != null && !_playerSleep.IsSleeping)
+         {
+             float decreaseAmount = 0.01f * 1.025f; 
+             _hapinessBar.fillAmount -= decreaseAmount;
+             _hapinessBar.fillAmount = Mathf.Max(_hapinessBar.fillAmount, 0f);
+
+             _bitHungry = false;
+         }
+
+         if (_reallytHungry && _playerSleep != null && !_playerSleep.IsSleeping)
+         {
+             float decreaseAmount = 0.01f * 1.005f; 
+             _hapinessBar.fillAmount -= decreaseAmount;
+             _hapinessBar.fillAmount = Mathf.Max(_hapinessBar.fillAmount, 0f);
+
+             _reallytHungry = false;
+         }
+     }*/
+
+    private void UpdateBar()
+    {
+        if (!_eggIsOpened || _playerDead.IsDead)
+        {
+            return;
+        }
+
+        bool isSleeping = _playerSleep.IsSleeping;
+        int activePoopCount = _playerPoop.GetActivePoopCount();
+
+        float decreaseAmount = 0f;
+
+        if (!isSleeping && !_playerDead.IsDead)
+        {
+            decreaseAmount = 0.0075f + (activePoopCount * 0.005f);
+
+            if (_bitHungry)
+            {
+                decreaseAmount *= 1.025f;
+                _bitHungry = false;
+            }
+            else if (_reallytHungry)
+            {
+                decreaseAmount *= 1.005f;
+                _reallytHungry = false;
+            }
+
+            if (_lowSleepNotified)
+            {
+                decreaseAmount *= 1.0025f; 
+                _lowSleepNotified = false;
+            }
+            else if (_noSleepNotified)
+            {
+                decreaseAmount *= 1.005f; 
+                _noSleepNotified = false;
+            }
+        }
+
+        _hapinessBar.fillAmount -= decreaseAmount;
+        _hapinessBar.fillAmount = Mathf.Max(_hapinessBar.fillAmount, 0f);
+
+        if (!_playerDead.IsDead && !isSleeping)
+        {
+            _playerData.HapinessPercent = _hapinessBar.fillAmount;
+        }
+    }
+
+    public void NotifyLowSleep()
+    {
+        _lowSleepNotified = true;
+    } 
+
+    public void NotifyNoSleep()
+    {
+        _noSleepNotified = true;
+    }
+
+    public void NotifyBitHungry()
+    {
+        _bitHungry = true;
+    }
+
+    public void NotifyReallyHungry()
+    {
+        _reallytHungry = true;
     }
 }

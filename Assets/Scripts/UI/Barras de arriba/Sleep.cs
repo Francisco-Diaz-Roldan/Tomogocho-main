@@ -8,6 +8,7 @@ public class Sleep : MonoBehaviour
     [SerializeField] private PlayerSleep _playerSleep;
     [SerializeField] private PlayerHappy _playerHappy;
     [SerializeField] private PlayerDead _playerDead;
+    [SerializeField] private Hapiness _hapiness;
     public PlayerData playerData;
     private bool _eggIsOpened;
     private bool isResting = false;
@@ -18,7 +19,14 @@ public class Sleep : MonoBehaviour
     {
         _sleepBar.fillAmount = playerData.SleepPercent;
         if (_playerDead == null) { return; }
+        if (_sleepBar.fillAmount < 0.5f) {_hapiness.NotifyLowSleep(); }
         if (!_playerDead.IsDead) InvokeRepeating(nameof(DecreaseSleep), 1f, 1f);  // Llama repetidamente al método que decrementa la barra de sueño con un intervalo de tiempo de 1 segundo
+    }
+
+    private void Update()
+    {
+        if (_sleepBar.fillAmount < 0.5f && _sleepBar.fillAmount > 0) { _hapiness.NotifyLowSleep(); }
+        if (_sleepBar.fillAmount > 0f) { _hapiness.NotifyNoSleep(); }
     }
 
     public void StartBar()
@@ -28,10 +36,7 @@ public class Sleep : MonoBehaviour
 
     private void DecreaseSleep()
     {
-        if (!_eggIsOpened)
-        {
-            return;
-        }
+        if (!_eggIsOpened) { return; }
 
         if (!isResting && !_playerDead.IsDead) // Solo baja si no se está descansando
         {

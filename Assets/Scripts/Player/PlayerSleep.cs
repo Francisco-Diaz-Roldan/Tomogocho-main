@@ -12,17 +12,7 @@ public class PlayerSleep : MonoBehaviour
     [SerializeField] private Egg _egg;
     private bool _isSleeping = false;
     
-    //Hago un Get de la propiedad privada y no puede editarse porque voy a poder acceder desde cualquier script
-    //y que por seguridad solo se pueda activar desde aquí
-    public bool IsSleeping => _isSleeping;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-       //  _playerDead = GetComponent<PlayerDead>();
-       // animator = GetComponent<Animator>();
-       // _egg = GetComponent<Egg>();
-    }
+    public bool IsSleeping => _isSleeping; //Hago un Get de la propiedad privada y no puede editarse porque voy a poder acceder desde cualquier script y que por seguridad solo se pueda activar desde aquí
 
     public void ChangeSleepState(bool isSleeping)
     {

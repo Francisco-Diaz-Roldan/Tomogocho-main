@@ -3046,7 +3046,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1774910572}
         m_TargetAssemblyTypeName: TresEnRayaController, Assembly-CSharp
-        m_MethodName: OpenPaneMiniGame
+        m_MethodName: ToggleMiniGameButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4511,7 +4511,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1774910572}
         m_TargetAssemblyTypeName: TresEnRayaController, Assembly-CSharp
-        m_MethodName: CLosePanelMinigame
+        m_MethodName: ClosePanelMiniGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

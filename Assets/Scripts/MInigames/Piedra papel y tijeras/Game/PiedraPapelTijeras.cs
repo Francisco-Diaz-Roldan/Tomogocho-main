@@ -18,6 +18,8 @@ public class PiedraPapelTijeras : MonoBehaviour
     private int rondasGanadasTomogocho = 0;
     private int partidasGanadas = 0;
     private int partidasPerdidas = 0;
+    private int numeroRonda = 1;
+
 
     private void Start()
     {
@@ -38,6 +40,9 @@ public class PiedraPapelTijeras : MonoBehaviour
     {
         AsignarJugadaJugador(jugadaJugador);
 
+        // Mostrar el bocadillo de la jugada de Tomogocho
+        _bocadilloJugadaTomogocho.SetActive(true);
+
         // Determinar la jugada de Tomogocho basada en una estrategia simple
         string jugadaTomogocho = DeterminarJugadaTomogocho();
 
@@ -49,7 +54,10 @@ public class PiedraPapelTijeras : MonoBehaviour
         string resultado = DeterminarResultado(jugadaJugador, jugadaTomogocho);
 
         // Mostrar el resultado de la ronda en el texto
-        _resultadoText.text = "Ronda: " + resultado;
+        _resultadoText.text = "Ronda " + numeroRonda + ": " + resultado;
+
+        // Incrementar el número de ronda
+        numeroRonda++;
 
         // Determinar si alguien ha ganado al mejor de 3
         if (resultado == "¡Ganaste!")
@@ -77,6 +85,9 @@ public class PiedraPapelTijeras : MonoBehaviour
 
             // Guardar las partidas ganadas y perdidas
             GuardarPartida();
+
+            // Incrementar el número de ronda
+            numeroRonda++;
 
             // Actualizar los contadores de partidas en la UI
             ActualizarContadoresUI();

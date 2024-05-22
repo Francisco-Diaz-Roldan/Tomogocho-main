@@ -4739,7 +4739,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _panelResetearPuntuacion: {fileID: 894970503}
   _panelResultado: {fileID: 1979695709}
-  _panelMiniGame: {fileID: 894970503}
+  _panelMiniGame: {fileID: 1350022395}
   _panelHome: {fileID: 1920278426}
 --- !u!1 &1786855017
 GameObject:

@@ -212,6 +212,11 @@ public class PiedraPapelTijeras : MonoBehaviour
 
     public void ResetData()
     {
+        // Guardar las partidas ganadas y perdidas antes de resetear
+        PlayerPrefs.SetInt("PartidasGanadas", partidasGanadas);
+        PlayerPrefs.SetInt("PartidasPerdidas", partidasPerdidas);
+        PlayerPrefs.Save();
+
         // Reiniciar todas las variables
         rondasGanadasJugador = 0;
         rondasGanadasTomogocho = 0;

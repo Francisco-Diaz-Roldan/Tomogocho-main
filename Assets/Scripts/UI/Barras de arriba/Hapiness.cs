@@ -139,13 +139,13 @@ public class Hapiness : MonoBehaviour
 
         float decreaseAmount = 0f;
 
-        if (!isSleeping && !_playerDead.IsDead)
+        if (!isSleeping && !_playerDead.IsDead) //Aquí es donde baja la barra de vida
         {
-            decreaseAmount = 0.0075f + (activePoopCount * 0.005f);
+            decreaseAmount = 0.005f + (activePoopCount * 0.005f);
 
             if (_bitHungry)
             {
-                decreaseAmount *= 1.025f;
+                decreaseAmount *= 1.002f;
                 _bitHungry = false;
             }
             else if (_reallytHungry)
@@ -156,7 +156,7 @@ public class Hapiness : MonoBehaviour
 
             if (_lowSleepNotified)
             {
-                decreaseAmount *= 1.0025f; 
+                decreaseAmount *= 1.002f; 
                 _lowSleepNotified = false;
             }
             else if (_noSleepNotified)

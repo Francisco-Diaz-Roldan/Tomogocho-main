@@ -14,6 +14,8 @@ public class Sleep : MonoBehaviour
     private bool isResting = false;
     private float restInterval = 1f;
     private bool isNightTime = false;
+    private bool _waitForWakeUp = false;
+
 
     private void Start()
     {
@@ -27,6 +29,18 @@ public class Sleep : MonoBehaviour
     {
         if (_sleepBar.fillAmount < 0.5f && _sleepBar.fillAmount > 0) { _hapiness.NotifyLowSleep(); }
         if (_sleepBar.fillAmount > 0f) { _hapiness.NotifyNoSleep(); }
+        if (_sleepBar.fillAmount <= 0f && !isNightTime)
+        {
+            ForceSleep();
+            Invoke("ForceWakeUpAfterDelay", 30f); // Hacemos que el personaje espere de 30 segundos para que despierte
+
+        }
+    }
+
+    private void ForceWakeUpAfterDelay()
+    {
+        _waitForWakeUp = true; // Establecer que estamos esperando
+        ForceWakeUp(); // Forzar al personaje a despertar
     }
 
     public void StartBar()

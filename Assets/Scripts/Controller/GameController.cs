@@ -65,19 +65,19 @@ public class GameController : MonoBehaviour
 
     public void GoToChromeMiniGameScene()
     {
-        //Time.timeScale = 0f;
+        Time.timeScale = 1f;
         StartCoroutine(LoadSceneAndPause("ChromeMiniGameScene"));
     }
 
     public void GoToTresEnRayaMiniGameScene()
     {
-        //Time.timeScale = 0f;
+        Time.timeScale = 1f;
         StartCoroutine(LoadSceneAndPause("TresEnRayaMiniGameScene"));
     }
 
     public void GoToPiedraPapelTijerasMiniGameScene()
     {
-        //Time.timeScale = 0f;
+        Time.timeScale = 1f;
         StartCoroutine(LoadSceneAndPause("PiedraPapelTijerasMiniGameScene"));
     }
 

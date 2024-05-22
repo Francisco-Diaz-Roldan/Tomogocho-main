@@ -146,7 +146,7 @@ public class TresEnRaya : MonoBehaviour
         }
     }
 
-    int GetAIMove()
+    /*int GetAIMove()
     {
         // Prioridad 1: Ganar si es posible
         int winMove = FindWinningMove(currentSprite);
@@ -166,7 +166,41 @@ public class TresEnRaya : MonoBehaviour
             }
         }
         return -1; // No quedan movimientos disponibles
+    }*/
+
+    int GetAIMove()
+    {
+        // Prioridad 1: Ganar si es posible
+        int winMove = FindWinningMove(currentSprite);
+        if (winMove != -1) return winMove;
+
+        // Prioridad 2: Bloquear al jugador si está a punto de ganar
+        Sprite opponentSprite = (currentSprite == _playerSprite) ? _tomogochoSprite : _playerSprite;
+        int blockMove = FindWinningMove(opponentSprite);
+        if (blockMove != -1) return blockMove;
+
+        // Prioridad 3: Elegir la posición central si está disponible
+        int centerIndex = 4;
+        if (buttonImages[centerIndex].sprite == null) return centerIndex;
+
+        // Prioridad 4: Elegir una posición aleatoria entre las disponibles
+        List<int> availablePositions = new List<int>();
+        for (int i = 0; i < buttonImages.Length; i++)
+        {
+            if (buttonImages[i].sprite == null)
+            {
+                availablePositions.Add(i);
+            }
+        }
+        if (availablePositions.Count > 0)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, availablePositions.Count);
+            return availablePositions[randomIndex];
+        }
+
+        return -1; // No quedan movimientos disponibles
     }
+
 
     int FindWinningMove(Sprite sprite)
     {

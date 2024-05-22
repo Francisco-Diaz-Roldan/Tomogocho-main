@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject _panelHome;
     [SerializeField] private GameObject _panelMinijuegos;
     private PlayerDead _playerDead;
+    private bool _isHomeMenuActive = false;
 
     private void Start()
     {
@@ -17,11 +18,31 @@ public class GameController : MonoBehaviour
     }
     public void Pausa()
     {
-       // if (_playerDead != null && !_playerDead.IsDead && _panelHome != null)
-        //{
-            Time.timeScale = 0f;
-            _panelHome.SetActive(true);
-        //}
+        Time.timeScale = 0f;
+        _panelHome.SetActive(true);
+        _isHomeMenuActive = true;
+    }
+
+    public void Reanudar()
+    {
+        Time.timeScale = 1f;
+        if (_panelHome != null)
+        {
+            _panelHome.SetActive(false);
+            _isHomeMenuActive = false;
+        }
+    }
+
+    public void ToggleHomeMenu()
+    {
+        if (_isHomeMenuActive)
+        {
+            Reanudar();
+        }
+        else
+        {
+            Pausa();
+        }
     }
 
     public void TogglePanelMinijuegos()
@@ -35,7 +56,7 @@ public class GameController : MonoBehaviour
             OpenPanelMinijuegos();
         }
     }
-    
+
     public void OpenPanelMinijuegos()
     {
         Time.timeScale = 0f;
@@ -46,15 +67,6 @@ public class GameController : MonoBehaviour
     {
         Time.timeScale = 1f;
         _panelMinijuegos.SetActive(false);
-    }
-
-    public void Reanudar()
-    {
-        Time.timeScale = 1f;
-        if (_panelHome != null)
-        {
-            _panelHome.SetActive(false);
-        }
     }
 
     public void GoToMainScene()
@@ -85,7 +97,7 @@ public class GameController : MonoBehaviour
     private System.Collections.IEnumerator LoadSceneAndPause(string sceneName)
     {
         // Pauso la escena actual
-       // Time.timeScale = 0f;
+        // Time.timeScale = 0f;
 
         // Cargo la nueva escena de forma asíncrona
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);

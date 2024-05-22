@@ -13,6 +13,8 @@ public class ChromeMinigameController : MonoBehaviour
     [SerializeField] ObstacleSpawner _cloudSpawner2;
     [SerializeField] Score _scoreManager;
     [SerializeField] PlayerChrome _player;
+    private bool _isHomeMenuActive = false;
+
 
 
     public void Restart()
@@ -42,7 +44,8 @@ public class ChromeMinigameController : MonoBehaviour
     {
         Time.timeScale = 0f;
         _panelHome.SetActive(true);
-         _panelJugar.SetActive(false) ;
+        _isHomeMenuActive = true;
+        _panelJugar.SetActive(false) ;
         _obstacleSpawner.StopSpawning();
         _cloudSpawner1.StopSpawning();
         _cloudSpawner2.StopSpawning();
@@ -72,11 +75,24 @@ public class ChromeMinigameController : MonoBehaviour
         if (!_panelGameOver.activeSelf) 
         {
             Time.timeScale = 1f;
+            _isHomeMenuActive = false;
             _obstacleSpawner.StartSpawning();
             _cloudSpawner1.StartSpawning();
             _cloudSpawner2.StartSpawning();
             _scoreManager.StartGame();
             _player.StartGame();
+        }
+    }
+
+    public void ToggleHomeMenu()
+    {
+        if (_isHomeMenuActive)
+        {
+            GoBack();
+        }
+        else
+        {
+            Pause();
         }
     }
 }

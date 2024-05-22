@@ -1064,7 +1064,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2.3
+  m_GravityScale: 2.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1847,7 +1847,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 283474442}
         m_TargetAssemblyTypeName: ChromeMinigameController, Assembly-CSharp
-        m_MethodName: Pause
+        m_MethodName: ToggleHomeMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

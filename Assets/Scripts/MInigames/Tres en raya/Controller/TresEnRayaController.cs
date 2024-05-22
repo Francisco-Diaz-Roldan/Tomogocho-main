@@ -37,11 +37,8 @@ public class TresEnRayaController : MonoBehaviour
     public void GoBack()
     {
         _panelHome.SetActive(false);
-        if (!_panelResultado.activeSelf)
-        {
             Time.timeScale = 1f;
             _isHomeMenuActive = false;
-        }
     }
 
     public void ToggleHomeMenu()

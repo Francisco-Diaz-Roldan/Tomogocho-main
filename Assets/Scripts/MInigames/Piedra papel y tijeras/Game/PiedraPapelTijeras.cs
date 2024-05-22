@@ -9,6 +9,9 @@ public class PiedraPapelTijeras : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _resultadoText;
     [SerializeField] private TextMeshProUGUI _partidasText;
     [SerializeField] private GameObject _panelResultado;
+    [SerializeField] private GameObject _bocadilloJugadaTomogocho;
+    [SerializeField] private Image _imagenJugadaTomogocho;
+    [SerializeField] private List<Sprite> _spriteJugadaTomogocho;
 
     private int rondasGanadasJugador = 0;
     private int rondasGanadasTomogocho = 0;
@@ -21,6 +24,7 @@ public class PiedraPapelTijeras : MonoBehaviour
         partidasGanadas = PlayerPrefs.GetInt("PartidasGanadas", 0);
         partidasPerdidas = PlayerPrefs.GetInt("PartidasPerdidas", 0);
         ActualizarContadoresUI();
+        OcultarJugadaTomogocho();
     }
 
     private void AsignarJugadaJugador(string jugadaJugador)
@@ -36,6 +40,7 @@ public class PiedraPapelTijeras : MonoBehaviour
         string jugadaTomogocho = DeterminarJugadaTomogocho();
 
         // Mostrar la jugada de Tomogocho
+        MostrarJugadaTomogocho(jugadaTomogocho);
         Debug.Log("Tomogocho seleccionó: " + jugadaTomogocho);
 
         // Determinar el resultado del juego
@@ -164,6 +169,32 @@ public class PiedraPapelTijeras : MonoBehaviour
     {
         if (!_panelResultado.activeSelf) SeleccionarJugada("Tijeras");
     }
+
+    void MostrarJugadaTomogocho(string jugadaTomogocho)
+    {
+        _bocadilloJugadaTomogocho.SetActive(true);
+        OcultarJugadaTomogocho(); // Ocultar la imagen antes de mostrar la nueva
+        switch (jugadaTomogocho)
+        {
+            case "Piedra":
+                _imagenJugadaTomogocho.sprite = _spriteJugadaTomogocho[0];
+                break;
+            case "Papel":
+                _imagenJugadaTomogocho.sprite = _spriteJugadaTomogocho[1];
+                break;
+            case "Tijeras":
+                _imagenJugadaTomogocho.sprite = _spriteJugadaTomogocho[2];
+                break;
+        }
+        _imagenJugadaTomogocho.gameObject.SetActive(true); // Mostrar la imagen seleccionada
+    }
+
+    void OcultarJugadaTomogocho()
+    {
+        //_bocadilloJugadaTomogocho.SetActive(false);
+        _imagenJugadaTomogocho.gameObject.SetActive(false);
+    }
+
     public void ReiniciarRondas()
     {
         rondasGanadasJugador = 0;

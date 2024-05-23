@@ -72,24 +72,28 @@ public class GameController : MonoBehaviour
     public void GoToMainScene()
     {
         Time.timeScale = 1f;
+       //if(_panelMinijuegos.activeSelf) ClosePanelMinijuegos();
         SceneManager.LoadScene("MainScene");
     }
 
     public void GoToChromeMiniGameScene()
     {
         Time.timeScale = 1f;
+        //if (_panelMinijuegos.activeSelf) ClosePanelMinijuegos();
         StartCoroutine(LoadSceneAndPause("ChromeMiniGameScene"));
     }
 
     public void GoToTresEnRayaMiniGameScene()
     {
         Time.timeScale = 1f;
+        //if (_panelMinijuegos.activeSelf) ClosePanelMinijuegos();
         StartCoroutine(LoadSceneAndPause("TresEnRayaMiniGameScene"));
     }
 
     public void GoToPiedraPapelTijerasMiniGameScene()
     {
         Time.timeScale = 1f;
+       // if (_panelMinijuegos.activeSelf) ClosePanelMinijuegos();
         StartCoroutine(LoadSceneAndPause("PiedraPapelTijerasMiniGameScene"));
     }
 

@@ -15,6 +15,7 @@ public class ChromeMinigameController : MonoBehaviour
     [SerializeField] PlayerChrome _player;
     private bool _isHomeMenuActive = false;
     private bool _isMiniGameActive = false;
+    
 
     public void Restart()
     {
@@ -36,6 +37,11 @@ public class ChromeMinigameController : MonoBehaviour
 
     public void Pause()
     {
+        if (_isMiniGameActive)
+        {
+            _isMiniGameActive = false ;
+            _panelMiniGame.SetActive(false);
+        }
         Time.timeScale = 0f;
         _panelHome.SetActive(true);
         _isHomeMenuActive = true;
@@ -62,13 +68,18 @@ public class ChromeMinigameController : MonoBehaviour
         _panelHome.SetActive(false);
         if (!_panelGameOver.activeSelf)
         {
-            _isHomeMenuActive = false;
             Time.timeScale = 1f;
         }
+        _isHomeMenuActive = false;
     }
 
     public void OpenPanelMiniGame()
     {
+        if (_isHomeMenuActive)
+        {
+            _panelHome.SetActive(false);
+            _isHomeMenuActive = false;
+        }
         _panelMiniGame.SetActive(true);
         _isMiniGameActive = true;
     }
@@ -81,8 +92,16 @@ public class ChromeMinigameController : MonoBehaviour
 
     public void ToggleMiniGameButton()
     {
-        _isMiniGameActive = !_isMiniGameActive;
-        _panelMiniGame.SetActive(_isMiniGameActive);
+       // _isMiniGameActive = !_isMiniGameActive;
+      //  _panelMiniGame.SetActive(_isMiniGameActive);
+      if ( !_isMiniGameActive)
+        {
+            OpenPanelMiniGame();
+        }
+      else
+        {
+            ClosePanelMiniGame(); 
+        }
     }
 
     public void ToggleHomeMenu()

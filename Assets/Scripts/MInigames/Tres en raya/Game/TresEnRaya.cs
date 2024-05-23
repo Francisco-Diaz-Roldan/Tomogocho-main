@@ -175,7 +175,6 @@ public class TresEnRaya : MonoBehaviour
             int randomIndex = UnityEngine.Random.Range(0, availablePositions.Count);
             return availablePositions[randomIndex];
         }
-
         return -1; // No quedan movimientos disponibles
     }
 
@@ -208,7 +207,6 @@ public class TresEnRaya : MonoBehaviour
                 return a;
             }
         }
-
         return -1;
     }
 
@@ -249,7 +247,6 @@ public class TresEnRaya : MonoBehaviour
                 return true;
             }
         }
-
         return false;
     }
 
@@ -287,7 +284,6 @@ public class TresEnRaya : MonoBehaviour
         _empates = PlayerPrefs.GetInt(EmpatesKey, 0);
         UpdateResultadosTotales();
     }
-
     bool CheckDraw()
     {
         // Comprueba que todas las casillas estén ocupadas y no haya un ganador ni un perdedor
@@ -305,7 +301,6 @@ public class TresEnRaya : MonoBehaviour
             // Si se recorre todo el tablero y no hay casillas vacías, es un empate
             return true;
         }
-
         return false; // No es un empate si hay un ganador o un perdedor
     }
 

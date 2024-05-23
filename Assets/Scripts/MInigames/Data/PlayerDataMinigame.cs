@@ -8,5 +8,4 @@ public class PlayerDataMinigame : MonoBehaviour
     {
         _playerData.LifeTimeInSeconds += Time.deltaTime;
     }
-
 }

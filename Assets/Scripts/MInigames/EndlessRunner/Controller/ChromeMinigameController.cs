@@ -39,7 +39,6 @@ public class ChromeMinigameController : MonoBehaviour
         Time.timeScale = 0f;
         _panelHome.SetActive(true);
         _isHomeMenuActive = true;
-        //_panelJugar.SetActive(false); ->Eliminar esta linea
         StopGame();
     }
     public void OpenResetMenu()

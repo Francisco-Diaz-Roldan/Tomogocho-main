@@ -13,12 +13,19 @@ public class PiedraPapelTijeras : MonoBehaviour
     [SerializeField] private Image _imagenJugadaTomogocho;
     [SerializeField] private List<Sprite> _spriteJugadaTomogocho;
     [SerializeField] private Animator _animator;
+    [SerializeField] private Image _puntoTomogocho1;
+    [SerializeField] private Image _puntoTomogocho2;
+    [SerializeField] private Image _puntoJugador1;
+    [SerializeField] private Image _puntoJugador2;
 
     private int rondasGanadasJugador = 0;
     private int rondasGanadasTomogocho = 0;
     private int partidasGanadas = 0;
     private int partidasPerdidas = 0;
     private int numeroRonda = 1;
+    private Color colorPuntosTomogocho = new Color32(0, 3, 123, 255);
+    private Color colorPuntosJugador = new Color32(255, 0, 61, 255);
+
 
 
     private void Start()
@@ -55,10 +62,12 @@ public class PiedraPapelTijeras : MonoBehaviour
         if (resultado == "Ganaste")
         {
             rondasGanadasJugador++;
+            CambiarColorPuntosJugador(rondasGanadasJugador);
         }
         else if (resultado == "Perdiste")
         {
             rondasGanadasTomogocho++;
+            CambiarColorPuntosTomogocho(rondasGanadasTomogocho);
         }
 
         if (rondasGanadasJugador >= 2 || rondasGanadasTomogocho >= 2)
@@ -93,6 +102,8 @@ public class PiedraPapelTijeras : MonoBehaviour
             // Reiniciar los contadores para una nueva partida
             rondasGanadasJugador = 0;
             rondasGanadasTomogocho = 0;
+            ReiniciarColoresPuntosJugador();//////////////////////////////////
+            ReiniciarColoresPuntosTomogocho();////////////////////////////////
         }
     }
 
@@ -208,6 +219,7 @@ public class PiedraPapelTijeras : MonoBehaviour
         rondasGanadasJugador = 0;
         rondasGanadasTomogocho = 0;
         _resultadoText.text = "Elige: Piedra, Papel o Tijeras";
+        ReiniciarColoresPuntosTomogocho();
     }
 
     public void ResetData()
@@ -238,6 +250,9 @@ public class PiedraPapelTijeras : MonoBehaviour
 
         // Ocultar la jugada de Tomogocho
         OcultarJugadaTomogocho();
+
+        // Reiniciar los colores de los puntos de Tomogocho
+        ReiniciarColoresPuntosTomogocho();
     }
 
     private void EstablecerAnimaciónJugador()
@@ -245,5 +260,41 @@ public class PiedraPapelTijeras : MonoBehaviour
         _animator.SetFloat("Y", -1f);
         _animator.SetFloat("X", 0f);
         _animator.SetFloat("Speed", 0f);
+    }
+
+    private void CambiarColorPuntosTomogocho(int rondasGanadas)
+    {
+        switch (rondasGanadas)
+        {
+            case 1:
+                _puntoTomogocho1.color = colorPuntosTomogocho;
+                break;
+            case 2:
+                _puntoTomogocho2.color = colorPuntosTomogocho;
+                break;
+        }
+    }
+    private void CambiarColorPuntosJugador(int rondasGanadas)
+    {
+        switch (rondasGanadas)
+        {
+            case 1:
+                _puntoJugador1.color = colorPuntosJugador;
+                break;
+            case 2:
+                _puntoJugador2.color = colorPuntosJugador;
+                break;
+        }
+    }
+
+    private void ReiniciarColoresPuntosTomogocho()
+    {
+        _puntoTomogocho1.color = Color.white;
+        _puntoTomogocho2.color = Color.white;
+    }
+    private void ReiniciarColoresPuntosJugador()
+    {
+        _puntoJugador1.color = Color.white;
+        _puntoJugador2.color = Color.white;
     }
 }

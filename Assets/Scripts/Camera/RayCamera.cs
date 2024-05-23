@@ -6,7 +6,7 @@ public class RayCamera : MonoBehaviour
 {
     [SerializeField] private GameObject _panelGameOver;
     [SerializeField] private GameObject _panelHome;
-    [SerializeField] private PlayerData _playrData;
+    [SerializeField] private PlayerData _playerData;
 
     void Update()
     {
@@ -27,6 +27,10 @@ public class RayCamera : MonoBehaviour
                 if (playerSleep.IsSleeping) { return; }
                 if (playerDead.IsDead) {
                     _panelGameOver.SetActive(true);
+                    if(_playerData.MostOldTomogochoTime < _playerData.LifeTimeInSeconds)
+                    {
+                        _playerData.MostOldTomogochoTime = _playerData.LifeTimeInSeconds;
+                    }
                     return;
                 }
 
@@ -48,7 +52,7 @@ public class RayCamera : MonoBehaviour
             }
             else if (hit.collider != null && hit.collider.gameObject.CompareTag("Egg"))
             {
-                _playrData.TimeToOpenEgg -= 1f;
+                _playerData.TimeToOpenEgg -= 1f;
             }
         }
     }

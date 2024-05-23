@@ -26,8 +26,6 @@ public class PiedraPapelTijeras : MonoBehaviour
     private Color colorPuntosTomogocho = new Color32(0, 3, 123, 255);
     private Color colorPuntosJugador = new Color32(255, 0, 61, 255);
 
-
-
     private void Start()
     {
         // Cargar las partidas ganadas y perdidas al iniciar el juego

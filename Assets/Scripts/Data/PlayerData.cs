@@ -8,15 +8,13 @@ using UnityEngine;
 
 public class PlayerData : ScriptableObject
 {
-
     public float HungerPercent;
     public float HapinessPercent;
     public float SleepPercent;
     public DateTime? StartLifeTime; //TODO para futura mejora que incluya la fecha en la que empecé la partida
     public float LifeTimeInSeconds;   //Para medir la cantidad de tiempo jugado
     public float TimeToOpenEgg = 60f;
-
-    
+    public float MostOldTomogochoTime = 0f;
 
     public void ResetValues(bool newGame = true)
     {

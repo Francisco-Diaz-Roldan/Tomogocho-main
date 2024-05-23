@@ -3,7 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class ChromeMinigameController : MonoBehaviour
 {
-
     [SerializeField] GameObject _panelJugar;
     [SerializeField] GameObject _panelHome;
     [SerializeField] GameObject _panelGameOver;
@@ -33,6 +32,12 @@ public class ChromeMinigameController : MonoBehaviour
     {
         _panelJugar.SetActive(false);
         StartGame();
+        /*Time.timeScale = 1f;
+        _obstacleSpawner.StartSpawning();
+        _cloudSpawner1.StartSpawning();
+        _cloudSpawner2.StartSpawning();
+        _scoreManager.StartGame();
+        _player.StartGame();*/
     }
 
     public void Pause()
@@ -40,7 +45,7 @@ public class ChromeMinigameController : MonoBehaviour
         Time.timeScale = 0f;
         _panelHome.SetActive(true);
         _isHomeMenuActive = true;
-        _panelJugar.SetActive(false);
+        //_panelJugar.SetActive(false); ->Eliminar esta linea
         StopGame();
     }
     public void OpenResetMenu()
@@ -65,7 +70,7 @@ public class ChromeMinigameController : MonoBehaviour
         if (!_panelGameOver.activeSelf)
         {
             _isHomeMenuActive = false;
-            StartGame();
+            Time.timeScale = 1f;
         }
     }
 

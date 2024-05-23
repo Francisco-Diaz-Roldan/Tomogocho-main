@@ -30,7 +30,7 @@ public class TresEnRayaController : MonoBehaviour
         SceneManager.LoadScene("MainScene");
     }
 
-    public void GoToGameScene() 
+    public void GoToGameScene()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("GameScene");
@@ -57,8 +57,8 @@ public class TresEnRayaController : MonoBehaviour
     public void GoBack()
     {
         _panelHome.SetActive(false);
-            Time.timeScale = 1f;
-            _isHomeMenuActive = false;
+        Time.timeScale = 1f;
+        _isHomeMenuActive = false;
     }
 
     public void ToggleHomeMenu()
@@ -66,6 +66,7 @@ public class TresEnRayaController : MonoBehaviour
         if (_isHomeMenuActive)
         {
             GoBack();
+            if (_panelMiniGame.activeSelf) ClosePanelMiniGame();
         }
         else
         {
@@ -73,8 +74,8 @@ public class TresEnRayaController : MonoBehaviour
         }
     }
 
-    public void OpenPanelResultado() 
-    { 
+    public void OpenPanelResultado()
+    {
         _panelResultado.SetActive(true);
     }
 

@@ -12,7 +12,6 @@ public class PiedraPapelTijerasGameController : MonoBehaviour
     private bool _isHomeMenuActive = false;
     private bool _isMiniGameActive = false;
 
-
     public void Restart()
     {
         SceneManager.LoadScene("PiedraPapelTijerasMinigameScene");
@@ -65,6 +64,7 @@ public class PiedraPapelTijerasGameController : MonoBehaviour
         if (_isHomeMenuActive)
         {
             GoBack();
+            if (_panelMiniGame.activeSelf) ClosePanelMiniGame();
         }
         else
         {

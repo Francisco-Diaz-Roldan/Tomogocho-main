@@ -32,12 +32,6 @@ public class ChromeMinigameController : MonoBehaviour
     {
         _panelJugar.SetActive(false);
         StartGame();
-        /*Time.timeScale = 1f;
-        _obstacleSpawner.StartSpawning();
-        _cloudSpawner1.StartSpawning();
-        _cloudSpawner2.StartSpawning();
-        _scoreManager.StartGame();
-        _player.StartGame();*/
     }
 
     public void Pause()
@@ -97,6 +91,7 @@ public class ChromeMinigameController : MonoBehaviour
         if (_isHomeMenuActive)
         {
             GoBack();
+            if (_panelMiniGame.activeSelf) ClosePanelMiniGame();
         }
         else
         {

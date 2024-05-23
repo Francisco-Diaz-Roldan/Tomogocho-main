@@ -3546,7 +3546,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1652496814}
         m_TargetAssemblyTypeName: PiedraPapelTijerasGameController, Assembly-CSharp
-        m_MethodName: GoBack
+        m_MethodName: ClosePanelMenuResetearPuntuacion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

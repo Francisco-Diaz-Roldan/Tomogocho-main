@@ -146,28 +146,6 @@ public class TresEnRaya : MonoBehaviour
         }
     }
 
-    /*int GetAIMove()
-    {
-        // Prioridad 1: Ganar si es posible
-        int winMove = FindWinningMove(currentSprite);
-        if (winMove != -1) return winMove;
-
-        // Prioridad 2: Bloquear al jugador si está a punto de ganar
-        Sprite opponentSprite = (currentSprite == _playerSprite) ? _tomogochoSprite : _playerSprite;
-        int blockMove = FindWinningMove(opponentSprite);
-        if (blockMove != -1) return blockMove;
-
-        // Prioridad 3: Hacer el mejor movimiento posible
-        for (int i = 0; i < buttonImages.Length; i++)
-        {
-            if (buttonImages[i].sprite == null)
-            {
-                return i;
-            }
-        }
-        return -1; // No quedan movimientos disponibles
-    }*/
-
     int GetAIMove()
     {
         // Prioridad 1: Ganar si es posible
@@ -378,6 +356,4 @@ public class TresEnRaya : MonoBehaviour
             buttonImages[index].color = buttonColor;
         }
     }
-
-
 }

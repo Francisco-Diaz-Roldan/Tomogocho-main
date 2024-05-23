@@ -66,12 +66,12 @@ public class PiedraPapelTijeras : MonoBehaviour
             // Determinar al ganador al mejor de 3
             if (rondasGanadasJugador >= 2)
             {
-                _resultadoText.text = "¡Has ganado al mejor de 3!";
+                _resultadoText.text = "¡Enhorabuena, has ganado!";
                 partidasGanadas++;
             }
             else
             {
-                _resultadoText.text = "El todopoderoso Tomogocho te ha vencido al mejor de 3.";
+                _resultadoText.text = "El todopoderoso Tomogocho te ha derrotado";
                 partidasPerdidas++;
             }
 

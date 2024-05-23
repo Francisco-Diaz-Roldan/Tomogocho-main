@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TresEnRayaMinigameScene.unity
     guid: c94717eb8ad074a449a2fe358c71efdc
+  - enabled: 1
+    path: Assets/Scenes/PiedraPapelTijerasMinigameScene.unity
+    guid: 7992ea179976697428e0f530ce3a4df0
   m_configObjects: {}

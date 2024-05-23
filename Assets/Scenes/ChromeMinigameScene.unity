@@ -665,6 +665,7 @@ MonoBehaviour:
   _panelHome: {fileID: 411773027}
   _panelGameOver: {fileID: 762180344}
   _panelResetMenu: {fileID: 491057115}
+  _panelMiniGame: {fileID: 2021100967}
   _obstacleSpawner: {fileID: 195211203}
   _cloudSpawner1: {fileID: 723326100}
   _cloudSpawner2: {fileID: 681088765}
@@ -3047,7 +3048,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 283474442}
         m_TargetAssemblyTypeName: ChromeMinigameController, Assembly-CSharp
-        m_MethodName: GoToGameScene
+        m_MethodName: OpenPanelMiniGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3129,8 +3130,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.06281482, y: 0.60947424}
   m_AnchorMax: {x: 0.9508519, y: 0.7523314}
-  m_AnchoredPosition: {x: 0, y: 95}
-  m_SizeDelta: {x: 0, y: -110.81949}
+  m_AnchoredPosition: {x: 0, y: -320.50024}
+  m_SizeDelta: {x: 0, y: -197.99362}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1153359335
 MonoBehaviour:
@@ -4283,8 +4284,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.25, y: 0.28763404}
   m_AnchorMax: {x: 0.75000006, y: 0.4}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -209.8039}
+  m_SizeDelta: {x: 0, y: -68.5679}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1335782778
 MonoBehaviour:
@@ -4330,8 +4331,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TresEnRayaController, Assembly-CSharp
+      - m_Target: {fileID: 283474442}
+        m_TargetAssemblyTypeName: ChromeMinigameController, Assembly-CSharp
         m_MethodName: GoToGameScene
         m_Mode: 1
         m_Arguments:
@@ -4761,8 +4762,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.25, y: 0.46045366}
   m_AnchorMax: {x: 0.75000006, y: 0.57172686}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -314.92834}
+  m_SizeDelta: {x: 0, y: -67.90106}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1594956585
 MonoBehaviour:
@@ -4808,8 +4809,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TresEnRayaController, Assembly-CSharp
+      - m_Target: {fileID: 283474442}
+        m_TargetAssemblyTypeName: ChromeMinigameController, Assembly-CSharp
         m_MethodName: ClosePanelMiniGame
         m_Mode: 1
         m_Arguments:
@@ -4932,7 +4933,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5253704, y: 0.7495386}
   m_AnchorMax: {x: 0.97670376, y: 0.8534188}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.00024414062}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1648596020
@@ -6370,7 +6371,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2021100968
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6389,7 +6390,7 @@ RectTransform:
   m_Father: {fileID: 2103730157}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.14354809}
-  m_AnchorMax: {x: 1, y: 0.7392223}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6529,12 +6530,12 @@ RectTransform:
   - {fileID: 762180345}
   - {fileID: 411773028}
   - {fileID: 491057116}
-  - {fileID: 1624162914}
-  - {fileID: 1863023322}
-  - {fileID: 698090433}
   - {fileID: 1283841423}
   - {fileID: 1347942239}
   - {fileID: 2021100968}
+  - {fileID: 1624162914}
+  - {fileID: 1863023322}
+  - {fileID: 698090433}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

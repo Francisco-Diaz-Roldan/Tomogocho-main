@@ -33,7 +33,6 @@ public class Sleep : MonoBehaviour
         {
             ForceSleep();
             Invoke("ForceWakeUpAfterDelay", 30f); // Hacemos que el personaje espere de 30 segundos para que despierte
-
         }
     }
 
@@ -131,9 +130,7 @@ public class Sleep : MonoBehaviour
 
             _sleepBar.fillAmount = Mathf.Lerp(_sleepBar.fillAmount, 1f, incrementSpeed); // Calculo el nuevo valor de fillAmount de manera más suave usando Lerp
             _sleepBar.fillAmount = Mathf.Min(_sleepBar.fillAmount, 1f); // Asegura que el valor no supere 1
-
-            // Guardo el valor actual de _sleepBar.fillAmount en SleepPercent de PlayerData
-                playerData.SleepPercent = _sleepBar.fillAmount;
+            playerData.SleepPercent = _sleepBar.fillAmount;// Guardo el valor actual de _sleepBar.fillAmount en SleepPercent de PlayerData
         }
     }
 

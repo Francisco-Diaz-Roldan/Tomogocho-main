@@ -2231,7 +2231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _panelGameOver: {fileID: 565995711}
   _panelHome: {fileID: 663273135}
-  _playrData: {fileID: 11400000, guid: d85bd1a6960046445a21db94936db762, type: 2}
+  _playerData: {fileID: 11400000, guid: d85bd1a6960046445a21db94936db762, type: 2}
 --- !u!1 &544034646
 GameObject:
   m_ObjectHideFlags: 0

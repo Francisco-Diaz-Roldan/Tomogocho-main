@@ -3048,7 +3048,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 283474442}
         m_TargetAssemblyTypeName: ChromeMinigameController, Assembly-CSharp
-        m_MethodName: OpenPanelMiniGame
+        m_MethodName: ToggleMiniGameButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6527,10 +6527,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1887942137}
+  - {fileID: 1283841423}
   - {fileID: 762180345}
   - {fileID: 411773028}
   - {fileID: 491057116}
-  - {fileID: 1283841423}
   - {fileID: 1347942239}
   - {fileID: 2021100968}
   - {fileID: 1624162914}

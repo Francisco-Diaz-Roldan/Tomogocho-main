@@ -2619,6 +2619,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1854049471}
   - {fileID: 1987015795}
   - {fileID: 607925965}
   - {fileID: 335830718}
@@ -2627,7 +2628,6 @@ RectTransform:
   - {fileID: 1526450589}
   - {fileID: 2127993466}
   - {fileID: 1809507609}
-  - {fileID: 1854049471}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4179,7 +4179,7 @@ RectTransform:
   m_GameObject: {fileID: 1424101241}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 1}
+  m_LocalScale: {x: 7, y: 7, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1854049471}
@@ -5538,7 +5538,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1652496814}
         m_TargetAssemblyTypeName: PiedraPapelTijerasGameController, Assembly-CSharp
-        m_MethodName: Pause
+        m_MethodName: ToggleHomeMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

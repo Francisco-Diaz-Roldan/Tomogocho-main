@@ -9,8 +9,10 @@ public class ChromeMinigameController : MonoBehaviour
     [SerializeField] GameObject _panelResetMenu;
     [SerializeField] GameObject _panelMiniGame;
     [SerializeField] ObstacleSpawner _obstacleSpawner;
-    [SerializeField] ObstacleSpawner _cloudSpawner1;
-    [SerializeField] ObstacleSpawner _cloudSpawner2;
+   // [SerializeField] ObstacleSpawner _cloudSpawner1;
+   // [SerializeField] ObstacleSpawner _cloudSpawner2;
+    [SerializeField] SkySpawner _skySpawner; // Referencia al SkySpawner
+    [SerializeField] SkySpawner _skySpawner2; // Referencia al SkySpawner2
     [SerializeField] Score _scoreManager;
     [SerializeField] PlayerChrome _player;
     private bool _isHomeMenuActive = false;
@@ -119,8 +121,8 @@ public class ChromeMinigameController : MonoBehaviour
     {
         Time.timeScale = 1f;
         _obstacleSpawner.StartSpawning();
-        _cloudSpawner1.StartSpawning();
-        _cloudSpawner2.StartSpawning();
+        _skySpawner.StartSpawning();
+        _skySpawner2.StartSpawning();
         _scoreManager.StartGame();
         _player.StartGame();
     }
@@ -128,8 +130,8 @@ public class ChromeMinigameController : MonoBehaviour
     private void StopGame()
     {
         _obstacleSpawner.StopSpawning();
-        _cloudSpawner1.StopSpawning();
-        _cloudSpawner2.StopSpawning();
+        _skySpawner.StopSpawning();
+        _skySpawner2.StopSpawning();
         _scoreManager.StopGame();
         _player.StopGame();
     }

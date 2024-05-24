@@ -32,10 +32,11 @@ public class CurrentHourMinigame : MonoBehaviour
 
         // Paso la hora a un formato de 24 horas
         int currentHour = _currentHour.Hour;
-        int currentMinit = _currentHour.Minute;
+        int currentMinute = _currentHour.Minute;
 
         // Dependiendo de la hora le asigno un Sprite u otro
-        if (currentHour >= 8 && (currentHour < 21 || (currentHour == 21 && currentMinit < 30)))  // Entre las 8:00h y las 20:30h
+        if (currentHour >= 8 && (currentHour < 21 || (currentHour == 21 && currentMinute < 30)))  // Entre las 8:00h y las 20:30h
+        //if ( (currentHour <8  && currentMinute < 30))
         {
             _panelNoche.SetActive(false);
             _imageDay.sprite = _dayIcon[0];  // Asigno el sprite de la mañana
@@ -49,5 +50,17 @@ public class CurrentHourMinigame : MonoBehaviour
         // Actualizo el texto de la hora en el componente TMP_Text
         string _formattedHour = _currentHour.ToString("HH:mm:ss");
         _hourText.text = _formattedHour;
+    }
+
+    // Agregar método para obtener la hora actual
+    public int GetCurrentHour()
+    {
+        return DateTime.Now.Hour;
+    }
+
+    // Agregar método para obtener el minuto actual
+    public int GetCurrentMinute()
+    {
+        return DateTime.Now.Minute;
     }
 }

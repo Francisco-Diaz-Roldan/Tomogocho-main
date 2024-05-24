@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
+using System;
 
 public class Sleep : MonoBehaviour
 {
@@ -202,18 +203,30 @@ public class Sleep : MonoBehaviour
     private void UpdateTimer()
     {
         _timeRemaining -= 1f;
-        if (isNightTime)
-        {
-            _timeRemainingText.text = "Es la hora de dormir del tomogocho  se despertará a las 7 de la mañana";
-        }
-        else
-        {
-            _timeRemainingText.text = "El Tomogocho está agotado. Espera " + Mathf.RoundToInt(_timeRemaining).ToString() + " segundos para que se despierte";
-        }
 
         if (_timeRemaining <= 0)
         {
             ForceWakeUp(); // Despierta al personaje cuando el tiempo restante llega a cero
+            return;
+        }
+
+       if (isNightTime)
+    {
+        int totalSecondsUntilMorning = (7 * 3600) - (DateTime.Now.Hour * 3600 + DateTime.Now.Minute * 60 + DateTime.Now.Second);
+        if (totalSecondsUntilMorning < 0)
+        {
+            totalSecondsUntilMorning += 24 * 3600; // Si ya es después de las 7 AM, sumamos 24 horas para calcular el tiempo hasta mañana.
+        }
+        int hoursUntilMorning = totalSecondsUntilMorning / 3600;
+        int minutesUntilMorning = (totalSecondsUntilMorning % 3600) / 60;
+        int secondsUntilMorning = totalSecondsUntilMorning % 60;
+
+        string wakeupTime = string.Format(" Faltan {0} horas, {1} minutos y {2} segundos. para que el Tomogocho se despierte", hoursUntilMorning, minutesUntilMorning, secondsUntilMorning);
+        _timeRemainingText.text = wakeupTime;
+    }
+        else
+        {
+            _timeRemainingText.text = "El Tomogocho está agotado. Espera " + Mathf.RoundToInt(_timeRemaining).ToString() + " segundos para que se despierte";
         }
     }
 }

@@ -221,7 +221,7 @@ public class Sleep : MonoBehaviour
         int minutesUntilMorning = (totalSecondsUntilMorning % 3600) / 60;
         int secondsUntilMorning = totalSecondsUntilMorning % 60;
 
-        string wakeupTime = string.Format(" Faltan {0} horas, {1} minutos y {2} segundos. para que el Tomogocho se despierte", hoursUntilMorning, minutesUntilMorning, secondsUntilMorning);
+        string wakeupTime = string.Format("El Tomogocho se despertará a las 7:00h. Aún faltan {0} horas, {1} minutos y {2} segundos. para que el Tomogocho se despierte", hoursUntilMorning, minutesUntilMorning, secondsUntilMorning);
         _timeRemainingText.text = wakeupTime;
     }
         else

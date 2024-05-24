@@ -694,7 +694,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &303205140
 RectTransform:
   m_ObjectHideFlags: 0
@@ -731,6 +731,7 @@ MonoBehaviour:
   _hours: {fileID: 830449150}
   _minutes: {fileID: 2021793771}
   _playerData: {fileID: 11400000, guid: d85bd1a6960046445a21db94936db762, type: 2}
+  _isGameOver: 0
 --- !u!114 &303205142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1495,6 +1496,7 @@ MonoBehaviour:
   _hours: {fileID: 785168570}
   _minutes: {fileID: 1836708024}
   _playerData: {fileID: 11400000, guid: d85bd1a6960046445a21db94936db762, type: 2}
+  _isGameOver: 1
 --- !u!1 &681504006
 GameObject:
   m_ObjectHideFlags: 0

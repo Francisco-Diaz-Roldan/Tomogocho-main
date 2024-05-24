@@ -11,10 +11,18 @@ public class GameOverData : MonoBehaviour
     [SerializeField] private TMP_Text _hours;
     [SerializeField] private TMP_Text _minutes;
     [SerializeField] private PlayerData _playerData;
+    [SerializeField] private bool _isGameOver = true;
 
     private void OnEnable()
     {
-        ConvertirSegundos(_playerData.LifeTimeInSeconds);
+        if (_isGameOver)
+        {
+            ConvertirSegundos(_playerData.LifeTimeInSeconds);
+        }
+        else
+        {
+            ConvertirSegundos(_playerData.MostOldTomogochoTime);
+        }
     }
 
     private void ConvertirSegundos(float segundos)

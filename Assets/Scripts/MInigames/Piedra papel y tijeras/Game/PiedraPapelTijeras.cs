@@ -23,8 +23,9 @@ public class PiedraPapelTijeras : MonoBehaviour
     private int partidasGanadas = 0;
     private int partidasPerdidas = 0;
     private int numeroRonda = 1;
-    private Color colorPuntosTomogocho = new Color32(0, 3, 123, 255);
-    private Color colorPuntosJugador = new Color32(255, 0, 61, 255);
+    private Color colorPuntosTomogocho = new Color32(255, 0, 61, 255);
+    private Color colorPuntosJugador = new Color32(34, 177, 76, 255);
+
 
     private void Start()
     {

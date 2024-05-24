@@ -2392,6 +2392,7 @@ MonoBehaviour:
   _hours: {fileID: 364383639}
   _minutes: {fileID: 671834917}
   _playerData: {fileID: 11400000, guid: d85bd1a6960046445a21db94936db762, type: 2}
+  _isGameOver: 1
 --- !u!114 &565995714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3579,6 +3580,7 @@ MonoBehaviour:
   _hours: {fileID: 321930922}
   _minutes: {fileID: 685364011}
   _playerData: {fileID: 11400000, guid: d85bd1a6960046445a21db94936db762, type: 2}
+  _isGameOver: 1
 --- !u!1 &797573793
 GameObject:
   m_ObjectHideFlags: 0

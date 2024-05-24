@@ -9,6 +9,12 @@ public class Sleep : MonoBehaviour
     [SerializeField] private PlayerHappy _playerHappy;
     [SerializeField] private PlayerDead _playerDead;
     [SerializeField] private Hapiness _hapiness;
+
+    [SerializeField] private Button _hungerButton; // Referencia al botón de Hunger
+    [SerializeField] private Button _sleepButton; // Referencia al botón de Sleep
+    [SerializeField] private Button _minigameButton; // Referencia al botón de Minigame
+
+
     public PlayerData playerData;
     private bool _eggIsOpened;
     private bool isResting = false;
@@ -37,10 +43,10 @@ public class Sleep : MonoBehaviour
     }
 
     private void ForceWakeUpAfterDelay()
-    {
-        _waitForWakeUp = true; // Establecer que estamos esperando
-        ForceWakeUp(); // Forzar al personaje a despertar
-    }
+     {
+         _waitForWakeUp = true; // Establecer que estamos esperando
+         ForceWakeUp(); // Forzar al personaje a despertar
+     }
 
     public void StartBar()
     {
@@ -85,6 +91,9 @@ public class Sleep : MonoBehaviour
             isResting = true;
             isNightTime = true;
             StartResting();
+            _hungerButton.interactable = false;
+            _sleepButton.interactable = false;
+            _minigameButton.interactable = false;
         }
     }
 
@@ -96,6 +105,9 @@ public class Sleep : MonoBehaviour
             isResting = false;
             isNightTime = false;
             StopResting();
+            _hungerButton.interactable = true;
+            _sleepButton.interactable = true;
+            _minigameButton.interactable = true;
         }
     }
 

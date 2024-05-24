@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
     {
         Time.timeScale = 0f;
         _panelHome.SetActive(true);
+        _panelMinijuegos.SetActive(false); // Desactiva el panel de Minijuegos
         _isHomeMenuActive = true;
     }
 
@@ -61,7 +62,10 @@ public class GameController : MonoBehaviour
     {
         Time.timeScale = 0f;
         _panelMinijuegos.SetActive(true);
+        _panelHome.SetActive(false); // Desactiva el panel del Menú
+        _isHomeMenuActive = false; // Actualiza el estado del Menú
     }
+
 
     public void ClosePanelMinijuegos()
     {

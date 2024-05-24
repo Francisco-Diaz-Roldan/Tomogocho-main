@@ -58,12 +58,12 @@ public class PiedraPapelTijeras : MonoBehaviour
         numeroRonda++;
 
         // Determinar si alguien ha ganado al mejor de 3
-        if (resultado == "Ganaste")
+        if (resultado == "¡Has ganado la ronda!")
         {
             rondasGanadasJugador++;
             CambiarColorPuntosJugador(rondasGanadasJugador);
         }
-        else if (resultado == "Perdiste")
+        else if (resultado == "Has perdido la ronda")
         {
             rondasGanadasTomogocho++;
             CambiarColorPuntosTomogocho(rondasGanadasTomogocho);
@@ -170,11 +170,11 @@ public class PiedraPapelTijeras : MonoBehaviour
                  (jugadaJugador == "Papel" && jugadaTomogocho == "Piedra") ||
                  (jugadaJugador == "Tijeras" && jugadaTomogocho == "Papel"))
         {
-            return "Ganaste";
+            return "¡Has ganado la ronda!";
         }
         else
         {
-            return "Perdiste";
+            return "Has perdido la ronda";
         }
     }
 

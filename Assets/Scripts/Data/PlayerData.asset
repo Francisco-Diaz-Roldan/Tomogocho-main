@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a19fe76bbe392f148a0266c3930aca54, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  HungerPercent: 0.86000013
-  HapinessPercent: 0.5900004
+  HungerPercent: 0
+  HapinessPercent: 0
   SleepPercent: 0
-  LifeTimeInSeconds: 390.55063
-  TimeToOpenEgg: 10
+  LifeTimeInSeconds: 122.8611
+  TimeToOpenEgg: 60
+  MostOldTomogochoTime: 143.97453

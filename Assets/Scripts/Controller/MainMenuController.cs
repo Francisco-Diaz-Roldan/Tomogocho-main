@@ -5,6 +5,7 @@ public class MainMenuController : MonoBehaviour
 {
 
     [SerializeField] private GameObject _panelMenu;
+    [SerializeField] private GameObject _panelRecord;
     [SerializeField] private PlayerData _playerData;
 
     public void GoToMenu()
@@ -26,4 +27,14 @@ public class MainMenuController : MonoBehaviour
         }
         SceneManager.LoadScene("GameScene");// Para ir a la escena de Juego
     }   
+
+    public void OpenRecordTomogochoAge()
+    {
+        _panelRecord.SetActive(true);
+    }
+
+    public void CloseRecordTomogochoAge()
+    {
+        _panelRecord.SetActive(false);
+    }
 }

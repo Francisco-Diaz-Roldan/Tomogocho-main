@@ -4015,7 +4015,7 @@ MonoBehaviour:
   _hungerButton: {fileID: 0}
   _sleepButton: {fileID: 0}
   _minigameButton: {fileID: 0}
-  _awakeTimerText: {fileID: 0}
+  _timeRemainingText: {fileID: 0}
   playerData: {fileID: 0}
 --- !u!114 &804420079
 MonoBehaviour:
@@ -4583,6 +4583,8 @@ MonoBehaviour:
   _playerSleep: {fileID: 0}
   _playerEating: {fileID: 0}
   _hapiness: {fileID: 0}
+  _panelHome: {fileID: 0}
+  _panelMinijuegos: {fileID: 0}
   _playerData: {fileID: 0}
 --- !u!114 &958217363
 MonoBehaviour:
@@ -7246,6 +7248,8 @@ MonoBehaviour:
   _playerSleep: {fileID: 1214898774}
   _playerEating: {fileID: 1214898777}
   _hapiness: {fileID: 862111844}
+  _panelHome: {fileID: 663273135}
+  _panelMinijuegos: {fileID: 331351307}
   _playerData: {fileID: 11400000, guid: d85bd1a6960046445a21db94936db762, type: 2}
 --- !u!1 &1600329456
 GameObject:
@@ -9205,7 +9209,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0.03
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -9239,7 +9243,7 @@ MonoBehaviour:
   _hungerButton: {fileID: 1877286452}
   _sleepButton: {fileID: 1631837199}
   _minigameButton: {fileID: 140856892}
-  _awakeTimerText: {fileID: 442598177}
+  _timeRemainingText: {fileID: 442598177}
   playerData: {fileID: 11400000, guid: d85bd1a6960046445a21db94936db762, type: 2}
 --- !u!1 &2112859978
 GameObject:

@@ -21,6 +21,7 @@ public class Sleep : MonoBehaviour
     private float restInterval = 1f;
     private bool isNightTime = false;
     private bool _waitForWakeUp = false;
+    private float _secondsUntilAwake = 15f;
 
 
     private void Start()
@@ -38,7 +39,7 @@ public class Sleep : MonoBehaviour
         if (_sleepBar.fillAmount <= 0f && !isNightTime)
         {
             ForceSleep();
-            Invoke(nameof(ForceWakeUpAfterDelay), 15f); // Hacemos que el personaje espere de 15 segundos para que despierte
+            Invoke(nameof(ForceWakeUpAfterDelay), _secondsUntilAwake); // Hacemos que el personaje espere de 15 segundos para que despierte
         }
     }
 

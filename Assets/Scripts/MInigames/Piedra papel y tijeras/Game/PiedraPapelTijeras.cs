@@ -101,8 +101,8 @@ public class PiedraPapelTijeras : MonoBehaviour
             // Reiniciar los contadores para una nueva partida
             rondasGanadasJugador = 0;
             rondasGanadasTomogocho = 0;
-            ReiniciarColoresPuntosJugador();//////////////////////////////////
-            ReiniciarColoresPuntosTomogocho();////////////////////////////////
+            ReiniciarColoresPuntosJugador();
+            ReiniciarColoresPuntosTomogocho();
         }
     }
 
@@ -123,7 +123,7 @@ public class PiedraPapelTijeras : MonoBehaviour
         string[] jugadasPosibles = { "Piedra", "Papel", "Tijeras" };
 
         // Si es la primera jugada, elige al azar
-        if (_resultadoText.text == "" || !_resultadoText.text.Contains(" "))
+        if (numeroRonda == 1)
         {
             int indiceJugadaInicial = Random.Range(0, jugadasPosibles.Length);
             return jugadasPosibles[indiceJugadaInicial];
@@ -131,16 +131,8 @@ public class PiedraPapelTijeras : MonoBehaviour
         else
         {
             // Intenta vencer la última jugada del jugador
-            string[] palabrasResultado = _resultadoText.text.Split(' ');
+            string jugadaJugadorAnterior = ObtenerUltimaJugadaJugador();
 
-            if (palabrasResultado.Length < 2)
-            {
-                // Si el texto no está en el formato esperado, elige al azar
-                int indiceJugadaInicial = Random.Range(0, jugadasPosibles.Length);
-                return jugadasPosibles[indiceJugadaInicial];
-            }
-
-            string jugadaJugadorAnterior = palabrasResultado[1]; // Obtener la última jugada del jugador
             switch (jugadaJugadorAnterior)
             {
                 case "Piedra":
@@ -153,6 +145,19 @@ public class PiedraPapelTijeras : MonoBehaviour
                     return jugadasPosibles[Random.Range(0, jugadasPosibles.Length)]; // En caso de error, elige al azar
             }
         }
+    }
+
+    string ObtenerUltimaJugadaJugador()
+    {
+        string[] palabrasResultado = _resultadoText.text.Split(' ');
+
+        if (palabrasResultado.Length < 2)
+        {
+            // Si el texto no está en el formato esperado, devuelve una jugada aleatoria
+            return "Piedra"; // O cualquier otra jugada por defecto
+        }
+
+        return palabrasResultado[1]; // Obtener la última jugada del jugador
     }
 
     string DeterminarResultado(string jugadaJugador, string jugadaTomogocho)

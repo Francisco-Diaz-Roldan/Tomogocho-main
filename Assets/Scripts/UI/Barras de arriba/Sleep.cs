@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using TMPro;
 
 public class Sleep : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class Sleep : MonoBehaviour
     [SerializeField] private Button _hungerButton; // Referencia al botón de Hunger
     [SerializeField] private Button _sleepButton; // Referencia al botón de Sleep
     [SerializeField] private Button _minigameButton; // Referencia al botón de Minigame
+    [SerializeField] private TMP_Text _timeRemainingText;
 
 
     public PlayerData playerData;
@@ -22,7 +25,7 @@ public class Sleep : MonoBehaviour
     private bool isNightTime = false;
     private bool _waitForWakeUp = false;
     private float _secondsUntilAwake = 15f;
-
+    private float _timeRemaining;
 
     private void Start()
     {
@@ -95,6 +98,10 @@ public class Sleep : MonoBehaviour
             _hungerButton.interactable = false;
             _sleepButton.interactable = false;
             _minigameButton.interactable = false;
+            _timeRemainingText.gameObject.SetActive(true);
+            _timeRemaining = _secondsUntilAwake; // Inicializa el tiempo restante
+            InvokeRepeating(nameof(UpdateTimer), 0f, 1f); // Actualiza el tiempo restante cada segundo
+
         }
     }
 
@@ -109,6 +116,8 @@ public class Sleep : MonoBehaviour
             _hungerButton.interactable = true;
             _sleepButton.interactable = true;
             _minigameButton.interactable = true;
+            _timeRemainingText.gameObject.SetActive(false);
+            CancelInvoke(nameof(UpdateTimer)); // Cancela la actualización del tiempo restante
         }
     }
 
@@ -154,5 +163,15 @@ public class Sleep : MonoBehaviour
     public bool IsResting()
     {
         return isResting;
+    }
+
+    private void UpdateTimer()
+    {
+        _timeRemaining -= 1f;
+        _timeRemainingText.text = "Tomogocho está agotado. Espera " + Mathf.RoundToInt(_timeRemaining).ToString() + " segundos para que se despierte";
+        if (_timeRemaining <= 0)
+        {
+            ForceWakeUp(); // Despierta al personaje cuando el tiempo restante llega a cero
+        }
     }
 }

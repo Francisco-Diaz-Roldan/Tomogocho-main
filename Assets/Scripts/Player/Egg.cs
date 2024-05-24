@@ -61,7 +61,6 @@ public class Egg : MonoBehaviour
         sequence.Play();
     }
 
-
     private void OpenEgg()
     {
         ActivateBars();

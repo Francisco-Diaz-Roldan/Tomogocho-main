@@ -1921,12 +1921,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 442598175}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1539663549}
+  m_Father: {fileID: 1521749659}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.135, y: 0.25800002}
   m_AnchorMax: {x: 0.8880001, y: 0.37027887}
@@ -4012,6 +4012,8 @@ MonoBehaviour:
   _playerHappy: {fileID: 0}
   _playerDead: {fileID: 0}
   _hapiness: {fileID: 0}
+  _panelHome: {fileID: 0}
+  _panelMinijuegos: {fileID: 0}
   _hungerButton: {fileID: 0}
   _sleepButton: {fileID: 0}
   _minigameButton: {fileID: 0}
@@ -7032,6 +7034,7 @@ RectTransform:
   - {fileID: 565995712}
   - {fileID: 1740794067}
   - {fileID: 2072185676}
+  - {fileID: 442598176}
   - {fileID: 663273136}
   - {fileID: 511452644}
   - {fileID: 1824708988}
@@ -7147,7 +7150,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1521749659}
-  - {fileID: 442598176}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -9240,6 +9242,8 @@ MonoBehaviour:
   _playerHappy: {fileID: 1214898773}
   _playerDead: {fileID: 1214898775}
   _hapiness: {fileID: 862111844}
+  _panelHome: {fileID: 663273135}
+  _panelMinijuegos: {fileID: 331351307}
   _hungerButton: {fileID: 1877286452}
   _sleepButton: {fileID: 1631837199}
   _minigameButton: {fileID: 140856892}

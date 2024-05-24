@@ -12,7 +12,6 @@ public class TresEnRayaController : MonoBehaviour
     private bool _isHomeMenuActive = false;
     private bool _isMiniGameActive = false;
 
-
     public void Restart()
     {
         SceneManager.LoadScene("TresEnRayaMinigameScene");
@@ -21,7 +20,9 @@ public class TresEnRayaController : MonoBehaviour
     public void Pause()
     {
         _panelHome.SetActive(true);
+        _panelMiniGame.SetActive(false); // Desactiva el panel de MiniGame
         _isHomeMenuActive = true;
+        _isMiniGameActive = false; // Actualiza el estado del MiniGame
     }
 
     public void GoToMainScene()
@@ -36,16 +37,12 @@ public class TresEnRayaController : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
-    public void ToggleMiniGameButton()
-    {
-        _isMiniGameActive = !_isMiniGameActive;
-        _panelMiniGame.SetActive(_isMiniGameActive);
-    }
-
     public void OpenPanelMiniGame()
     {
         _panelMiniGame.SetActive(true);
+        _panelHome.SetActive(false); // Desactiva el panel del Menú
         _isMiniGameActive = true;
+        _isHomeMenuActive = false; // Actualiza el estado del Menú
     }
 
     public void ClosePanelMiniGame()
@@ -57,8 +54,10 @@ public class TresEnRayaController : MonoBehaviour
     public void GoBack()
     {
         _panelHome.SetActive(false);
+        _panelMiniGame.SetActive(false); // Desactiva el panel de MiniGame
         Time.timeScale = 1f;
         _isHomeMenuActive = false;
+        _isMiniGameActive = false; // Actualiza el estado del MiniGame
     }
 
     public void ToggleHomeMenu()
@@ -66,11 +65,22 @@ public class TresEnRayaController : MonoBehaviour
         if (_isHomeMenuActive)
         {
             GoBack();
-            if (_panelMiniGame.activeSelf) ClosePanelMiniGame();
         }
         else
         {
             Pause();
+        }
+    }
+
+    public void ToggleMiniGameButton()
+    {
+        if (_isMiniGameActive)
+        {
+            ClosePanelMiniGame();
+        }
+        else
+        {
+            OpenPanelMiniGame();
         }
     }
 

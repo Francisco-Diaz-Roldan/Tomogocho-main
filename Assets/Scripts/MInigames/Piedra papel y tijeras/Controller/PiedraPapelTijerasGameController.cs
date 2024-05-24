@@ -16,16 +16,20 @@ public class PiedraPapelTijerasGameController : MonoBehaviour
     {
         SceneManager.LoadScene("PiedraPapelTijerasMinigameScene");
     }
+
     public void Pause()
     {
         _panelHome.SetActive(true);
+        _panelMiniGame.SetActive(false); // Desactiva el panel de MiniGame
         _isHomeMenuActive = true;
+        _isMiniGameActive = false; // Actualiza el estado del MiniGame
     }
 
     public void GoToMainScene()
     {
         SceneManager.LoadScene("MainScene");
     }
+
     public void GoToGameScene()
     {
         Time.timeScale = 1f;
@@ -36,16 +40,25 @@ public class PiedraPapelTijerasGameController : MonoBehaviour
     {
         _panelResultado.SetActive(true);
     }
+
     public void ToggleMiniGame()
     {
-        _isMiniGameActive = !_isMiniGameActive;
-        _panelMiniGame.SetActive(_isMiniGameActive);
+        if (_isMiniGameActive)
+        {
+            ClosePanelMiniGame();
+        }
+        else
+        {
+            OpenPanelMiniGame();
+        }
     }
 
     public void OpenPanelMiniGame()
     {
         _panelMiniGame.SetActive(true);
+        _panelHome.SetActive(false); // Desactiva el panel del Menú
         _isMiniGameActive = true;
+        _isHomeMenuActive = false; // Actualiza el estado del Menú
     }
 
     public void ClosePanelMiniGame()
@@ -53,10 +66,13 @@ public class PiedraPapelTijerasGameController : MonoBehaviour
         _panelMiniGame.SetActive(false);
         _isMiniGameActive = false;
     }
+
     public void GoBack()
     {
         _panelHome.SetActive(false);
+        _panelMiniGame.SetActive(false); // Desactiva el panel de MiniGame
         _isHomeMenuActive = false;
+        _isMiniGameActive = false; // Actualiza el estado del MiniGame
     }
 
     public void ToggleHomeMenu()
@@ -64,7 +80,6 @@ public class PiedraPapelTijerasGameController : MonoBehaviour
         if (_isHomeMenuActive)
         {
             GoBack();
-            if (_panelMiniGame.activeSelf) ClosePanelMiniGame();
         }
         else
         {

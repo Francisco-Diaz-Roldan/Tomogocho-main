@@ -92,8 +92,6 @@ public class ChromeMinigameController : MonoBehaviour
 
     public void ToggleMiniGameButton()
     {
-       // _isMiniGameActive = !_isMiniGameActive;
-      //  _panelMiniGame.SetActive(_isMiniGameActive);
       if ( !_isMiniGameActive)
         {
             OpenPanelMiniGame();

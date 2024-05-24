@@ -32,7 +32,7 @@ public class Sleep : MonoBehaviour
         if (_sleepBar.fillAmount <= 0f && !isNightTime)
         {
             ForceSleep();
-            Invoke("ForceWakeUpAfterDelay", 30f); // Hacemos que el personaje espere de 30 segundos para que despierte
+            Invoke(nameof(ForceWakeUpAfterDelay), 30f); // Hacemos que el personaje espere de 30 segundos para que despierte
         }
     }
 

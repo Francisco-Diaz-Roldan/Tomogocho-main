@@ -14,7 +14,19 @@ public class TresEnRayaController : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene("TresEnRayaMinigameScene");
+        // Obtén una referencia al script TresEnRaya
+        TresEnRaya tresEnRaya = GameObject.FindObjectOfType<TresEnRaya>();
+
+        // Verifica si se encontró una instancia válida de TresEnRaya y si la partida ha terminado
+        if (tresEnRaya != null && tresEnRaya.partidaTerminada)
+        {
+            SceneManager.LoadScene("TresEnRayaMinigameScene");
+        }
+        else
+        {
+            // Si no se encuentra una instancia válida o la partida no ha terminado, cierra el panel de resultados
+            _panelResultado.SetActive(false);
+        }
     }
 
     public void Pause()

@@ -17,7 +17,7 @@ public class PiedraPapelTijeras : MonoBehaviour
     [SerializeField] private Image _puntoTomogocho2;
     [SerializeField] private Image _puntoJugador1;
     [SerializeField] private Image _puntoJugador2;
-
+    public bool partidaTerminada = false;
     private int rondasGanadasJugador = 0;
     private int rondasGanadasTomogocho = 0;
     private int partidasGanadas = 0;
@@ -71,6 +71,7 @@ public class PiedraPapelTijeras : MonoBehaviour
 
         if (rondasGanadasJugador >= 2 || rondasGanadasTomogocho >= 2)
         {
+            partidaTerminada = true;
             // Determinar al ganador al mejor de 3
             if (rondasGanadasJugador >= 2)
             {

@@ -14,7 +14,16 @@ public class PiedraPapelTijerasGameController : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene("PiedraPapelTijerasMinigameScene");
+        // Verifica si la partida en PiedraPapelTijeras ha terminado antes de reiniciar
+        if (GameObject.FindObjectOfType<PiedraPapelTijeras>().partidaTerminada)
+        {
+            SceneManager.LoadScene("PiedraPapelTijerasMinigameScene");
+        }
+        else
+        {
+            // La partida no ha terminado, así que cierra el panel de resultados
+            _panelResultado.SetActive(false);
+        }
     }
 
     public void Pause()

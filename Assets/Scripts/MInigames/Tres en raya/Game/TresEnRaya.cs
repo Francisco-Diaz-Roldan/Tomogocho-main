@@ -16,6 +16,7 @@ public class TresEnRaya : MonoBehaviour
     public Sprite _playerSprite;
     public Sprite _tomogochoSprite;
     private Sprite currentSprite;
+    public bool partidaTerminada = false;
 
     private string playerTurn = "Jugador";
     private int _partidasGanadasJugador = 0;
@@ -92,6 +93,7 @@ public class TresEnRaya : MonoBehaviour
         }
         SaveResultadosTotales();
         ShowResultPanel();
+        partidaTerminada = true;
     }
 
     void HandleDraw()
@@ -100,6 +102,7 @@ public class TresEnRaya : MonoBehaviour
         _turnText.text = "Vaya sorpresa, ha habido un empate.";
         SaveResultadosTotales();
         ShowResultPanel();
+        partidaTerminada = true;
     }
     IEnumerator AIMove()
     {

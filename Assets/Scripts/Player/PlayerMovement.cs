@@ -7,21 +7,25 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     [Tooltip("Velocidad de movimiento")]
     private float _speed;
+    private float _originalSpeed;
+    private float _reducedSpeed;
     private Vector2 _centerPlayerPosition;
     private Rigidbody2D _rb;
     private Vector2 _direction;
     private Animator _playerAnimator;
     private bool _inZone = true;
-
     private bool _isMoving = false;
     private float _timeSinceLastTurn = 1f;
     private float _turnInterval = 1f; // Intervalo de tiempo para cambiar la dirección
     private float _minTurnAngle = 100f; // Ángulo mínimo de giro
     private float _maxTurnAngle = 192f; // Ángulo máximo de giro
+    private float _reducedMinTurnAngle = 50f; // Ángulo mínimo de giro reducido
+    private float _reducedMaxTurnAngle = 96f; // Ángulo máximo de giro reducido
     private bool _isHappy = false;
 
     private PlayerSleep _sleep;
     private PlayerDead _playerDead;
+    private bool _isHungry = false;
 
     private void Awake()
     {
@@ -31,17 +35,29 @@ public class PlayerMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _direction = Vector2.zero;
         _playerAnimator = GetComponent<Animator>();
+        _originalSpeed = _speed; // Guardar la velocidad original
+        _reducedSpeed = _speed / 10;
     }
 
     private void Update()
     {
         if (_isHappy || _sleep.IsSleeping || _playerDead.IsDead) { return; }
 
+        if (_isHungry)
+        {
+            _speed = _originalSpeed / 2; // Disminuir la velocidad a la mitad
+        }
+        else
+        {
+            _speed = _originalSpeed; // Restaurar la velocidad original
+        }
+
         if ( !_inZone) { 
             OnReturnPosition();
             _isMoving = true;
             return;
         }
+
         if (!_isMoving)
         {
             SetRandomDirection();
@@ -118,7 +134,17 @@ public class PlayerMovement : MonoBehaviour
     private void RotateDirection()
     {
         // Rotar la dirección actual
-        float angle = Random.Range(_minTurnAngle, _maxTurnAngle) * (Random.value > 0.5f ? 1f : -1f); // Girar en dirección aleatoria
+        float angle;
+        if (_isHungry)
+        {
+            // Usar ángulo de giro reducido
+            angle = Random.Range(_reducedMinTurnAngle, _reducedMaxTurnAngle) * (Random.value > 0.5f ? 1f : -1f);
+        }
+        else
+        {
+            // Usar ángulo de giro normal
+            angle = Random.Range(_minTurnAngle, _maxTurnAngle) * (Random.value > 0.5f ? 1f : -1f);
+        }
         _direction = Quaternion.Euler(0, 0, angle) * _direction;
 
         // Normalizar la dirección
@@ -143,5 +169,10 @@ public class PlayerMovement : MonoBehaviour
             _playerAnimator.SetFloat("Y", _direction.y);
             _playerAnimator.SetFloat("Speed", _direction.sqrMagnitude);
         }
+    }
+
+    public void SetHungry(bool isHungry)
+    {
+        _isHungry = isHungry;
     }
 }

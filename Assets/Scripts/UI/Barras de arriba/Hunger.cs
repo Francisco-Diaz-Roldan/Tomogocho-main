@@ -9,6 +9,7 @@ public class Hunger : MonoBehaviour
     [SerializeField] private PlayerDead _playerDead;
     [SerializeField] private PlayerSleep _playerSleep;
     [SerializeField] private PlayerEating _playerEating;
+    [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private Hapiness _hapiness;
     [SerializeField] private GameObject _panelHome; // Referencia al panel de Home
     [SerializeField] private GameObject _panelMinijuegos; // Referencia al panel de Minijuegos
@@ -35,7 +36,7 @@ public class Hunger : MonoBehaviour
 
     public void FeedCreature()
     {
-        if (!_playerDead.IsDead && !_playerSleep.IsSleeping && !_panelHome.activeSelf && !_panelMinijuegos.activeSelf) 
+        if (!_playerDead.IsDead && !_playerSleep.IsSleeping && !_panelHome.activeSelf && !_panelMinijuegos.activeSelf)
         {
             _playerEating.ActivateEatingFace(true);
             _hungryBar.fillAmount = Mathf.Min(1f, _hungryBar.fillAmount + .1f);
@@ -56,7 +57,7 @@ public class Hunger : MonoBehaviour
         // Disminuye el porcentaje de hambre solo si el jugador no está muerto
         if (!_playerDead.IsDead && !_playerSleep.IsSleeping && !_panelHome.activeSelf && !_panelMinijuegos.activeSelf)
         {
-            _hungryBar.fillAmount -= .01f;
+            _hungryBar.fillAmount -= .015f;
             _hungryBar.fillAmount = Mathf.Max(_hungryBar.fillAmount, 0f);
 
             // Guardo el valor actual de _hungryBar.fillAmount en HungerPercent de PlayerData
@@ -64,6 +65,9 @@ public class Hunger : MonoBehaviour
             {
                 _playerData.HungerPercent = _hungryBar.fillAmount;
             }
+
+            // Usar el operador ternario para establecer el estado de hambre
+            _playerMovement.SetHungry(_hungryBar.fillAmount == 0f);
         }
     }
 }

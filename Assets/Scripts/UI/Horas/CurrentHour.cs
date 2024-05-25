@@ -38,7 +38,7 @@ public class CurrentHour : MonoBehaviour
 
         // Dependiendo de la hora le asigno un Sprite u otro
         //if (currentHour >= 7 && (currentHour < 21 || (currentHour == 21 && currentMinit < 30)))  // Entre las 7:00h y las 21:30h
-        if (currentHour >7)  // Entre las 7:00h y las 21:30h
+        if (currentHour <8)  // Entre las 7:00h y las 21:30h
         {
             _imageDay.sprite = _dayIcon[0];  // Asigno el sprite de la mañana
             if (!_sleepScript.IsResting())

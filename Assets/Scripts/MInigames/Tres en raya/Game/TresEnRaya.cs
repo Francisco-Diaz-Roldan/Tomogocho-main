@@ -119,6 +119,7 @@ public class TresEnRaya : MonoBehaviour
                 ResetBoard();
                 SaveResultadosTotales();
                 ShowResultPanel();
+                partidaTerminada = true;
             }
             else
             {

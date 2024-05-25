@@ -35,8 +35,8 @@ public class CurrentHourMinigame : MonoBehaviour
         int currentMinute = _currentHour.Minute;
 
         // Dependiendo de la hora le asigno un Sprite u otro
-        //if (currentHour >= 8 && (currentHour < 21 || (currentHour == 21 && currentMinute < 30)))  // Entre las 8:00h y las 20:30h
-        if ( (currentHour >8  && currentMinute < 30))
+        if (currentHour >= 8 && (currentHour < 21 || (currentHour == 21 && currentMinute < 30)))  // Entre las 8:00h y las 20:30h
+        //if ( (currentHour >8  && currentMinute < 30))
         {
             _panelNoche.SetActive(false);
             _imageDay.sprite = _dayIcon[0];  // Asigno el sprite de la mañana

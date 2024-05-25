@@ -28,9 +28,6 @@ public class RayCamera : MonoBehaviour
             // Convertir la posición del input a coordenadas del mundo
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(inputPosition.x, inputPosition.y, Camera.main.nearClipPlane));
 
-            // Agregar un Debug.Log para verificar la posición de entrada
-            Debug.Log("Input position: " + inputPosition + ", World position: " + worldPosition);
-
             // Ajustar la posición z para que coincida con el plano de juego 2D
             worldPosition.z = 0f;
 
@@ -53,8 +50,8 @@ public class RayCamera : MonoBehaviour
             }
             else if (hit.collider != null && hit.collider.gameObject.CompareTag("Egg"))
             {
-                Debug.Log("Egg hit detected");
-                _playerData.TimeToOpenEgg -= 1f;
+                Egg egg = hit.collider.gameObject.GetComponent<Egg>();
+                egg.TouchEgg();
             }
         }
     }

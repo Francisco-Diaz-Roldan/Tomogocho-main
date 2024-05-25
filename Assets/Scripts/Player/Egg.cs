@@ -108,5 +108,10 @@ public class Egg : MonoBehaviour
             _timeRemainingText.gameObject.SetActive(false); 
         }
     }
+
+    public void TouchEgg()
+    {
+        _playerData.TimeToOpenEgg -= 1f;
+    }
 }
 

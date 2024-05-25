@@ -7449,7 +7449,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2098435507}
         m_TargetAssemblyTypeName: Sleep, Assembly-CSharp
-        m_MethodName: IncreaseSleep
+        m_MethodName: RestCreature
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7461,7 +7461,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2098435507}
         m_TargetAssemblyTypeName: Sleep, Assembly-CSharp
-        m_MethodName: RestCreature
+        m_MethodName: IncreaseSleep
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9213,7 +9213,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.03
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

@@ -15,6 +15,7 @@ public class PlayerDead : MonoBehaviour
     private AudioSource _audioSource;
     private Animator _animator;
     private bool _isDead = false;
+    private bool _deathSoundPlayed = false;
     public bool IsDead => _isDead;
 
     void Start()
@@ -43,6 +44,10 @@ public class PlayerDead : MonoBehaviour
     {
         _isDead = isDead;
         _animator.SetBool("IsAlive", !isDead); // Cambia el estado de la animación en base al estado de vida
-        _audioSource.PlayOneShot(_deathSound);
+        if (!_deathSoundPlayed && isDead) // Reproducir el sonido solo si no se ha reproducido antes y el jugador está muerto
+        {
+            _audioSource.PlayOneShot(_deathSound);
+            _deathSoundPlayed = true; // Marcar el sonido como reproducido
+        }
     }
 }

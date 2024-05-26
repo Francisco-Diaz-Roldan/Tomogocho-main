@@ -21,7 +21,8 @@ public class Egg : MonoBehaviour
     [SerializeField] private Button _hungerButton;
     [SerializeField] private Button _minigamesButton;
     [SerializeField] private TMP_Text _timeRemainingText;
-
+    [SerializeField] private AudioClip _touchSound;
+    private AudioSource _audioSource;
     private bool isEgg = true;
 
     public bool IsEgg()
@@ -31,6 +32,7 @@ public class Egg : MonoBehaviour
 
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         if (_playerData.EggHasBeenOpened())
         {
             OpenEgg();
@@ -112,6 +114,7 @@ public class Egg : MonoBehaviour
     public void TouchEgg()
     {
         _playerData.TimeToOpenEgg -= 1f;
+        _audioSource.PlayOneShot(_touchSound);
     }
 }
 

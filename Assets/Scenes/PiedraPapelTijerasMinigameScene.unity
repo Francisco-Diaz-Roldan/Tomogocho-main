@@ -2950,7 +2950,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7c13b1fd5c33c8e4490e6e2fd3b7b0b9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0d45db47206445e4ebc57a870bfdc89f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3226,7 +3226,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 02bcd428c5e54914496a2220e0984206, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5b0ffb8552b96174cbe9fef5a04a8b66, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5048,7 +5048,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 40e71e2db756d5945aa664ad1d22c4ae, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7bfcf2e6b8bd568468ca16b731284ed8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6177,6 +6177,8 @@ MonoBehaviour:
   _puntoTomogocho2: {fileID: 1820373793}
   _puntoJugador1: {fileID: 628386268}
   _puntoJugador2: {fileID: 1610533020}
+  _victorySound: {fileID: 8300000, guid: 8d82e9f8294ebf84c82b7e9f5c53c73f, type: 3}
+  _defeatSound: {fileID: 8300000, guid: 63a8aeb16661aa343a9b93f8e0f7e969, type: 3}
   partidaTerminada: 0
 --- !u!1 &2127993465
 GameObject:

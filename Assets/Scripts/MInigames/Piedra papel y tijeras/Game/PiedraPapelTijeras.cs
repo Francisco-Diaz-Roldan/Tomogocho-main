@@ -17,6 +17,9 @@ public class PiedraPapelTijeras : MonoBehaviour
     [SerializeField] private Image _puntoTomogocho2;
     [SerializeField] private Image _puntoJugador1;
     [SerializeField] private Image _puntoJugador2;
+    [SerializeField] private AudioClip _victorySound;  // Clip de audio para la victoria
+    [SerializeField] private AudioClip _defeatSound;
+    private AudioSource _audioSource;
     public bool partidaTerminada = false;
     private int rondasGanadasJugador = 0;
     private int rondasGanadasTomogocho = 0;
@@ -29,6 +32,9 @@ public class PiedraPapelTijeras : MonoBehaviour
 
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
+        if (_audioSource == null)
+        { _audioSource = gameObject.AddComponent<AudioSource>(); } 
         // Cargar las partidas ganadas y perdidas al iniciar el juego
         partidasGanadas = PlayerPrefs.GetInt("PartidasGanadas", 0);
         partidasPerdidas = PlayerPrefs.GetInt("PartidasPerdidas", 0);
@@ -77,11 +83,13 @@ public class PiedraPapelTijeras : MonoBehaviour
             {
                 _resultadoText.text = "¡Enhorabuena, has ganado!";
                 partidasGanadas++;
+                _audioSource.PlayOneShot(_victorySound);
             }
             else
             {
                 _resultadoText.text = "El todopoderoso Tomogocho te ha derrotado";
                 partidasPerdidas++;
+                _audioSource.PlayOneShot(_defeatSound);
             }
 
             // Guardar las partidas ganadas y perdidas

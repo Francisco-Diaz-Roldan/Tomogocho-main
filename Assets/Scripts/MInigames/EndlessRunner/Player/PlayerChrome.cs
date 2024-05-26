@@ -13,16 +13,18 @@ public class PlayerChrome : MonoBehaviour
     [SerializeField] private Button _jumpButton;
     [SerializeField] private float _fallMultiplier = 2.5f; // Multiplicador de la gravedad al caer
     [SerializeField] private float _lowJumpMultiplier = 2f; // Multiplicador de la gravedad al hacer un salto corto
-
-
+    [SerializeField] private AudioClip _jumpSound;
+    [SerializeField] private AudioClip _deadSound;
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
+    private AudioSource _audioSource;
     private bool _isPlaying;
 
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
         _isPlaying = false;
         _jumpButton.onClick.AddListener(Jump);
     }
@@ -75,6 +77,7 @@ public class PlayerChrome : MonoBehaviour
             Time.timeScale = 0f;
             _gameOverPanel.SetActive(true);
             StopGame();
+            _audioSource.PlayOneShot(_deadSound);
         }
     }
      public void Jump()
@@ -83,6 +86,7 @@ public class PlayerChrome : MonoBehaviour
         if (_isPlaying && isGrounded)
         {
             _rigidbody2D.AddForce(Vector2.up * _upForce);
+            _audioSource.PlayOneShot(_jumpSound);
         }
     }
 }

@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4369493816820773556, guid: dbdbbe9237d1f2044bdb5caa08ea0821, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4433548986382332432, guid: dbdbbe9237d1f2044bdb5caa08ea0821, type: 3}
       propertyPath: m_Size.x
       value: 0.4906597
@@ -76,7 +80,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4369493816820773556, guid: dbdbbe9237d1f2044bdb5caa08ea0821, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

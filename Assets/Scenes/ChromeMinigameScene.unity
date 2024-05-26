@@ -1170,7 +1170,7 @@ MonoBehaviour:
   _fallMultiplier: 1.5
   _lowJumpMultiplier: 1
   _jumpSound: {fileID: 8300000, guid: c42421a1c0a9a5948b6081963b1f42fe, type: 3}
-  _deadSound: {fileID: 8300000, guid: e92dcb16373be3e4ea8684866a12f11d, type: 3}
+  _deadSound: {fileID: 8300000, guid: cd54cbef23705fb499ab36f615de8f6a, type: 3}
 --- !u!68 &384416974
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -1355,11 +1355,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e92dcb16373be3e4ea8684866a12f11d, type: 3}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: cd54cbef23705fb499ab36f615de8f6a, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1.07
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

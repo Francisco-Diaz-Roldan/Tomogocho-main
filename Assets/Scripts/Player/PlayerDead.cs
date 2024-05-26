@@ -10,6 +10,9 @@ public class PlayerDead : MonoBehaviour
     [SerializeField] private Button _botonComida;
     [SerializeField] private Button _botonSueno;
     [SerializeField] private Button _botonMinijuegos;
+    [SerializeField] private AudioClip _deathSound;
+
+    private AudioSource _audioSource;
     private Animator _animator;
     private bool _isDead = false;
     public bool IsDead => _isDead;
@@ -17,6 +20,7 @@ public class PlayerDead : MonoBehaviour
     void Start()
     {
        _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -39,5 +43,6 @@ public class PlayerDead : MonoBehaviour
     {
         _isDead = isDead;
         _animator.SetBool("IsAlive", !isDead); // Cambia el estado de la animación en base al estado de vida
+        _audioSource.PlayOneShot(_deathSound);
     }
 }

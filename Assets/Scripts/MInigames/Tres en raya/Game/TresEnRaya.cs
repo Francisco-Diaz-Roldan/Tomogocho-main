@@ -276,6 +276,10 @@ public class TresEnRaya : MonoBehaviour
         for (int i = 0; i < buttonImages.Length; i++)
         {
             buttonImages[i].sprite = null;
+
+            Color buttonColor = buttonImages[i].color;
+            buttonColor.a = 0f;
+            buttonImages[i].color = buttonColor;
         }
         playerTurn = "Jugador";
         currentSprite = _playerSprite;

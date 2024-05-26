@@ -125,7 +125,6 @@ public class PlayerMovement : MonoBehaviour
             _isMoving = false;
             return;
         }
-        Debug.Log("Moviendo en dirección: " + _direction + " con velocidad: " + _speed);
         _rb.position = _rb.position + _direction * _speed * Time.deltaTime;
     }
 

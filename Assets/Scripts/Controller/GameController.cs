@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
     {
         Time.timeScale = 0f;
         _panelHome.SetActive(true);
-        _panelMinijuegos.SetActive(false); 
+        _panelMinijuegos.SetActive(false);
         _isHomeMenuActive = true;
     }
 
@@ -63,7 +63,7 @@ public class GameController : MonoBehaviour
     {
         Time.timeScale = 0f;
         _panelMinijuegos.SetActive(true);
-        _panelHome.SetActive(false); 
+        _panelHome.SetActive(false);
         _isHomeMenuActive = false;
     }
 
@@ -97,11 +97,11 @@ public class GameController : MonoBehaviour
         StartCoroutine(LoadSceneAndPause("PiedraPapelTijerasMiniGameScene"));
     }
 
-    private System.Collections.IEnumerator LoadSceneAndPause(string sceneName)// Método para cargar la escena y pausarla
+    private System.Collections.IEnumerator LoadSceneAndPause(string sceneName) // Método para cargar la escena y pausarla
     {
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName); // Cargo la nueva escena de forma asíncrona
-       
-        while (!asyncLoad.isDone){ yield return null; } // Espero hasta que la escena se haya cargado completamente
+
+        while (!asyncLoad.isDone) { yield return null; } // Espero hasta que la escena se haya cargado completamente
     }
 }

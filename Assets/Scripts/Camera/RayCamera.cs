@@ -12,29 +12,24 @@ public class RayCamera : MonoBehaviour
 
     private void Start()
     {
-        _audioSource = GetComponent<AudioSource>(); 
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
+        if (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) // Si se hace click izquierdo con el ratón o pulso la pantalla
         {
             Vector3 inputPosition = Input.mousePosition;
 
-            if (Input.touchCount > 0)
-            {
-                inputPosition = Input.GetTouch(0).position;
-            }
+            if (Input.touchCount > 0){ inputPosition = Input.GetTouch(0).position; }
 
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(inputPosition.x, inputPosition.y, Camera.main.nearClipPlane));
 
-            // Ajustar la posición z para que coincida con el plano de juego 2D
-            worldPosition.z = 0f;
+            worldPosition.z = 0f; // Ajusto la posición z para que coincida con el plano de juego 2D
 
-            // Lanza un rayo desde la posición del input para detectar colisiones
-            RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero);
+            RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero);// Lanza un rayo desde la posición del input para detectar colisiones
 
-            // Comprueba las colisiones con los objetos con tags específicas
+            // Compruebo las colisiones con los objetos con tags específicas
             if (hit.collider != null && hit.collider.gameObject.CompareTag("Player"))
             {
                 HandlePlayerHit(hit.collider.gameObject);

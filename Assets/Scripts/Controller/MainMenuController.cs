@@ -14,18 +14,18 @@ public class MainMenuController : MonoBehaviour
 
     public void ResetGame()
     {
-        _playerData.ResetValues(true); // Resetear valores sin iniciar un nuevo juego
+        _playerData.ResetValues(true);
         GoToGameScene();
     }
 
     public void GoToGameScene()
     {
-        if (_playerData.HasDied()) // En caso de que la criatura tenga 0 de vida al darle a jugar se resetean sus valores
+        if (_playerData.HasDied())
         {
             _playerData.ResetValues(true);
         }
-        SceneManager.LoadScene("GameScene");// Para ir a la escena de Juego
-    }   
+        SceneManager.LoadScene("GameScene");
+    }
 
     public void OpenRecordTomogochoAge()
     {

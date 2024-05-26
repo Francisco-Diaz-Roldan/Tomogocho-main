@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 
 public class GameOverData : MonoBehaviour
 {
@@ -11,6 +8,7 @@ public class GameOverData : MonoBehaviour
     [SerializeField] private TMP_Text _hours;
     [SerializeField] private TMP_Text _minutes;
     [SerializeField] private PlayerData _playerData;
+
     [SerializeField] private bool _isGameOver = true;
 
     private void OnEnable()
@@ -27,22 +25,15 @@ public class GameOverData : MonoBehaviour
 
     private void ConvertirSegundos(float segundos)
     {
-        // 1 día equivale a 86400 segundos (24 horas * 60 minutos * 60 segundos)
-        const float segundosEnUnDia = 86400;
-        // 1 hora equivale a 3600 segundos (60 minutos * 60 segundos)
-        const float segundosEnUnaHora = 3600;
-        // 1 minuto equivale a 60 segundos
+
+        const float segundosEnUnDia = 86400; // (24 horas * 60 minutos * 60 segundos)
+        const float segundosEnUnaHora = 3600; // (60 minutos * 60 segundos)
         const float segundosEnUnMinuto = 60;
 
-        // Calcular días
-        float dias = Mathf.Floor(segundos / segundosEnUnDia);
-        // Calcular horas restantes después de restar los días
-        float horasRestantes = segundos % segundosEnUnDia;
-        // Calcular horas
+        float dias = Mathf.Floor(segundos / segundosEnUnDia); // Calculo los días
+        float horasRestantes = segundos % segundosEnUnDia; // Calculo las horas restantes después de restar los días
         float horas = Mathf.Floor(horasRestantes / segundosEnUnaHora);
-        // Calcular minutos restantes después de restar las horas
         float minutosRestantes = horasRestantes % segundosEnUnaHora;
-        // Calcular minutos
         float minutos = Mathf.Floor(minutosRestantes / segundosEnUnMinuto);
 
         _days.text = $"Días: {dias.ToString()}";

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,7 +6,9 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject _botonHome;
     [SerializeField] private GameObject _panelHome;
     [SerializeField] private GameObject _panelMinijuegos;
+
     private PlayerDead _playerDead;
+
     private bool _isHomeMenuActive = false;
 
     private void Start()
@@ -16,11 +16,12 @@ public class GameController : MonoBehaviour
         _playerDead = FindObjectOfType<PlayerDead>();
         if (_playerDead == null) { return; }
     }
+
     public void Pausa()
     {
         Time.timeScale = 0f;
         _panelHome.SetActive(true);
-        _panelMinijuegos.SetActive(false); // Desactiva el panel de Minijuegos
+        _panelMinijuegos.SetActive(false); 
         _isHomeMenuActive = true;
     }
 
@@ -62,10 +63,9 @@ public class GameController : MonoBehaviour
     {
         Time.timeScale = 0f;
         _panelMinijuegos.SetActive(true);
-        _panelHome.SetActive(false); // Desactiva el panel del Menú
-        _isHomeMenuActive = false; // Actualiza el estado del Menú
+        _panelHome.SetActive(false); 
+        _isHomeMenuActive = false;
     }
-
 
     public void ClosePanelMinijuegos()
     {
@@ -76,47 +76,32 @@ public class GameController : MonoBehaviour
     public void GoToMainScene()
     {
         Time.timeScale = 1f;
-       //if(_panelMinijuegos.activeSelf) ClosePanelMinijuegos();
         SceneManager.LoadScene("MainScene");
     }
 
     public void GoToChromeMiniGameScene()
     {
         Time.timeScale = 1f;
-        //if (_panelMinijuegos.activeSelf) ClosePanelMinijuegos();
         StartCoroutine(LoadSceneAndPause("ChromeMiniGameScene"));
     }
 
     public void GoToTresEnRayaMiniGameScene()
     {
         Time.timeScale = 1f;
-        //if (_panelMinijuegos.activeSelf) ClosePanelMinijuegos();
         StartCoroutine(LoadSceneAndPause("TresEnRayaMiniGameScene"));
     }
 
     public void GoToPiedraPapelTijerasMiniGameScene()
     {
         Time.timeScale = 1f;
-       // if (_panelMinijuegos.activeSelf) ClosePanelMinijuegos();
         StartCoroutine(LoadSceneAndPause("PiedraPapelTijerasMiniGameScene"));
     }
 
-    // Método para cargar la escena y pausarla
-    private System.Collections.IEnumerator LoadSceneAndPause(string sceneName)
+    private System.Collections.IEnumerator LoadSceneAndPause(string sceneName)// Método para cargar la escena y pausarla
     {
-        // Pauso la escena actual
-        // Time.timeScale = 0f;
 
-        // Cargo la nueva escena de forma asíncrona
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-
-        // Espero hasta que la escena se haya cargado completamente
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-
-        // Pauso la nueva escena una vez que se haya cargado
-        //Time.timeScale = 0f;
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName); // Cargo la nueva escena de forma asíncrona
+       
+        while (!asyncLoad.isDone){ yield return null; } // Espero hasta que la escena se haya cargado completamente
     }
 }

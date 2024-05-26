@@ -1,10 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RayCamera : MonoBehaviour
@@ -13,6 +6,14 @@ public class RayCamera : MonoBehaviour
     [SerializeField] private GameObject _panelHome;
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private AudioClip _cleanedPooSound;
+    [SerializeField] private AudioClip _touchedPlayerSound;
+
+    private AudioSource _audioSource;
+
+    private void Start()
+    {
+        _audioSource = GetComponent<AudioSource>(); 
+    }
 
 
     void Update()
@@ -89,5 +90,7 @@ public class RayCamera : MonoBehaviour
         {
             hapiness.MakeFeelHappyCreature();
         }
+
+        _audioSource.PlayOneShot(_touchedPlayerSound);
     }
 }

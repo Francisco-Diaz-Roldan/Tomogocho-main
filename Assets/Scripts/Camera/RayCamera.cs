@@ -15,7 +15,6 @@ public class RayCamera : MonoBehaviour
         _audioSource = GetComponent<AudioSource>(); 
     }
 
-
     void Update()
     {
         if (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
@@ -54,10 +53,7 @@ public class RayCamera : MonoBehaviour
 
     private void HandlePooHit(GameObject poo)
     {
-        // Desactiva el objeto primero
         poo.SetActive(false);
-
-        // Reproduce el sonido al tocar la caquita
         AudioSource audioSource = GetComponent<AudioSource>();
         audioSource.PlayOneShot(_cleanedPooSound);
     }

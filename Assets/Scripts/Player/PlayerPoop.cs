@@ -9,13 +9,13 @@ public class PlayerPoop : MonoBehaviour
     [SerializeField] GameObject _pooPrefab;
     [SerializeField] float _poopHungerTime;
     [SerializeField] float _poopNohungerTime;
-
-    private float _poopTime = 0;
     [SerializeField] private PlayerSleep _playerSleep;
     [SerializeField] private PlayerDead _playerDead;
 
     private List<GameObject> pooledObjects = new List<GameObject>();
-    private int poolSize = 10; // Tamaño del pool (cantidad máxima de objetos Poo que pueden existir a la vez)
+
+    private float _poopTime = 0;
+    private int poolSize = 10;
 
     void Start()
     {
@@ -27,13 +27,6 @@ public class PlayerPoop : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    /*void Update()
-    {
-        if (_playerSleep.IsSleeping || (_playerDead != null && !_playerDead.IsDead)) return;
-
-        CheckPoop();
-    }*/
     void Update()
     {
         {
@@ -41,7 +34,6 @@ public class PlayerPoop : MonoBehaviour
             {
                 return;
             }
-
             CheckPoop();
         }
     }
@@ -66,7 +58,7 @@ public class PlayerPoop : MonoBehaviour
     {
         _poopTime = 0f;
 
-        foreach (GameObject obj in pooledObjects) // Buscar un objeto inactivo en el pool para reutilizarlo
+        foreach (GameObject obj in pooledObjects)
         {
             if (!obj.activeInHierarchy)
             {

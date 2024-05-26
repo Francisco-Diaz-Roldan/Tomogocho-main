@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerEating : MonoBehaviour
@@ -23,6 +22,7 @@ public class PlayerEating : MonoBehaviour
         carita_comida.SetActive(isEating);
         _playerMovement.SetHappyFace(isEating);
     }
+
     private IEnumerator DisctivateEatingFace()
     {
         yield return new WaitForSeconds(1.5f);

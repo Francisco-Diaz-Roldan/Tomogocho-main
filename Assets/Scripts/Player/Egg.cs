@@ -1,16 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using System;
 using UnityEngine.UI;
-using Unity.VisualScripting;
 using TMPro;
 
 public class Egg : MonoBehaviour
 {
-    //public event Action EggOpened; //Esto es un Evento (Una acción que se ejecuta y notifica a otro Script al que haga referencia)
-
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private float _rotationDuration = 2f;
     [SerializeField] private GameObject _player;
@@ -22,7 +16,9 @@ public class Egg : MonoBehaviour
     [SerializeField] private Button _minigamesButton;
     [SerializeField] private TMP_Text _timeRemainingText;
     [SerializeField] private AudioClip _touchSound;
+
     private AudioSource _audioSource;
+
     private bool isEgg = true;
 
     public bool IsEgg()
@@ -55,7 +51,7 @@ public class Egg : MonoBehaviour
 
     private void EggMovement()
     {
-        DG.Tweening.Sequence sequence = DOTween.Sequence();
+        Sequence sequence = DOTween.Sequence();
 
         sequence.Append(transform.DORotate(new Vector3(0, 0, -25), _rotationDuration));
         sequence.Append(transform.DORotate(new Vector3(0, 0, 25), _rotationDuration));
@@ -117,4 +113,3 @@ public class Egg : MonoBehaviour
         _audioSource.PlayOneShot(_touchSound);
     }
 }
-

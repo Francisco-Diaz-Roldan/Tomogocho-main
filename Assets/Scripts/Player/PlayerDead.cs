@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,8 +12,10 @@ public class PlayerDead : MonoBehaviour
 
     private AudioSource _audioSource;
     private Animator _animator;
+
     private bool _isDead = false;
     private bool _deathSoundPlayed = false;
+
     public bool IsDead => _isDead;
 
     void Start()
@@ -26,14 +26,14 @@ public class PlayerDead : MonoBehaviour
 
     private void Update()
     {
-        CheckHappiness(); // Comprueba el estado de la felicidad para determinar si el jugador está muerto
+        CheckHappiness(); // Comprueba el estado de la felicidad/vida para determinar si el jugador está muerto
     }
 
     private void CheckHappiness()
     {
         if (_hapiness != null && _hapiness.HapinessBarPercent <= 0f)
         {
-            SetDead(true); // Marca al jugador como muerto si la felicidad llega a cero
+            SetDead(true);
             _botonMinijuegos.interactable = false;
             _botonSueno.interactable = false;
             _botonComida.interactable = false;
@@ -43,11 +43,11 @@ public class PlayerDead : MonoBehaviour
     public void SetDead(bool isDead)
     {
         _isDead = isDead;
-        _animator.SetBool("IsAlive", !isDead); // Cambia el estado de la animación en base al estado de vida
-        if (!_deathSoundPlayed && isDead) // Reproducir el sonido solo si no se ha reproducido antes y el jugador está muerto
+        _animator.SetBool("IsAlive", !isDead);
+        if (!_deathSoundPlayed && isDead) 
         {
             _audioSource.PlayOneShot(_deathSound);
-            _deathSoundPlayed = true; // Marcar el sonido como reproducido
+            _deathSoundPlayed = true;
         }
     }
 }

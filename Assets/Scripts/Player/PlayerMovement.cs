@@ -1,19 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Velocidad de movimiento")]
-    private float _speed;
-    private float _originalSpeed;
-    private float _reducedSpeed;
+
     private Vector2 _centerPlayerPosition;
     private Rigidbody2D _rb;
     private Vector2 _direction;
     private Animator _playerAnimator;
+    private PlayerSleep _sleep;
+    private PlayerDead _playerDead;
+    
     private bool _inZone = true;
+    private float _speed;
+    private float _originalSpeed;
+    private float _reducedSpeed;
     private bool _isMoving = false;
     private float _timeSinceLastTurn = 1f;
     private float _turnInterval = 1f; // Intervalo de tiempo para cambiar la dirección
@@ -22,9 +24,6 @@ public class PlayerMovement : MonoBehaviour
     private float _reducedMinTurnAngle = 50f; // Ángulo mínimo de giro reducido
     private float _reducedMaxTurnAngle = 96f; // Ángulo máximo de giro reducido
     private bool _isHappy = false;
-
-    private PlayerSleep _sleep;
-    private PlayerDead _playerDead;
     private bool _isHungry = false;
 
     private void Awake()
@@ -35,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _direction = Vector2.zero;
         _playerAnimator = GetComponent<Animator>();
-        _originalSpeed = _speed; // Guardar la velocidad original
+        _originalSpeed = _speed;
         _reducedSpeed = _speed / 10;
     }
 
@@ -45,11 +44,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (_isHungry)
         {
-            _speed = _originalSpeed / 2; // Disminuir la velocidad a la mitad
+            _speed = _originalSpeed / 2;
         }
         else
         {
-            _speed = _originalSpeed; // Restaurar la velocidad original
+            _speed = _originalSpeed;
         }
 
         if ( !_inZone) { 
@@ -69,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         if (_timeSinceLastTurn >= _turnInterval)
         {
             RotateDirection();
-            _timeSinceLastTurn = 0f; // Reiniciar el contador
+            _timeSinceLastTurn = 0f;
         }
     }
 
@@ -127,27 +126,26 @@ public class PlayerMovement : MonoBehaviour
             _isMoving = false;
             return;
         }
-
         _rb.position = _rb.position + _direction * _speed * Time.deltaTime;
     }
 
     private void RotateDirection()
     {
-        // Rotar la dirección actual
+        // Giro la dirección actual
         float angle;
         if (_isHungry)
         {
-            // Usar ángulo de giro reducido
+            // Uso el ángulo de giro reducido
             angle = Random.Range(_reducedMinTurnAngle, _reducedMaxTurnAngle) * (Random.value > 0.5f ? 1f : -1f);
         }
         else
         {
-            // Usar ángulo de giro normal
+            // Uso el ángulo de giro normal
             angle = Random.Range(_minTurnAngle, _maxTurnAngle) * (Random.value > 0.5f ? 1f : -1f);
         }
         _direction = Quaternion.Euler(0, 0, angle) * _direction;
 
-        // Normalizar la dirección
+        // Normalizo la dirección
         _direction.Normalize();
 
         // Actualizar la animación

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,9 +10,11 @@ public class Hunger : MonoBehaviour
     [SerializeField] private PlayerEating _playerEating;
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private Hapiness _hapiness;
-    [SerializeField] private GameObject _panelHome; // Referencia al panel de Home
-    [SerializeField] private GameObject _panelMinijuegos; // Referencia al panel de Minijuegos
+    [SerializeField] private GameObject _panelHome;
+    [SerializeField] private GameObject _panelMinijuegos;
+
     public PlayerData _playerData;
+
     private bool _eggIsOpened;
 
     private void Start()
@@ -44,7 +45,7 @@ public class Hunger : MonoBehaviour
         }
     }
 
-    private IEnumerator DisactivateEatingCoroutine() // Corrutina para desactivar la cara de comer después de un tiempo
+    private IEnumerator DisactivateEatingCoroutine() // Corrutina para desactivar la cara del Tomogocho cuando come después de un tiempo
     {
         yield return new WaitForSeconds(1.5f);
         _playerEating.ActivateEatingFace(false);
@@ -54,19 +55,16 @@ public class Hunger : MonoBehaviour
     {
         if (!_eggIsOpened) { return; }
 
-        // Disminuye el porcentaje de hambre solo si el jugador no está muerto
         if (!_playerDead.IsDead && !_playerSleep.IsSleeping && !_panelHome.activeSelf && !_panelMinijuegos.activeSelf)
         {
             _hungryBar.fillAmount -= .015f;
             _hungryBar.fillAmount = Mathf.Max(_hungryBar.fillAmount, 0f);
 
-            // Guardo el valor actual de _hungryBar.fillAmount en HungerPercent de PlayerData
             if (_playerData != null)
             {
                 _playerData.HungerPercent = _hungryBar.fillAmount;
             }
 
-            // Usar el operador ternario para establecer el estado de hambre
             _playerMovement.SetHungry(_hungryBar.fillAmount == 0f);
         }
     }

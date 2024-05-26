@@ -11,6 +11,10 @@ public class TresEnRaya : MonoBehaviour
     [SerializeField] private TMP_Text _turnText;
     [SerializeField] private GameObject _panelResultado;
     [SerializeField] private TMP_Text _resultadosTotalesText;
+    [SerializeField] private AudioClip _playerWinSound;
+    [SerializeField] private AudioClip _tomogochoWinSound;
+    private AudioSource _audioSource;
+
     public Button[] buttons;
     public Image[] buttonImages;
     public Sprite _playerSprite;
@@ -27,6 +31,15 @@ public class TresEnRaya : MonoBehaviour
     private const string PartidasGanadasJugadorKey = "PartidasGanadasJugador";
     private const string PartidasGanadasTomogochoKey = "PartidasGanadasTomogocho";
     private const string EmpatesKey = "Empates";
+
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+        if (_audioSource == null)
+        {
+            _audioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
 
     void Start()
     {
@@ -89,6 +102,8 @@ public class TresEnRaya : MonoBehaviour
         if (playerTurn == "Jugador")
         {
             IncrementarPartidasGanadasJugador();
+            _audioSource.PlayOneShot(_playerWinSound);
+
             _turnText.text = "¡Enhorabuena, has ganado!";
         }
         SaveResultadosTotales();
@@ -116,6 +131,8 @@ public class TresEnRaya : MonoBehaviour
             {
                 IncrementarPartidasGanadasTomogocho(); //Aquí es donde se añaden las partidas ganadas por el Tomogocho
                 _turnText.text = "Lo siento, has perdido contra el todopoderoso Tomogocho.";
+                _audioSource.PlayOneShot(_tomogochoWinSound);
+
                 ResetBoard();
                 SaveResultadosTotales();
                 ShowResultPanel();

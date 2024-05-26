@@ -6178,7 +6178,7 @@ MonoBehaviour:
   _puntoJugador1: {fileID: 628386268}
   _puntoJugador2: {fileID: 1610533020}
   _victorySound: {fileID: 8300000, guid: 8d82e9f8294ebf84c82b7e9f5c53c73f, type: 3}
-  _defeatSound: {fileID: 8300000, guid: 63a8aeb16661aa343a9b93f8e0f7e969, type: 3}
+  _defeatSound: {fileID: 8300000, guid: 0eddc93b3a17bb740a524157c2322948, type: 3}
   partidaTerminada: 0
 --- !u!1 &2127993465
 GameObject:

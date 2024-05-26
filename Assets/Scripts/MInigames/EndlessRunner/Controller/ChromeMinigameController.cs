@@ -9,10 +9,8 @@ public class ChromeMinigameController : MonoBehaviour
     [SerializeField] GameObject _panelResetMenu;
     [SerializeField] GameObject _panelMiniGame;
     [SerializeField] ObstacleSpawner _obstacleSpawner;
-   // [SerializeField] ObstacleSpawner _cloudSpawner1;
-   // [SerializeField] ObstacleSpawner _cloudSpawner2;
-    [SerializeField] SkySpawner _skySpawner; // Referencia al SkySpawner
-    [SerializeField] SkySpawner _skySpawner2; // Referencia al SkySpawner2
+    [SerializeField] SkySpawner _skySpawner; 
+    [SerializeField] SkySpawner _skySpawner2;
     [SerializeField] Score _scoreManager;
     [SerializeField] PlayerChrome _player;
     private bool _isHomeMenuActive = false;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -8,11 +6,11 @@ public class Score : MonoBehaviour
 {
     [SerializeField] private TMP_Text _scoreText;
     [SerializeField] private TMP_Text _highScoreText;
+
     private int _score;
     private float _timer;
     private int _highScore;
     private bool _isPlaying;
-
 
     private void Start()
     {

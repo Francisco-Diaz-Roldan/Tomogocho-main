@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System;
 
 public class TresEnRaya : MonoBehaviour
 {
@@ -13,24 +11,24 @@ public class TresEnRaya : MonoBehaviour
     [SerializeField] private TMP_Text _resultadosTotalesText;
     [SerializeField] private AudioClip _playerWinSound;
     [SerializeField] private AudioClip _tomogochoWinSound;
-    private AudioSource _audioSource;
 
+    private AudioSource _audioSource;
     public Button[] buttons;
     public Image[] buttonImages;
     public Sprite _playerSprite;
     public Sprite _tomogochoSprite;
     private Sprite currentSprite;
-    public bool partidaTerminada = false;
+
+    private const string PartidasGanadasJugadorKey = "PartidasGanadasJugador";
+    private const string PartidasGanadasTomogochoKey = "PartidasGanadasTomogocho";
+    private const string EmpatesKey = "Empates";
 
     private string playerTurn = "Jugador";
     private int _partidasGanadasJugador = 0;
     private int _partidasGanadasTomogocho = 0;
     private int _empates = 0;
     private bool _gameOver = false;
-
-    private const string PartidasGanadasJugadorKey = "PartidasGanadasJugador";
-    private const string PartidasGanadasTomogochoKey = "PartidasGanadasTomogocho";
-    private const string EmpatesKey = "Empates";
+    public bool partidaTerminada = false;
 
     private void Awake()
     {
@@ -57,7 +55,9 @@ public class TresEnRaya : MonoBehaviour
     void UpdateTurnText()
     {
         if (_gameOver)
+        {
             return;
+        }
 
         if (playerTurn == "Jugador")
         {
@@ -101,7 +101,7 @@ public class TresEnRaya : MonoBehaviour
     {
         if (playerTurn == "Jugador")
         {
-            IncrementarPartidasGanadasJugador();
+            AumentarPartidasGanadasJugador();
             _audioSource.PlayOneShot(_playerWinSound);
 
             _turnText.text = "¡Enhorabuena, has ganado!";
@@ -113,7 +113,7 @@ public class TresEnRaya : MonoBehaviour
 
     void HandleDraw()
     {
-        IncrementarEmpates();
+        AumentarEmpates();
         _turnText.text = "Vaya sorpresa, ha habido un empate.";
         SaveResultadosTotales();
         ShowResultPanel();
@@ -129,7 +129,7 @@ public class TresEnRaya : MonoBehaviour
             SetSpritesVisibles(index);
             if (CheckWin())
             {
-                IncrementarPartidasGanadasTomogocho(); //Aquí es donde se añaden las partidas ganadas por el Tomogocho
+                AumentarPartidasGanadasTomogocho();
                 _turnText.text = "Lo siento, has perdido contra el todopoderoso Tomogocho.";
                 _audioSource.PlayOneShot(_tomogochoWinSound);
 
@@ -279,7 +279,7 @@ public class TresEnRaya : MonoBehaviour
         }
         playerTurn = "Jugador";
         currentSprite = _playerSprite;
-        EnableButtons();  
+        EnableButtons();
     }
 
     void ShowResultPanel()
@@ -314,28 +314,26 @@ public class TresEnRaya : MonoBehaviour
             {
                 if (buttonImages[i].sprite == null)
                 {
-                    // Aún hay casillas vacías, no hay empate
-                    return false;
+                    return false; // Aún hay casillas vacías, no hay empate
+
                 }
             }
-
-            // Si se recorre todo el tablero y no hay casillas vacías, es un empate
-            return true;
+            return true; // Si se recorre todo el tablero y no hay casillas vacías, es un empate
         }
         return false; // No es un empate si hay un ganador o un perdedor
     }
 
-    void IncrementarPartidasGanadasJugador()
+    void AumentarPartidasGanadasJugador()
     {
         _partidasGanadasJugador++;
     }
 
-    void IncrementarPartidasGanadasTomogocho()
+    void AumentarPartidasGanadasTomogocho()
     {
         _partidasGanadasTomogocho++;
     }
 
-    void IncrementarEmpates()
+    void AumentarEmpates()
     {
         _empates++;
     }
@@ -362,13 +360,8 @@ public class TresEnRaya : MonoBehaviour
     {
         if (index >= 0 && index < buttonImages.Length && buttonImages[index] != null)
         {
-            // Obtén el color actual del botón
             Color buttonColor = buttonImages[index].color;
-
-            // Establece el canal alfa (A) del color
-            buttonColor.a = 1f; // Hacer el botón completamente opaco
-
-            // Asigna el nuevo color al botón
+            buttonColor.a = 1f;
             buttonImages[index].color = buttonColor;
         }
     }

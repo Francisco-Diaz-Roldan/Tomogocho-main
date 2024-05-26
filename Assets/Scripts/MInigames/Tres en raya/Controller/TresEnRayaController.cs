@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,22 +7,20 @@ public class TresEnRayaController : MonoBehaviour
     [SerializeField] private GameObject _panelResultado;
     [SerializeField] private GameObject _panelMiniGame;
     [SerializeField] private GameObject _panelHome;
+
     private bool _isHomeMenuActive = false;
     private bool _isMiniGameActive = false;
 
     public void Restart()
     {
-        // Obtén una referencia al script TresEnRaya
         TresEnRaya tresEnRaya = GameObject.FindObjectOfType<TresEnRaya>();
 
-        // Verifica si se encontró una instancia válida de TresEnRaya y si la partida ha terminado
         if (tresEnRaya != null && tresEnRaya.partidaTerminada)
         {
             SceneManager.LoadScene("TresEnRayaMinigameScene");
         }
         else
         {
-            // Si no se encuentra una instancia válida o la partida no ha terminado, cierra el panel de resultados
             _panelResultado.SetActive(false);
         }
     }
@@ -32,9 +28,9 @@ public class TresEnRayaController : MonoBehaviour
     public void Pause()
     {
         _panelHome.SetActive(true);
-        _panelMiniGame.SetActive(false); // Desactiva el panel de MiniGame
+        _panelMiniGame.SetActive(false);
         _isHomeMenuActive = true;
-        _isMiniGameActive = false; // Actualiza el estado del MiniGame
+        _isMiniGameActive = false;
     }
 
     public void GoToMainScene()
@@ -52,9 +48,9 @@ public class TresEnRayaController : MonoBehaviour
     public void OpenPanelMiniGame()
     {
         _panelMiniGame.SetActive(true);
-        _panelHome.SetActive(false); // Desactiva el panel del Menú
+        _panelHome.SetActive(false);
         _isMiniGameActive = true;
-        _isHomeMenuActive = false; // Actualiza el estado del Menú
+        _isHomeMenuActive = false;
     }
 
     public void ClosePanelMiniGame()
@@ -66,10 +62,10 @@ public class TresEnRayaController : MonoBehaviour
     public void GoBack()
     {
         _panelHome.SetActive(false);
-        _panelMiniGame.SetActive(false); // Desactiva el panel de MiniGame
+        _panelMiniGame.SetActive(false);
         Time.timeScale = 1f;
         _isHomeMenuActive = false;
-        _isMiniGameActive = false; // Actualiza el estado del MiniGame
+        _isMiniGameActive = false;
     }
 
     public void ToggleHomeMenu()

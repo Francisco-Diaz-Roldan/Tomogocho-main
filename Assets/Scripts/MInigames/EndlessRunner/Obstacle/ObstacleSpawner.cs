@@ -6,6 +6,7 @@ public class ObstacleSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] _obstacles;
     [SerializeField] private int poolSize = 10;
+
     private List<GameObject> obstaclePool = new List<GameObject>();
     private Coroutine spawnCoroutine;
 

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -17,23 +16,28 @@ public class PiedraPapelTijeras : MonoBehaviour
     [SerializeField] private Image _puntoTomogocho2;
     [SerializeField] private Image _puntoJugador1;
     [SerializeField] private Image _puntoJugador2;
-    [SerializeField] private AudioClip _victorySound; 
+    [SerializeField] private AudioClip _victorySound;
     [SerializeField] private AudioClip _defeatSound;
+
+    private Color colorPuntosTomogocho = new Color32(255, 0, 61, 255);
+    private Color colorPuntosJugador = new Color32(34, 177, 76, 255);
     private AudioSource _audioSource;
+
     public bool partidaTerminada = false;
     private int rondasGanadasJugador = 0;
     private int rondasGanadasTomogocho = 0;
     private int partidasGanadas = 0;
     private int partidasPerdidas = 0;
     private int numeroRonda = 1;
-    private Color colorPuntosTomogocho = new Color32(255, 0, 61, 255);
-    private Color colorPuntosJugador = new Color32(34, 177, 76, 255);
-
 
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        if (_audioSource == null) { _audioSource = gameObject.AddComponent<AudioSource>(); } 
+        if (_audioSource == null)
+        {
+            _audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
         // Cargar las partidas ganadas y perdidas al iniciar el juego
         partidasGanadas = PlayerPrefs.GetInt("PartidasGanadas", 0);
         partidasPerdidas = PlayerPrefs.GetInt("PartidasPerdidas", 0);
@@ -44,25 +48,14 @@ public class PiedraPapelTijeras : MonoBehaviour
 
     public void SeleccionarJugadaJugador(string jugadaJugador)
     {
-        // Mostrar el bocadillo de la jugada de Tomogocho
         _bocadilloJugadaTomogocho.SetActive(true);
-
-        // Determinar la jugada de Tomogocho basada en una estrategia simple
         string jugadaTomogocho = DeterminarJugadaTomogocho();
-
-        // Mostrar la jugada de Tomogocho
         MostrarJugadaTomogocho(jugadaTomogocho);
-
-        // Determinar el resultado del juego
         string resultado = DeterminarResultado(jugadaJugador, jugadaTomogocho);
-
-        // Mostrar el resultado de la ronda en el texto
         _resultadoText.text = "Ronda " + numeroRonda + ": " + resultado;
-
-        // Incrementar el número de ronda
         numeroRonda++;
 
-        // Determinar si alguien ha ganado al mejor de 3
+        // Comprobamos si alguien ha ganado al mejor de 3
         if (resultado == "¡Has ganado la ronda!")
         {
             rondasGanadasJugador++;
@@ -77,7 +70,6 @@ public class PiedraPapelTijeras : MonoBehaviour
         if (rondasGanadasJugador >= 2 || rondasGanadasTomogocho >= 2)
         {
             partidaTerminada = true;
-            // Determinar al ganador al mejor de 3
             if (rondasGanadasJugador >= 2)
             {
                 _resultadoText.text = "¡Enhorabuena, has ganado!";
@@ -91,22 +83,12 @@ public class PiedraPapelTijeras : MonoBehaviour
                 _audioSource.PlayOneShot(_defeatSound);
             }
 
-            // Guardar las partidas ganadas y perdidas
             GuardarPartida();
-
-            // Incrementar el número de ronda
             numeroRonda++;
-
-            // Actualizar los contadores de partidas en la UI
             ActualizarContadoresUI();
-
-            // Ocultar la jugada de Tomogocho
             OcultarJugadaTomogocho();
-
-            // Mostrar el panel de resultados
             _panelResultado.SetActive(true);
 
-            // Reiniciar los contadores para una nueva partida
             rondasGanadasJugador = 0;
             rondasGanadasTomogocho = 0;
             ReiniciarColoresPuntosJugador();
@@ -159,13 +141,12 @@ public class PiedraPapelTijeras : MonoBehaviour
     {
         string[] palabrasResultado = _resultadoText.text.Split(' ');
 
-        if (palabrasResultado.Length < 2)
+        if (palabrasResultado.Length < 2) // Si el texto está en otro formato distinto al esperado
         {
-            // Si el texto no está en el formato esperado, devuelve una jugada aleatoria
-            return "Piedra"; // O cualquier otra jugada por defecto
+            return "Piedra";
         }
 
-        return palabrasResultado[1]; // Obtener la última jugada del jugador
+        return palabrasResultado[1]; // Se obtiene la última jugada del jugador
     }
 
     string DeterminarResultado(string jugadaJugador, string jugadaTomogocho)
@@ -204,7 +185,7 @@ public class PiedraPapelTijeras : MonoBehaviour
     void MostrarJugadaTomogocho(string jugadaTomogocho)
     {
         _bocadilloJugadaTomogocho.SetActive(true);
-        OcultarJugadaTomogocho(); // Ocultar la imagen antes de mostrar la nueva
+        OcultarJugadaTomogocho();
         switch (jugadaTomogocho)
         {
             case "Piedra":
@@ -217,12 +198,11 @@ public class PiedraPapelTijeras : MonoBehaviour
                 _imagenJugadaTomogocho.sprite = _spriteJugadaTomogocho[2];
                 break;
         }
-        _imagenJugadaTomogocho.gameObject.SetActive(true); // Mostrar la imagen seleccionada
+        _imagenJugadaTomogocho.gameObject.SetActive(true);
     }
 
     void OcultarJugadaTomogocho()
     {
-        //_bocadilloJugadaTomogocho.SetActive(false);
         _imagenJugadaTomogocho.gameObject.SetActive(false);
     }
 
@@ -236,34 +216,27 @@ public class PiedraPapelTijeras : MonoBehaviour
 
     public void ResetData()
     {
-        // Guardar las partidas ganadas y perdidas antes de resetear
+        // Guardo las partidas ganadas y perdidas antes de resetear
         PlayerPrefs.SetInt("PartidasGanadas", partidasGanadas);
         PlayerPrefs.SetInt("PartidasPerdidas", partidasPerdidas);
         PlayerPrefs.Save();
 
-        // Reiniciar todas las variables
         rondasGanadasJugador = 0;
         rondasGanadasTomogocho = 0;
         partidasGanadas = 0;
         partidasPerdidas = 0;
         numeroRonda = 1;
 
-        // Reiniciar el texto de resultado
         _resultadoText.text = "Elige: Piedra, Papel o Tijeras";
 
-        // Actualizar los contadores en la UI
         ActualizarContadoresUI();
 
-        // Ocultar el panel de resultados si está activo
         if (_panelResultado.activeSelf)
         {
             _panelResultado.SetActive(false);
         }
 
-        // Ocultar la jugada de Tomogocho
         OcultarJugadaTomogocho();
-
-        // Reiniciar los colores de los puntos de Tomogocho
         ReiniciarColoresPuntosTomogocho();
     }
 

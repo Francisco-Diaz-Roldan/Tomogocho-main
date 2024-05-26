@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,9 +13,11 @@ public class PlayerChrome : MonoBehaviour
     [SerializeField] private float _lowJumpMultiplier = 2f; // Multiplicador de la gravedad al hacer un salto corto
     [SerializeField] private AudioClip _jumpSound;
     [SerializeField] private AudioClip _deadSound;
+
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
     private AudioSource _audioSource;
+
     private bool _isPlaying;
 
     void Start()
@@ -31,8 +31,8 @@ public class PlayerChrome : MonoBehaviour
 
     void Update()
     {
-       
         bool isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _radius, _ground);
+
         if (isGrounded) _animator.SetFloat("X", 1f);
 
         if (_rigidbody2D.velocity.y < 0)
@@ -43,16 +43,6 @@ public class PlayerChrome : MonoBehaviour
         {
             _rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (_lowJumpMultiplier - 1) * Time.deltaTime;
         }
-        /* if (_isPlaying)
-         {
-             if (Input.GetMouseButtonDown(0))
-             {
-                 if (isGrounded)
-                 {
-                     _rigidbody2D.AddForce(Vector2.up * _upForce);
-                 }
-             }
-         }*/
     }
 
     public void StartGame()
@@ -80,6 +70,7 @@ public class PlayerChrome : MonoBehaviour
             _audioSource.PlayOneShot(_deadSound);
         }
     }
+
      public void Jump()
     {
         bool isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _radius, _ground);

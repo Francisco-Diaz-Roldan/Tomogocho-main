@@ -13,8 +13,7 @@ public class CurrentHourMinigame : MonoBehaviour
 
     void Start()
     {
-        // Llamo a la función ActualizarHora cada segundo
-        InvokeRepeating("ActualizarHora", 0f, 1f);
+        InvokeRepeating("ActualizarHora", 0.1f, 1f); // Llamo a la función ActualizarHora cada segundo
     }
 
     private void Update()
@@ -27,7 +26,7 @@ public class CurrentHourMinigame : MonoBehaviour
 
     void ActualizarHora()
     {
-        // Consigo la hora actual del sistema
+        // Obtengo la hora actual
         DateTime _currentHour = DateTime.Now;
 
         // Paso la hora a un formato de 24 horas
@@ -35,8 +34,7 @@ public class CurrentHourMinigame : MonoBehaviour
         int currentMinute = _currentHour.Minute;
 
         // Dependiendo de la hora le asigno un Sprite u otro
-        if (currentHour >= 7 && (currentHour < 21 || (currentHour == 21 && currentMinute < 30)))  // Entre las 7:00h y las 21:30h
-        //if ( (currentHour >8  && currentMinute < 30))
+        if (currentHour >= 7 && (currentHour < 21 || (currentHour == 21 && currentMinute < 30)))
         {
             _panelNoche.SetActive(false);
             _imageDay.sprite = _dayIcon[0];  // Asigno el sprite de la mañana

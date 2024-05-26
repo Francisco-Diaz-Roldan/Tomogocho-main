@@ -15,8 +15,8 @@ public class CurrentHour : MonoBehaviour
 
     void Start()
     {
-        // Llamo a la función ActualizarHora cada segundo
-        InvokeRepeating("ActualizarHora", 0.1f, 1f);
+        InvokeRepeating("ActualizarHora", 0.1f, 1f); // Llamo a la función ActualizarHora cada segundo
+
     }
 
     private void Update()
@@ -29,7 +29,7 @@ public class CurrentHour : MonoBehaviour
 
     void ActualizarHora()
     {
-        // Consigo la hora actual del sistema
+        // Obtengo la hora actual
         DateTime _currentHour = DateTime.Now;
 
         // Paso la hora a un formato de 24 horas
@@ -37,10 +37,9 @@ public class CurrentHour : MonoBehaviour
         int currentMinit = _currentHour.Minute;
 
         // Dependiendo de la hora le asigno un Sprite u otro
-        if (currentHour >= 7 && (currentHour < 21 || (currentHour == 21 && currentMinit < 30)))  // Entre las 7:00h y las 21:30h
-        //if (currentHour <8)  // Entre las 7:00h y las 21:30h
+        if (currentHour >= 7 && (currentHour < 21 || (currentHour == 21 && currentMinit < 30)))
         {
-            _imageDay.sprite = _dayIcon[0];  // Asigno el sprite de la mañana
+            _imageDay.sprite = _dayIcon[0];
             if (!_sleepScript.IsResting())
             {
                 _panelNoche.SetActive(false);
@@ -49,14 +48,13 @@ public class CurrentHour : MonoBehaviour
         else
         {
             _panelNoche.SetActive(true);
-            _imageDay.sprite = _dayIcon[1];  // Asigno el sprite de la tarde/noche
+            _imageDay.sprite = _dayIcon[1];
             if (_playerData.EggHasBeenOpened())
             {
                 _sleepScript.ForceSleep(Sleep.SleepReason.NightTime);
             }
         }
 
-        // Actualizo el texto de la hora en el componente TMP_Text
         string _formattedHour = _currentHour.ToString("HH:mm:ss");
         _hourText.text = _formattedHour;
     }

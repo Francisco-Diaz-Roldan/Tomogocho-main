@@ -9,19 +9,19 @@ public class PiedraPapelTijerasGameController : MonoBehaviour
     [SerializeField] private GameObject _panelMiniGame;
     [SerializeField] private GameObject _panelResultado;
     [SerializeField] private GameObject _panelHome;
+
     private bool _isHomeMenuActive = false;
     private bool _isMiniGameActive = false;
 
     public void Restart()
     {
-        // Verifica si la partida en PiedraPapelTijeras ha terminado antes de reiniciar
-        if (GameObject.FindObjectOfType<PiedraPapelTijeras>().partidaTerminada)
+        if (GameObject.FindObjectOfType<PiedraPapelTijeras>().partidaTerminada) // Comprueba si la partida ha terminado antes de reiniciar 
+
         {
             SceneManager.LoadScene("PiedraPapelTijerasMinigameScene");
         }
         else
         {
-            // La partida no ha terminado, así que cierra el panel de resultados
             _panelResultado.SetActive(false);
         }
     }
@@ -29,9 +29,9 @@ public class PiedraPapelTijerasGameController : MonoBehaviour
     public void Pause()
     {
         _panelHome.SetActive(true);
-        _panelMiniGame.SetActive(false); // Desactiva el panel de MiniGame
+        _panelMiniGame.SetActive(false);
         _isHomeMenuActive = true;
-        _isMiniGameActive = false; // Actualiza el estado del MiniGame
+        _isMiniGameActive = false;
     }
 
     public void GoToMainScene()

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
 public class Scroll : MonoBehaviour
@@ -9,7 +6,6 @@ public class Scroll : MonoBehaviour
 
     private float _scrollSpeed;
     private float _timer;
-
 
     void Start()
     {

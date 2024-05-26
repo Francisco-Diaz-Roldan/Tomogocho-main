@@ -9,13 +9,14 @@ public class ChromeMinigameController : MonoBehaviour
     [SerializeField] GameObject _panelResetMenu;
     [SerializeField] GameObject _panelMiniGame;
     [SerializeField] ObstacleSpawner _obstacleSpawner;
-    [SerializeField] SkySpawner _skySpawner; 
+    [SerializeField] SkySpawner _skySpawner;
     [SerializeField] SkySpawner _skySpawner2;
     [SerializeField] Score _scoreManager;
     [SerializeField] PlayerChrome _player;
+
     private bool _isHomeMenuActive = false;
     private bool _isMiniGameActive = false;
-    
+
 
     public void Restart()
     {
@@ -39,7 +40,7 @@ public class ChromeMinigameController : MonoBehaviour
     {
         if (_isMiniGameActive)
         {
-            _isMiniGameActive = false ;
+            _isMiniGameActive = false;
             _panelMiniGame.SetActive(false);
         }
         Time.timeScale = 0f;
@@ -47,6 +48,7 @@ public class ChromeMinigameController : MonoBehaviour
         _isHomeMenuActive = true;
         StopGame();
     }
+
     public void OpenResetMenu()
     {
         _panelResetMenu.SetActive(true);
@@ -92,13 +94,13 @@ public class ChromeMinigameController : MonoBehaviour
 
     public void ToggleMiniGameButton()
     {
-      if ( !_isMiniGameActive)
+        if (!_isMiniGameActive)
         {
             OpenPanelMiniGame();
         }
-      else
+        else
         {
-            ClosePanelMiniGame(); 
+            ClosePanelMiniGame();
         }
     }
 

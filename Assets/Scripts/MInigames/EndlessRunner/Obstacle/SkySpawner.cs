@@ -7,6 +7,7 @@ public class SkySpawner : MonoBehaviour
     [SerializeField] private GameObject[] _dayObstacles;
     [SerializeField] private GameObject[] _nightObstacles;
     [SerializeField] private int poolSize = 10;
+
     private CurrentHourMinigame currentHourMinigame; // Referencia al script CurrentHourMinigame
     private List<GameObject> obstaclePool = new List<GameObject>();
     private Coroutine spawnCoroutine;
@@ -23,40 +24,31 @@ public class SkySpawner : MonoBehaviour
         {
             currentHourMinigame = FindObjectOfType<CurrentHourMinigame>();
 
-            // Si sigue siendo null, mostramos un mensaje de error
-            if (currentHourMinigame == null)
-            {
-                Debug.LogError("El componente CurrentHourMinigame no se ha asignado correctamente.");
-                return;
-            }
+            if (currentHourMinigame == null) { return; }
         }
-            // Inicializar el pool de obstáculos según la hora actual
-            UpdateObstaclePool();
+        UpdateObstaclePool(); // Inicializar el pool de obstáculos según la hora actual
+
     }
 
     private void UpdateObstaclePool()
     {
         if (currentHourMinigame == null) { return; }
 
-        // Obtener la hora actual del script CurrentHourMinigame
+        // Obtengo la hora actual del script CurrentHourMinigame
         int currentHour = currentHourMinigame.GetCurrentHour();
         int currentMinute = currentHourMinigame.GetCurrentMinute();
 
-        // Seleccionar el array de obstáculos adecuado según la hora
+        // Selecciono el array de obstáculos adecuado según la hora
         GameObject[] obstaclesToSpawn = (currentHour >= 8 && (currentHour < 21 || (currentHour == 21 && currentMinute < 30))) ? _dayObstacles : _nightObstacles;
-        //GameObject[] obstaclesToSpawn = (currentHour < 8 && currentMinute < 30) ? _dayObstacles : _nightObstacles;
 
-        // Inicializar el pool de obstáculos según el array seleccionado
         InitializePoolFromArray(obstaclesToSpawn);
     }
 
     private void InitializePoolFromArray(GameObject[] obstacles)
     {
-        // Limpiar el pool actual
         obstaclePool.Clear();
 
-        // Llenar el pool con los obstáculos del array seleccionado
-        foreach (GameObject obstaclePrefab in obstacles)
+        foreach (GameObject obstaclePrefab in obstacles) // Relleno el pool con los obstáculos del array seleccionado
         {
             for (int i = 0; i < poolSize; i++)
             {

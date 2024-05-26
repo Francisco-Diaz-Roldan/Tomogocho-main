@@ -4,7 +4,6 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Velocidad de movimiento")]
-
     private Vector2 _centerPlayerPosition;
     private Rigidbody2D _rb;
     private Vector2 _direction;
@@ -13,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerDead _playerDead;
     
     private bool _inZone = true;
-    private float _speed;
+    private float _speed = 1.2f;
     private float _originalSpeed;
     private float _reducedSpeed;
     private bool _isMoving = false;
@@ -126,6 +125,7 @@ public class PlayerMovement : MonoBehaviour
             _isMoving = false;
             return;
         }
+        Debug.Log("Moviendo en dirección: " + _direction + " con velocidad: " + _speed);
         _rb.position = _rb.position + _direction * _speed * Time.deltaTime;
     }
 

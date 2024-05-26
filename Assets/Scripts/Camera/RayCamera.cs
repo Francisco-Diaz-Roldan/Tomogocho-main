@@ -34,11 +34,6 @@ public class RayCamera : MonoBehaviour
             // Lanza un rayo desde la posición del input para detectar colisiones
             RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero);
 
-            if (hit.collider != null)
-            {
-                Debug.Log("Hit: " + hit.collider.gameObject.name);
-            }
-
             // Verificar colisión con objetos específicos
             if (hit.collider != null && hit.collider.gameObject.CompareTag("Player"))
             {

@@ -10,21 +10,28 @@ public class PlayerHappy : MonoBehaviour
     [SerializeField] Image porcentajeFelicidad;
     [SerializeField] private PlayerMovement _playerMovement;
 
+    private void Awake()
+    {
+        _playerMovement = GetComponent<PlayerMovement>();
+    }
+
     public void ActivateHappyFace(bool isHappy)
     {
         carita.SetActive(isHappy);
         contenedorCorazones.SetActive(isHappy);
         _playerMovement.SetHappyFace(isHappy);
-        if (isHappy){
-            carita_carita_comida.SetActive(false);
-            StartCoroutine(SetToUnhappy());
-            porcentajeFelicidad.fillAmount = Mathf.Min(1, porcentajeFelicidad.fillAmount + 0.05f); //La barra de porcentaje no pasa de 1
-        }
-    }
 
-    private void Awake()
-    {
-        _playerMovement = GetComponent<PlayerMovement>();
+        if (isHappy)
+        {
+            _playerMovement.IncrementActiveFaceCount();
+            StartCoroutine(SetToUnhappy());
+            carita_carita_comida.SetActive(false);
+            porcentajeFelicidad.fillAmount = Mathf.Min(1, porcentajeFelicidad.fillAmount + 0.05f);
+        }
+        else
+        {
+            _playerMovement.DecrementActiveFaceCount();
+        }
     }
 
     private IEnumerator SetToUnhappy()

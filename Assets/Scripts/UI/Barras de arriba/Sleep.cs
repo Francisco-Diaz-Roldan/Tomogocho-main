@@ -56,7 +56,8 @@ public class Sleep : MonoBehaviour
 
     private void ForceSleepAtZero()
     {
-        if (_sleepBar.fillAmount <= 0f && !isNightTime && !_waitForWakeUp)
+        // Verifica si la barra de sueño está vacía y la criatura no está descansando
+        if (_sleepBar.fillAmount <= 0f && !isResting)
         {
             ForceSleep(SleepReason.LowSleep);
             Invoke(nameof(ForceWakeUpAfterDelay), _secondsUntilAwake);
@@ -65,8 +66,8 @@ public class Sleep : MonoBehaviour
 
     private void ForceWakeUpAfterDelay()
     {
-        _waitForWakeUp = true;
         ForceWakeUp();
+        _waitForWakeUp = false;
     }
 
     public void StartBar()

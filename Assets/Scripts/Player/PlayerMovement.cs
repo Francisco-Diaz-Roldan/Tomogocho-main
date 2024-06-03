@@ -24,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
     private float _reducedMaxTurnAngle = 96f; // Ángulo máximo de giro reducido
     private bool _isHappy = false;
     private bool _isHungry = false;
+    private int _activeFaceCount = 0;
+    private Vector2 _lastDirection;
+
 
     private void Awake()
     {
@@ -39,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (_isHappy || _sleep.IsSleeping || _playerDead.IsDead) { return; }
+        if (_activeFaceCount > 0 || _isHappy || _sleep.IsSleeping || _playerDead.IsDead) { return; }
 
         if (_isHungry)
         {
@@ -50,7 +53,8 @@ public class PlayerMovement : MonoBehaviour
             _speed = _originalSpeed;
         }
 
-        if ( !_inZone) { 
+        if (!_inZone)
+        {
             OnReturnPosition();
             _isMoving = true;
             return;
@@ -62,7 +66,6 @@ public class PlayerMovement : MonoBehaviour
             _isMoving = true;
         }
 
-        // Contador para decidir cuándo dar una vuelta
         _timeSinceLastTurn += Time.deltaTime;
         if (_timeSinceLastTurn >= _turnInterval)
         {
@@ -73,8 +76,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if ( _isHappy || _sleep.IsSleeping || _playerDead.IsDead) { return; }
-        Move();        
+        if (_activeFaceCount > 0 || _isHappy ||  _sleep.IsSleeping || _playerDead.IsDead) { return; }
+        Move();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -162,6 +165,25 @@ public class PlayerMovement : MonoBehaviour
             _playerAnimator.SetFloat("Speed", 0);
         } else
         {
+            _playerAnimator.SetFloat("X", _direction.x);
+            _playerAnimator.SetFloat("Y", _direction.y);
+            _playerAnimator.SetFloat("Speed", _direction.sqrMagnitude);
+        }
+    }
+
+    public void IncrementActiveFaceCount()
+    {
+        _lastDirection = _direction;
+        _direction = Vector2.zero;
+        _activeFaceCount++;
+    }
+
+    public void DecrementActiveFaceCount()
+    {
+        _activeFaceCount = Mathf.Max(0, _activeFaceCount - 1);
+        if (_activeFaceCount == 0)
+        {
+            _direction = _lastDirection;
             _playerAnimator.SetFloat("X", _direction.x);
             _playerAnimator.SetFloat("Y", _direction.y);
             _playerAnimator.SetFloat("Speed", _direction.sqrMagnitude);

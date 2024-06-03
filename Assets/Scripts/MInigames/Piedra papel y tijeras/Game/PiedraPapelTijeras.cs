@@ -19,16 +19,19 @@ public class PiedraPapelTijeras : MonoBehaviour
     [SerializeField] private AudioClip _victorySound;
     [SerializeField] private AudioClip _defeatSound;
 
-    private Color colorPuntosTomogocho = new Color32(255, 0, 61, 255);
-    private Color colorPuntosJugador = new Color32(34, 177, 76, 255);
+    private Color _colorPuntosTomogocho = new Color32(255, 0, 61, 255);
+    private Color _colorPuntosJugador = new Color32(34, 177, 76, 255);
+    private Color _colorEmpate = new Color32(255, 148, 0, 255);
+
     private AudioSource _audioSource;
 
-    public bool partidaTerminada = false;
-    private int rondasGanadasJugador = 0;
-    private int rondasGanadasTomogocho = 0;
-    private int partidasGanadas = 0;
-    private int partidasPerdidas = 0;
-    private int numeroRonda = 1;
+    public bool _partidaTerminada = false;
+    private bool _esEmpate = false;
+    private int _rondasGanadasJugador = 0;
+    private int _rondasGanadasTomogocho = 0;
+    private int _partidasGanadas = 0;
+    private int _partidasPerdidas = 0;
+    private int _numeroRonda = 1;
 
     private void Start()
     {
@@ -39,8 +42,8 @@ public class PiedraPapelTijeras : MonoBehaviour
         }
 
         // Cargar las partidas ganadas y perdidas al iniciar el juego
-        partidasGanadas = PlayerPrefs.GetInt("PartidasGanadas", 0);
-        partidasPerdidas = PlayerPrefs.GetInt("PartidasPerdidas", 0);
+        _partidasGanadas = PlayerPrefs.GetInt("PartidasGanadas", 0);
+        _partidasPerdidas = PlayerPrefs.GetInt("PartidasPerdidas", 0);
         ActualizarContadoresUI();
         OcultarJugadaTomogocho();
         EstablecerAnimaciónJugador();
@@ -48,49 +51,60 @@ public class PiedraPapelTijeras : MonoBehaviour
 
     public void SeleccionarJugadaJugador(string jugadaJugador)
     {
+        if (_esEmpate)
+        {
+            ReiniciarColoresEmpate();
+            _esEmpate = false;
+        }
+
         _bocadilloJugadaTomogocho.SetActive(true);
         string jugadaTomogocho = DeterminarJugadaTomogocho();
         MostrarJugadaTomogocho(jugadaTomogocho);
         string resultado = DeterminarResultado(jugadaJugador, jugadaTomogocho);
-        _resultadoText.text = "Ronda " + numeroRonda + ": " + resultado;
-        numeroRonda++;
+        _resultadoText.text = "Ronda " + _numeroRonda + ": " + resultado;
+        _numeroRonda++;
 
         // Comprobamos si alguien ha ganado al mejor de 3
         if (resultado == "¡Has ganado la ronda!")
         {
-            rondasGanadasJugador++;
-            CambiarColorPuntosJugador(rondasGanadasJugador);
+            _rondasGanadasJugador++;
+            CambiarColorPuntosJugador(_rondasGanadasJugador);
         }
         else if (resultado == "Has perdido la ronda")
         {
-            rondasGanadasTomogocho++;
-            CambiarColorPuntosTomogocho(rondasGanadasTomogocho);
+            _rondasGanadasTomogocho++;
+            CambiarColorPuntosTomogocho(_rondasGanadasTomogocho);
+        }
+        else if (resultado == "Empate")
+        {
+            _esEmpate = true;
+            CambiarColorPuntosEmpate();
         }
 
-        if (rondasGanadasJugador >= 2 || rondasGanadasTomogocho >= 2)
+        if (_rondasGanadasJugador >= 2 || _rondasGanadasTomogocho >= 2)
         {
-            partidaTerminada = true;
-            if (rondasGanadasJugador >= 2)
+            _partidaTerminada = true;
+            if (_rondasGanadasJugador >= 2)
             {
                 _resultadoText.text = "¡Enhorabuena, has ganado!";
-                partidasGanadas++;
+                _partidasGanadas++;
                 _audioSource.PlayOneShot(_victorySound);
             }
             else
             {
                 _resultadoText.text = "El todopoderoso Tomogocho te ha derrotado";
-                partidasPerdidas++;
+                _partidasPerdidas++;
                 _audioSource.PlayOneShot(_defeatSound);
             }
 
             GuardarPartida();
-            numeroRonda++;
+            _numeroRonda++;
             ActualizarContadoresUI();
             OcultarJugadaTomogocho();
             _panelResultado.SetActive(true);
 
-            rondasGanadasJugador = 0;
-            rondasGanadasTomogocho = 0;
+            _rondasGanadasJugador = 0;
+            _rondasGanadasTomogocho = 0;
             ReiniciarColoresPuntosJugador();
             ReiniciarColoresPuntosTomogocho();
         }
@@ -98,13 +112,13 @@ public class PiedraPapelTijeras : MonoBehaviour
 
     void ActualizarContadoresUI()
     {
-        _partidasText.text = "Partidas\nGanadas: " + partidasGanadas + "\nPerdidas: " + partidasPerdidas;
+        _partidasText.text = "Partidas\nGanadas: " + _partidasGanadas + "\nPerdidas: " + _partidasPerdidas;
     }
 
     void GuardarPartida()
     {
-        PlayerPrefs.SetInt("PartidasGanadas", partidasGanadas);
-        PlayerPrefs.SetInt("PartidasPerdidas", partidasPerdidas);
+        PlayerPrefs.SetInt("PartidasGanadas", _partidasGanadas);
+        PlayerPrefs.SetInt("PartidasPerdidas", _partidasPerdidas);
         PlayerPrefs.Save();
     }
 
@@ -113,7 +127,7 @@ public class PiedraPapelTijeras : MonoBehaviour
         string[] jugadasPosibles = { "Piedra", "Papel", "Tijeras" };
 
         // Si es la primera jugada, elige al azar
-        if (numeroRonda == 1)
+        if (_numeroRonda == 1)
         {
             int indiceJugadaInicial = Random.Range(0, jugadasPosibles.Length);
             return jugadasPosibles[indiceJugadaInicial];
@@ -208,8 +222,8 @@ public class PiedraPapelTijeras : MonoBehaviour
 
     public void ReiniciarRondas()
     {
-        rondasGanadasJugador = 0;
-        rondasGanadasTomogocho = 0;
+        _rondasGanadasJugador = 0;
+        _rondasGanadasTomogocho = 0;
         _resultadoText.text = "Elige: Piedra, Papel o Tijeras";
         ReiniciarColoresPuntosTomogocho();
     }
@@ -217,15 +231,15 @@ public class PiedraPapelTijeras : MonoBehaviour
     public void ResetData()
     {
         // Guardo las partidas ganadas y perdidas antes de resetear
-        PlayerPrefs.SetInt("PartidasGanadas", partidasGanadas);
-        PlayerPrefs.SetInt("PartidasPerdidas", partidasPerdidas);
+        PlayerPrefs.SetInt("PartidasGanadas", _partidasGanadas);
+        PlayerPrefs.SetInt("PartidasPerdidas", _partidasPerdidas);
         PlayerPrefs.Save();
 
-        rondasGanadasJugador = 0;
-        rondasGanadasTomogocho = 0;
-        partidasGanadas = 0;
-        partidasPerdidas = 0;
-        numeroRonda = 1;
+        _rondasGanadasJugador = 0;
+        _rondasGanadasTomogocho = 0;
+        _partidasGanadas = 0;
+        _partidasPerdidas = 0;
+        _numeroRonda = 1;
 
         _resultadoText.text = "Elige: Piedra, Papel o Tijeras";
 
@@ -252,10 +266,10 @@ public class PiedraPapelTijeras : MonoBehaviour
         switch (rondasGanadas)
         {
             case 1:
-                _puntoTomogocho1.color = colorPuntosTomogocho;
+                _puntoTomogocho1.color = _colorPuntosTomogocho;
                 break;
             case 2:
-                _puntoTomogocho2.color = colorPuntosTomogocho;
+                _puntoTomogocho2.color = _colorPuntosTomogocho;
                 break;
         }
     }
@@ -264,12 +278,18 @@ public class PiedraPapelTijeras : MonoBehaviour
         switch (rondasGanadas)
         {
             case 1:
-                _puntoJugador1.color = colorPuntosJugador;
+                _puntoJugador1.color = _colorPuntosJugador;
                 break;
             case 2:
-                _puntoJugador2.color = colorPuntosJugador;
+                _puntoJugador2.color = _colorPuntosJugador;
                 break;
         }
+    }
+
+    private void CambiarColorPuntosEmpate()
+    {
+        _puntoJugador1.color = _colorEmpate;
+        _puntoTomogocho1.color = _colorEmpate;
     }
 
     private void ReiniciarColoresPuntosTomogocho()
@@ -277,9 +297,16 @@ public class PiedraPapelTijeras : MonoBehaviour
         _puntoTomogocho1.color = Color.white;
         _puntoTomogocho2.color = Color.white;
     }
+
     private void ReiniciarColoresPuntosJugador()
     {
         _puntoJugador1.color = Color.white;
         _puntoJugador2.color = Color.white;
+    }
+
+    private void ReiniciarColoresEmpate()
+    {
+        ReiniciarColoresPuntosJugador();
+        ReiniciarColoresPuntosTomogocho();
     }
 }

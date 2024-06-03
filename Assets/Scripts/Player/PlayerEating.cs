@@ -16,14 +16,19 @@ public class PlayerEating : MonoBehaviour
     {
         if (isEating)
         {
+            _playerMovement.IncrementActiveFaceCount();
             carita_happy.SetActive(false);
-            StartCoroutine(DisctivateEatingFace());
+            StartCoroutine(DisactivateEatingFace());
+        }
+        else
+        {
+            _playerMovement.DecrementActiveFaceCount();
         }
         carita_comida.SetActive(isEating);
         _playerMovement.SetHappyFace(isEating);
     }
 
-    private IEnumerator DisctivateEatingFace()
+    private IEnumerator DisactivateEatingFace()
     {
         yield return new WaitForSeconds(1.5f);
         ActivateEatingFace(false);
